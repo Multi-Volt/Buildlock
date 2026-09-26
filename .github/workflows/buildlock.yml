@@ -1,0 +1,91 @@
+# Buildlock: refresh Tracklock data and publish the site to GitHub Pages.
+#
+# Runs:
+#   - every 6 hours (Tracklock data)
+#   - every Monday (also re-extracts game data, to pick up Deadlock patches)
+#   - whenever you push to main
+#   - on demand: Actions tab > "Update and deploy Buildlock" > Run workflow
+name: Update and deploy Buildlock
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"   # Tracklock refresh (times are UTC)
+    - cron: "40 8 * * 1"     # weekly game data refresh
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      update_game_data:
+        description: "Also re-download Deadlock game data (items, heroes, abilities)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write     # to save the Tracklock cache and game data back to the repo
+  pages: write        # to publish GitHub Pages
+  id-token: write     # required by the Pages deploy action
+
+concurrency:
+  group: buildlock
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Parser self-test
+        run: node test/parser.test.js
+
+      - name: Update game data (weekly or when requested)
+        if: github.event.schedule == '40 8 * * 1' || inputs.update_game_data == true
+        continue-on-error: true
+        run: python3 tools/build.py
+
+      - name: Copy the app into the site folder
+        run: |
+          mkdir -p _site
+          cp -r public/. _site/
+          touch _site/.nojekyll
+
+      - name: Fetch Tracklock builds for every hero
+        run: node server.js --export _site
+
+      - name: Save updated data back to the repository
+        run: |
+          git config user.name "buildlock-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/tracklock-cache.json public/index.html data/gamedata.json data/lookup.json
+          if git diff --cached --quiet; then
+            echo "Nothing new to save."
+          else
+            git commit -m "Update Buildlock data"
+            git pull --rebase --autostash || true
+            git push || echo "::warning::Could not push the data update (the site still deploys)."
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

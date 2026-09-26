@@ -1,0 +1,546 @@
+{
+ "heroes": {
+  "hero_atlas": {
+   "name": "Abrams",
+   "slug": "abrams",
+   "abilities": [
+    "Siphon Life",
+    "Shoulder Charge",
+    "Infernal Resilience",
+    "Seismic Impact"
+   ]
+  },
+  "hero_fencer": {
+   "name": "Apollo",
+   "slug": "apollo",
+   "abilities": [
+    "Disengaging Sigil",
+    "Riposte",
+    "Flawless Advance",
+    "Itani Lo Sahn"
+   ]
+  },
+  "hero_bebop": {
+   "name": "Bebop",
+   "slug": "bebop",
+   "abilities": [
+    "Exploding Uppercut",
+    "Sticky Bomb",
+    "Grapple Arm",
+    "Hyper Beam"
+   ]
+  },
+  "hero_punkgoat": {
+   "name": "Billy",
+   "slug": "billy",
+   "abilities": [
+    "Bashdown",
+    "Rising Ram",
+    "Blasted",
+    "Chain Gang"
+   ]
+  },
+  "hero_nano": {
+   "name": "Calico",
+   "slug": "calico",
+   "abilities": [
+    "Gloom Bombs",
+    "Leaping Slash",
+    "Ava",
+    "Return to Shadows"
+   ]
+  },
+  "hero_unicorn": {
+   "name": "Celeste",
+   "slug": "celeste",
+   "abilities": [
+    "Light Eater",
+    "Dazzling Trick",
+    "Radiant Daggers",
+    "Shining Wonder"
+   ]
+  },
+  "hero_drifter": {
+   "name": "Drifter",
+   "slug": "drifter",
+   "abilities": [
+    "Rend",
+    "Stalker's Mark",
+    "Bloodscent",
+    "Eternal Night"
+   ]
+  },
+  "hero_dynamo": {
+   "name": "Dynamo",
+   "slug": "dynamo",
+   "abilities": [
+    "Kinetic Pulse",
+    "Quantum Entanglement",
+    "Rejuvenating Aurora",
+    "Singularity"
+   ]
+  },
+  "hero_necro": {
+   "name": "Graves",
+   "slug": "graves",
+   "abilities": [
+    "Jar of Dead",
+    "Grasping Hands",
+    "Essence Theft",
+    "Borrowed Decree"
+   ]
+  },
+  "hero_orion": {
+   "name": "Grey Talon",
+   "slug": "grey-talon",
+   "abilities": [
+    "Charged Shot",
+    "Rain of Arrows",
+    "Spirit Snare",
+    "Guided Owl"
+   ]
+  },
+  "hero_haze": {
+   "name": "Haze",
+   "slug": "haze",
+   "abilities": [
+    "Sleep Dagger",
+    "Smoke Bomb",
+    "Fixation",
+    "Bullet Dance"
+   ]
+  },
+  "hero_astro": {
+   "name": "Holliday",
+   "slug": "holliday",
+   "abilities": [
+    "Powder Keg",
+    "Bounce Pad",
+    "Crackshot",
+    "Spirit Lasso"
+   ]
+  },
+  "hero_inferno": {
+   "name": "Infernus",
+   "slug": "infernus",
+   "abilities": [
+    "Napalm",
+    "Flame Dash",
+    "Afterburn",
+    "Concussive Combustion"
+   ]
+  },
+  "hero_tengu": {
+   "name": "Ivy",
+   "slug": "ivy",
+   "abilities": [
+    "Entangling Thorns",
+    "Kudzu Connection",
+    "Stone Form",
+    "Air Drop"
+   ]
+  },
+  "hero_kelvin": {
+   "name": "Kelvin",
+   "slug": "kelvin",
+   "abilities": [
+    "Frost Grenade",
+    "Ice Path",
+    "Arctic Beam",
+    "Frozen Shelter"
+   ]
+  },
+  "hero_ghost": {
+   "name": "Lady Geist",
+   "slug": "lady-geist",
+   "abilities": [
+    "Essence Bomb",
+    "Life Drain",
+    "Malice",
+    "Soul Exchange"
+   ]
+  },
+  "hero_lash": {
+   "name": "Lash",
+   "slug": "lash",
+   "abilities": [
+    "Ground Strike",
+    "Grapple",
+    "Flog",
+    "Death Slam"
+   ]
+  },
+  "hero_forge": {
+   "name": "McGinnis",
+   "slug": "mcginnis",
+   "abilities": [
+    "Mini Turret",
+    "Medicinal Specter",
+    "Spectral Wall",
+    "Heavy Barrage"
+   ]
+  },
+  "hero_vampirebat": {
+   "name": "Mina",
+   "slug": "mina",
+   "abilities": [
+    "Rake",
+    "Sanguine Retreat",
+    "Love Bites",
+    "Nox Nostra"
+   ]
+  },
+  "hero_mirage": {
+   "name": "Mirage",
+   "slug": "mirage",
+   "abilities": [
+    "Fire Scarabs",
+    "Dust Devil",
+    "Djinn's Mark",
+    "Traveler"
+   ]
+  },
+  "hero_krill": {
+   "name": "Mo & Krill",
+   "slug": "mo-and-krill",
+   "abilities": [
+    "Scorn",
+    "Burrow",
+    "Sand Blast",
+    "Combo"
+   ]
+  },
+  "hero_bookworm": {
+   "name": "Paige",
+   "slug": "paige",
+   "abilities": [
+    "Bookwyrm",
+    "Plot Armor",
+    "Captivating Read",
+    "Rallying Charge"
+   ]
+  },
+  "hero_chrono": {
+   "name": "Paradox",
+   "slug": "paradox",
+   "abilities": [
+    "Pulse Grenade",
+    "Time Wall",
+    "Kinetic Carbine",
+    "Paradoxical Swap"
+   ]
+  },
+  "hero_synth": {
+   "name": "Pocket",
+   "slug": "pocket",
+   "abilities": [
+    "Barrage",
+    "Flying Cloak",
+    "Enchanter's Satchel",
+    "Affliction"
+   ]
+  },
+  "hero_familiar": {
+   "name": "Rem",
+   "slug": "rem",
+   "abilities": [
+    "Pillow Toss",
+    "Tag Along",
+    "Lil Helpers",
+    "Naptime"
+   ]
+  },
+  "hero_gigawatt": {
+   "name": "Seven",
+   "slug": "seven",
+   "abilities": [
+    "Lightning Ball",
+    "Static Charge",
+    "Power Surge",
+    "Storm Cloud"
+   ]
+  },
+  "hero_shiv": {
+   "name": "Shiv",
+   "slug": "shiv",
+   "abilities": [
+    "Serrated Knives",
+    "Slice and Dice",
+    "Bloodletting",
+    "Killing Blow"
+   ]
+  },
+  "hero_werewolf": {
+   "name": "Silver",
+   "slug": "silver",
+   "abilities": [
+    "Slam Fire",
+    "Boot Kick",
+    "Entangling Bola",
+    "Lycan Curse"
+   ]
+  },
+  "hero_magician": {
+   "name": "Sinclair",
+   "slug": "sinclair",
+   "abilities": [
+    "Vexing Bolt",
+    "Spectral Assistant",
+    "Rabbit Hex",
+    "Audience Participation"
+   ]
+  },
+  "hero_doorman": {
+   "name": "The Doorman",
+   "slug": "the-doorman",
+   "abilities": [
+    "Call Bell",
+    "Doorway",
+    "Luggage Cart",
+    "Hotel Guest"
+   ]
+  },
+  "hero_priest": {
+   "name": "Venator",
+   "slug": "venator",
+   "abilities": [
+    "Consecrating Grenade",
+    "Gutshot",
+    "Hex-Lined Snap Trap",
+    "Ira Domini"
+   ]
+  },
+  "hero_frank": {
+   "name": "Victor",
+   "slug": "victor",
+   "abilities": [
+    "Pain Battery",
+    "Jumpstart",
+    "Aura of Suffering",
+    "Shocking Reanimation"
+   ]
+  },
+  "hero_hornet": {
+   "name": "Vindicta",
+   "slug": "vindicta",
+   "abilities": [
+    "Stake",
+    "Flight",
+    "Crow Familiar",
+    "Assassinate"
+   ]
+  },
+  "hero_viscous": {
+   "name": "Viscous",
+   "slug": "viscous",
+   "abilities": [
+    "Splatter",
+    "The Cube",
+    "Puddle Punch",
+    "Goo Ball"
+   ]
+  },
+  "hero_viper": {
+   "name": "Vyper",
+   "slug": "vyper",
+   "abilities": [
+    "Screwjab Dagger",
+    "Lethal Venom",
+    "Slither",
+    "Petrifying Bola"
+   ]
+  },
+  "hero_warden": {
+   "name": "Warden",
+   "slug": "warden",
+   "abilities": [
+    "Alchemical Flask",
+    "Willpower",
+    "Binding Word",
+    "Last Stand"
+   ]
+  },
+  "hero_wraith": {
+   "name": "Wraith",
+   "slug": "wraith",
+   "abilities": [
+    "Card Trick",
+    "Project Mind",
+    "Full Auto",
+    "Telekinesis"
+   ]
+  },
+  "hero_yamato": {
+   "name": "Yamato",
+   "slug": "yamato",
+   "abilities": [
+    "Power Slash",
+    "Flying Slash",
+    "Crimson Slash",
+    "Shadow Transformation"
+   ]
+  }
+ },
+ "items": {
+  "Extended Magazine": "upgrade_clip_size",
+  "Active Reload": "upgrade_active_reload",
+  "Intensifying Magazine": "upgrade_intensifying_clip",
+  "Titanic Magazine": "upgrade_titan_round",
+  "Endless Magazine": "upgrade_infinitemagazine",
+  "Escalating Resilience": "upgrade_reinforcing_casings",
+  "Rapid Rounds": "upgrade_rapid_rounds",
+  "Swift Striker": "upgrade_blitz_bullets",
+  "Burst Fire": "upgrade_burst_fire",
+  "Ricochet": "upgrade_ricochet",
+  "Weighted Shots": "upgrade_weighted_shots",
+  "High-Velocity Rounds": "upgrade_high_velocity_mag",
+  "Long Range": "upgrade_long_range",
+  "Split Shot": "upgrade_split_shot",
+  "Opening Rounds": "upgrade_pristine_emblem",
+  "Sharpshooter": "upgrade_sharpshooter",
+  "Armor Piercing Rounds": "upgrade_aprounds",
+  "Headshot Booster": "upgrade_headshot_booster",
+  "Weakening Headshot": "upgrade_headshot_booster2",
+  "Headhunter": "upgrade_headhunter",
+  "Crippling Headshot": "upgrade_banshee_slugs",
+  "Close Quarters": "upgrade_close_range",
+  "Point Blank": "upgrade_close_quarter_combat",
+  "Hunter's Aura": "upgrade_bullet_armor_reduction_aura",
+  "Shadow Weave": "upgrade_cloaking_device_active",
+  "Silencer": "upgrade_proc_silence",
+  "Melee Charge": "upgrade_melee_charge",
+  "Berserker": "upgrade_berserker",
+  "Frenzy": "upgrade_fervor",
+  "Mystic Shot": "upgrade_crackshot",
+  "Spirit Shredder Bullets": "upgrade_tech_defense_shredders",
+  "Spirit Rend": "upgrade_spellslinger_headshots",
+  "Tesla Bullets": "upgrade_chain_lightning",
+  "Spiritual Overflow": "upgrade_tech_overflow",
+  "Fleetfoot": "upgrade_fleetfoot_boots",
+  "Alchemical Fire": "upgrade_thermal_detonator",
+  "Heroic Aura": "upgrade_dps_aura",
+  "Warp Stone": "upgrade_warp_stone",
+  "Hollow Point": "upgrade_hollow_point_rounds",
+  "Monster Rounds": "upgrade_non_player_bonus",
+  "Kinetic Dash": "upgrade_kinetic_sash",
+  "Toxic Bullets": "upgrade_toxic_bullets",
+  "Lucky Shot": "upgrade_critshot",
+  "Slowing Bullets": "upgrade_slowing_bullets",
+  "Glass Cannon": "upgrade_glass_cannon",
+  "Extra Health": "upgrade_health",
+  "Toughness": "upgrade_health_2",
+  "Fortitude": "upgrade_chonky",
+  "Colossus": "upgrade_colossus",
+  "Unstoppable": "upgrade_unstoppable",
+  "Restorative Shot": "upgrade_medic_bullets",
+  "Healing Rite": "upgrade_health_stimpak",
+  "Healing Nova": "upgrade_health_nova",
+  "Rescue Beam": "upgrade_rescue_beam",
+  "Extra Regen": "upgrade_endurance",
+  "Restorative Locket": "upgrade_restorative_locket",
+  "Reactive Barrier": "upgrade_vex_barrier",
+  "Healing Booster": "upgrade_healing_booster",
+  "Healing Tempo": "upgrade_healbuff",
+  "Debuff Reducer": "upgrade_debuff_reducer",
+  "Dispel Magic": "upgrade_reduce_debuff_duration",
+  "Inhibitor": "upgrade_inhibitor",
+  "Spirit Armor": "upgrade_tech_armor",
+  "Enchanter's Emblem": "upgrade_magic_shield",
+  "Spirit Resilience": "upgrade_tech_purge",
+  "Cheat Death": "upgrade_cheat_death",
+  "Witchmail": "upgrade_absorbing_armor",
+  "Phantom Strike": "upgrade_phantom_strike",
+  "Spellbreaker": "upgrade_spellbreaker",
+  "Return Fire": "upgrade_return_fire",
+  "Battle Vest": "upgrade_regenerating_bullet_shield",
+  "Bullet Armor": "upgrade_bullet_armor",
+  "Bullet Resilience": "upgrade_improved_bullet_armor",
+  "Plated Armor": "upgrade_deflecting_armor",
+  "Bullet Lifesteal": "upgrade_vampire",
+  "Vampiric Burst": "upgrade_surging_power",
+  "Spirit Lifesteal": "upgrade_health_stealing_magic",
+  "Infuser": "upgrade_infuser",
+  "Leech": "upgrade_damage_recycler",
+  "Melee Lifesteal": "upgrade_lifestrike_gauntlets",
+  "Rebuttal": "upgrade_melee_rebuttal",
+  "Lifestrike": "upgrade_boxing_glove",
+  "Extra Stamina": "upgrade_improved_stamina",
+  "Sprint Boots": "upgrade_sprint_booster",
+  "Enduring Speed": "upgrade_cardio_calibrator",
+  "Stamina Mastery": "upgrade_superior_stamina",
+  "Majestic Leap": "upgrade_rocket_booster",
+  "Juggernaut": "upgrade_juggernaut",
+  "Healbane": "upgrade_healbane",
+  "Weapon Shielding": "upgrade_weapon_shielding",
+  "Spirit Shielding": "upgrade_spirit_bubble",
+  "Metal Skin": "upgrade_metal_skin",
+  "Veil Walker": "upgrade_veil_walker",
+  "Siphon Bullets": "upgrade_siphon_bullets",
+  "Diviner's Kevlar": "upgrade_diviners_kevlar",
+  "Extra Spirit": "upgrade_improved_spirit",
+  "Surge of Power": "upgrade_magic_storm",
+  "Improved Spirit": "upgrade_soaring_spirit",
+  "Boundless Spirit": "upgrade_boundless_spirit",
+  "Mystic Burst": "upgrade_magic_burst",
+  "Quicksilver Reload": "upgrade_quick_silver",
+  "Tankbuster": "upgrade_magic_shock",
+  "Lightning Scroll": "upgrade_ultimate_burst",
+  "Mystic Expansion": "upgrade_magic_reach",
+  "Arcane Surge": "upgrade_arcane_surge",
+  "Greater Expansion": "upgrade_tech_range",
+  "Duration Extender": "upgrade_arcane_extension",
+  "Superior Duration": "upgrade_imbued_duration_extender",
+  "Magic Carpet": "upgrade_magic_carpet",
+  "Spirit Burn": "upgrade_spirit_burn",
+  "Extra Charge": "upgrade_extra_charge",
+  "Rapid Recharge": "upgrade_rapid_recharge",
+  "Compress Cooldown": "upgrade_magic_tempo",
+  "Superior Cooldown": "upgrade_cooldown_reduction",
+  "Echo Shard": "upgrade_ability_power_shard",
+  "Spirit Strike": "upgrade_acolytes_glove",
+  "Spirit Snatch": "upgrade_spirit_snatch",
+  "Suppressor": "upgrade_suppressor",
+  "Mystic Slow": "upgrade_magic_slow",
+  "Mystic Reverb": "upgrade_mystic_reverb",
+  "Mystic Vulnerability": "upgrade_magic_vulnerability",
+  "Escalating Exposure": "upgrade_escalating_exposure",
+  "Slowing Hex": "upgrade_containment",
+  "Knockdown": "upgrade_target_stun",
+  "Vortex Web": "upgrade_aoe_root",
+  "Rusted Barrel": "upgrade_withering_whip",
+  "Disarming Hex": "upgrade_greater_withering_whip",
+  "Mystic Regeneration": "upgrade_mystic_regeneration",
+  "Bullet Resist Shredder": "upgrade_bullet_resist_shredder",
+  "Torment Pulse": "upgrade_tech_damage_pulse",
+  "Spirit Sap": "upgrade_spirit_sap",
+  "Decay": "upgrade_rupture",
+  "Cold Front": "upgrade_cold_front",
+  "Ethereal Shift": "upgrade_self_bubble",
+  "Silence Wave": "upgrade_targeted_silence",
+  "Cursed Relic": "upgrade_glitch",
+  "Scourge": "upgrade_discord",
+  "Focus Lens": "upgrade_focus_lens",
+  "Refresher": "upgrade_ability_refresher",
+  "Cultist Sacrifice": "upgrade_non_player_bonus_sacrifice",
+  "Capacitor": "upgrade_capacitor",
+  "Counterspell": "upgrade_counterspell",
+  "Trophy Collector": "upgrade_trophy_collector",
+  "Grit": "upgrade_grit",
+  "Transcendent Cooldown": "upgrade_transcendent_cooldown",
+  "Guardian Ward": "upgrade_guardian_ward",
+  "Divine Barrier": "upgrade_divine_barrier",
+  "Blood Tribute": "upgrade_blood_tribute",
+  "Arctic Blast": "upgrade_arctic_blast",
+  "Fury Trance": "upgrade_fury_trance",
+  "Crushing Fists": "upgrade_crushing_fists",
+  "Radiant Regeneration": "upgrade_resonant_healing",
+  "Mercurial Magnum": "upgrade_ethereal_bullets",
+  "Indomitable": "upgrade_auto_cleanse",
+  "Spellslinger": "upgrade_enchanted_holsters",
+  "Stalker": "upgrade_weapon_backstabber",
+  "Express Shot": "upgrade_express_shot",
+  "Ballistic Enchantment": "upgrade_bulletshredimbue",
+  "Recharging Rush": "upgrade_rechargingbullets",
+  "Golden Goose Egg": "upgrade_goose_egg"
+ }
+}

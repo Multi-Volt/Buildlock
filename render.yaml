@@ -1,0 +1,12 @@
+# One-click deploy on Render.com: New > Blueprint > point it at your copy of this repo.
+services:
+  - type: web
+    name: buildlock
+    runtime: node
+    plan: free
+    buildCommand: "true"
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: CACHE_HOURS
+        value: "6"

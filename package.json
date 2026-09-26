@@ -1,0 +1,15 @@
+{
+  "name": "buildlock",
+  "version": "1.0.0",
+  "description": "Deadlock build planner with live Tracklock builds. No dependencies.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "warm": "node server.js --warm",
+    "snapshot": "node server.js --snapshot",
+    "test": "node test/parser.test.js",
+    "update-game-data": "python3 tools/build.py"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#191612">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script src="config.js" onerror="void 0"></script>
+<title>Buildlock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#191612; --bg2:#201b16; --panel:#241f19; --panel2:#2c261f; --line:#3d3429; --line2:#56493a;
+  --text:#ebdfc6; --muted:#a39580; --faint:#6f6454;
+  --brass:#c9a45c; --brass2:#8a7141;
+  --w:#e0893a; --w-bg:#3a2515; --v:#80b448; --v-bg:#23301a; --s:#a56bdc; --s-bg:#2d2140;
+  --soul:#58d6c6; --bad:#e2604e; --good:#8fcf6a;
+  --shadow:0 10px 30px rgba(0,0,0,.45);
+  --display:"Big Shoulders Display", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --body:"Alegreya Sans", "Gill Sans", "Trebuchet MS", system-ui, sans-serif;
+  --hero:#8a7141; --hero-rgb:138,113,65;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#e9dfc9; --bg2:#e2d6bc; --panel:#f3ebd9; --panel2:#ebe0c8; --line:#cdbd9c; --line2:#b29f7b;
+    --text:#2a2118; --muted:#6e5f4b; --faint:#998a72; --brass:#8a6a2c; --brass2:#b7955a;
+    --w:#b8621b; --w-bg:#f3dcc4; --v:#4f8423; --v-bg:#dde9cc; --s:#7a41b3; --s-bg:#e6d8f2;
+    --soul:#17897c; --bad:#b83a2a; --good:#3f7d1f; --shadow:0 10px 30px rgba(60,40,10,.2); color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+    --bg:#e9dfc9; --bg2:#e2d6bc; --panel:#f3ebd9; --panel2:#ebe0c8; --line:#cdbd9c; --line2:#b29f7b;
+    --text:#2a2118; --muted:#6e5f4b; --faint:#998a72; --brass:#8a6a2c; --brass2:#b7955a;
+    --w:#b8621b; --w-bg:#f3dcc4; --v:#4f8423; --v-bg:#dde9cc; --s:#7a41b3; --s-bg:#e6d8f2;
+    --soul:#17897c; --bad:#b83a2a; --good:#3f7d1f; --shadow:0 10px 30px rgba(60,40,10,.2); color-scheme:light;
+}
+:root[data-theme="dark"]{color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%}
+body{margin:0; min-height:100%; background:var(--bg); color:var(--text); font-family:var(--body); font-size:15px; line-height:1.4;
+  background-image:radial-gradient(ellipse 90% 60% at 15% -10%, rgba(var(--hero-rgb),.34), transparent 65%),radial-gradient(ellipse 70% 50% at 100% 110%, rgba(var(--hero-rgb),.16), transparent 70%);
+  background-attachment:fixed; transition:background-color .4s;
+  -webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--soul); outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+img{max-width:100%}
+
+/* top bar */
+.top{display:flex; align-items:center; gap:14px; padding:10px 16px; border-bottom:2px solid rgba(var(--hero-rgb),.7); background:linear-gradient(90deg, rgba(var(--hero-rgb),.32), var(--bg2) 55%); position:sticky; top:env(safe-area-inset-top,0px); z-index:20}
+.herobtn{display:flex; align-items:center; gap:12px; background:none; border:0; padding:0; text-align:left}
+.herobtn .ic{width:52px; height:52px; border-radius:50%}
+.heroname{font-family:var(--display); font-weight:800; font-size:30px; letter-spacing:.02em; text-transform:uppercase; line-height:.95}
+.herosub{display:flex; flex-wrap:wrap; gap:4px; margin-top:4px}
+.tag{font-size:11.5px; padding:1px 8px; border-radius:10px; border:1px solid rgba(var(--hero-rgb),.8); background:rgba(var(--hero-rgb),.18); color:var(--text); white-space:nowrap}
+.hcard .tags{font-size:10.5px; color:var(--muted); line-height:1.2}
+.tl{display:grid; gap:10px}
+.tlph h4{margin:0 0 6px; font-family:var(--display); font-size:17px; letter-spacing:.02em}
+.tlrow{display:flex; align-items:center; gap:8px; padding:3px 0; font-size:13.5px}
+.tlrow .ic{width:30px; height:30px; border-radius:3px; background:color-mix(in srgb,var(--c) 30%, #000)}
+.tlrow .pb2{flex:1; height:5px; background:var(--line); border-radius:3px; overflow:hidden; max-width:110px}
+.tlrow .pb2 i{display:block; height:100%; background:var(--c)}
+.tlrow.dim{opacity:.45}
+.bname{flex:1; min-width:0}
+.bname input{width:100%; max-width:420px; background:transparent; border:0; border-bottom:1px dashed var(--line2); padding:4px 2px; font-size:17px; font-weight:500}
+.tbtn{background:var(--panel); border:1px solid var(--line2); color:var(--text); padding:8px 12px; border-radius:3px; font-size:14px; white-space:nowrap}
+.tbtn:hover{border-color:var(--brass)}
+.tbtn.primary{border-color:var(--brass); color:var(--brass)}
+
+/* soul strip */
+.souls{display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; padding:10px 16px; border-bottom:1px solid var(--line)}
+.soulval{display:flex; align-items:center; gap:8px}
+.soulval input{width:96px; background:var(--panel); border:1px solid var(--line2); border-radius:3px; padding:6px 8px; font-family:var(--display); font-weight:700; font-size:22px; color:var(--soul); text-align:right}
+.soulglyph{width:22px; height:22px; color:var(--soul)}
+.slider{flex:1 1 260px; display:flex; flex-direction:column; gap:2px; min-width:200px}
+.slider input[type=range]{width:100%; accent-color:var(--soul)}
+.presets{display:flex; gap:6px; font-size:12px; color:var(--muted); flex-wrap:wrap}
+.presets button{background:none; border:1px solid var(--line); border-radius:20px; padding:1px 9px; color:var(--muted); font-size:12px}
+.presets button:hover{color:var(--soul); border-color:var(--soul)}
+.lvl{display:flex; align-items:center; gap:6px}
+.lvl button{width:28px; height:28px; border-radius:50%; background:var(--panel); border:1px solid var(--line2)}
+.lvlnum{font-family:var(--display); font-weight:800; font-size:26px; min-width:78px; text-align:center; line-height:1}
+.lvlnum small{display:block; font-family:var(--body); font-weight:400; font-size:11px; color:var(--muted)}
+.pill{display:inline-flex; align-items:center; gap:5px; font-size:13px; color:var(--muted)}
+.pill b{color:var(--text); font-weight:700}
+.toggle{display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); cursor:pointer; user-select:none}
+.toggle input{accent-color:var(--brass); width:16px; height:16px}
+
+/* layout */
+main{display:grid; gap:14px; padding:14px 16px 90px; grid-template-columns:minmax(300px,360px) minmax(0,1fr) minmax(280px,330px); align-items:start}
+.col{display:flex; flex-direction:column; gap:14px; min-width:0}
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:4px; position:relative; box-shadow:0 1px 0 rgba(255,255,255,.02) inset}
+.panel::before{content:""; position:absolute; inset:3px; border:1px solid rgba(var(--hero-rgb),.35); border-radius:2px; pointer-events:none}
+.ph{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 14px 6px}
+.ph h2{margin:0; font-family:var(--display); font-weight:700; font-size:21px; letter-spacing:.03em; color:var(--brass)}
+.pb{padding:6px 14px 14px}
+@media (max-width:1180px){ main{grid-template-columns:minmax(300px,360px) minmax(0,1fr)} .c3{grid-column:1 / -1} }
+@media (max-width:760px){
+  main{grid-template-columns:minmax(0,1fr); padding:10px 10px 110px}
+  .top{position:static; padding:8px 12px} .tbtn{padding:6px 9px; font-size:13px}
+  .souls{padding:8px 12px} .soulval input{font-size:19px; width:86px} .lvlnum{font-size:22px; min-width:64px}
+  .slider{flex-basis:100%}
+  .col{display:contents}
+  .view{display:none}
+  body[data-m="shop"] .v-shop, body[data-m="build"] .v-build, body[data-m="abil"] .v-abil, body[data-m="stats"] .v-stats{display:block}
+  .top{flex-wrap:wrap; gap:8px 12px} .heroname{font-size:24px} .herobtn .ic{width:44px;height:44px}
+  .bname{order:3; flex-basis:100%}
+  .souls{gap:8px 12px}
+}
+.mnav{display:none}
+@media (max-width:760px){
+  .mnav{display:grid; grid-template-columns:repeat(4,1fr); position:fixed; left:0; right:0; bottom:0; z-index:30; background:var(--bg2); border-top:1px solid var(--line2); padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+  .mnav button{background:none; border:0; color:var(--muted); padding:6px 2px; font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.03em; border-radius:3px}
+  .mnav button[aria-current="true"]{color:var(--brass); background:var(--panel)}
+}
+
+/* icons */
+.ic{position:relative; display:inline-block; flex:none; overflow:hidden; background:var(--panel2)}
+.ic img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1}
+.ic .fb{position:absolute; inset:0; display:grid; place-items:center; font-family:var(--display); font-weight:800; color:#fff}
+.ic .fb svg{width:58%; height:58%}
+
+/* shop */
+.cats{display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:0 14px}
+.cats button{border:1px solid var(--line2); background:var(--panel2); padding:7px 4px; border-radius:3px; font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:.03em; color:var(--muted)}
+.cats button.W[aria-pressed="true"]{color:var(--w); border-color:var(--w); background:var(--w-bg)}
+.cats button.V[aria-pressed="true"]{color:var(--v); border-color:var(--v); background:var(--v-bg)}
+.cats button.S[aria-pressed="true"]{color:var(--s); border-color:var(--s); background:var(--s-bg)}
+.search{margin:10px 14px 0; display:flex}
+.search input{flex:1; background:var(--bg2); border:1px solid var(--line); border-radius:3px; padding:7px 10px; font-size:14px}
+.tier{margin-top:12px}
+.tierh{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); margin-bottom:6px}
+.tierh b{font-family:var(--display); font-size:16px; color:var(--text); letter-spacing:.03em}
+.tierh::after{content:""; flex:1; height:1px; background:var(--line)}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(70px,1fr)); gap:7px}
+.tile{position:relative; background:var(--c-bg); border:1px solid color-mix(in srgb,var(--c) 45%, transparent); border-radius:3px; padding:5px 4px 4px; text-align:center; color:var(--text); display:flex; flex-direction:column; align-items:center; gap:3px; min-height:98px}
+.tile:hover{border-color:var(--c)}
+.tile .ic{width:44px; height:44px; border-radius:3px; background:color-mix(in srgb,var(--c) 30%, #000)}
+.tile .tn{font-size:11.5px; line-height:1.1; font-weight:500}
+.tile.locked{opacity:.45}
+.tile.inb{box-shadow:0 0 0 2px var(--c) inset}
+.tile .qa{position:absolute; top:2px; right:2px; width:20px; height:20px; border-radius:50%; border:1px solid var(--c); background:var(--panel); color:var(--c); font-weight:700; line-height:1; padding:0; font-size:14px; z-index:2}
+.tile .act{position:absolute; top:3px; left:4px; font-size:10px; color:var(--c); font-weight:700; z-index:2}
+.cW{--c:var(--w); --c-bg:var(--w-bg)} .cV{--c:var(--v); --c-bg:var(--v-bg)} .cS{--c:var(--s); --c-bg:var(--s-bg)}
+
+/* build */
+.inv{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.invc{border-top:3px solid var(--c); background:var(--c-bg); padding:7px 9px; border-radius:0 0 3px 3px; font-size:12.5px}
+.invc .big{font-family:var(--display); font-weight:800; font-size:22px; color:var(--c); line-height:1}
+.bar{height:5px; background:rgba(0,0,0,.25); border-radius:3px; margin:5px 0 3px; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--c)}
+.slots{display:grid; grid-template-columns:repeat(12,1fr); gap:5px; margin-top:12px}
+.slot{aspect-ratio:1; border:1px dashed var(--line2); border-radius:3px; display:grid; place-items:center; color:var(--faint); font-size:10px; background:var(--bg2)}
+.slot.flex{border-style:dotted}
+.slot .ic{width:100%; height:100%; border-radius:3px}
+.slotnote{font-size:12px; color:var(--muted); margin-top:5px}
+.slotnote.warn{color:var(--bad)}
+@media (max-width:520px){ .slots{grid-template-columns:repeat(6,1fr)} .inv{gap:6px} .invc{padding:6px; font-size:11px} .invc .big{font-size:18px} .invc .big span{display:block; font-size:11px!important} .brow{gap:6px} .brow .iconbtn{width:24px} .actt{padding:2px 5px} }
+.phase{margin-top:14px; border-left:2px solid var(--line2); padding-left:10px}
+.phaseh{display:flex; align-items:center; gap:8px}
+.phaseh input{flex:1; min-width:0; background:transparent; border:0; font-family:var(--display); font-weight:700; font-size:19px; letter-spacing:.02em; padding:2px 0}
+.phaseh .sum{font-size:12px; color:var(--muted); white-space:nowrap}
+.iconbtn{background:none; border:1px solid transparent; color:var(--muted); width:28px; height:28px; border-radius:3px; display:inline-grid; place-items:center; padding:0; flex:none}
+.iconbtn:hover{border-color:var(--line2); color:var(--text)}
+.iconbtn svg{width:15px; height:15px}
+.brow{display:flex; align-items:center; gap:9px; padding:6px 4px; border-bottom:1px solid var(--line)}
+.brow .ic{width:38px; height:38px; border-radius:3px; background:color-mix(in srgb,var(--c) 30%, #000); outline:1px solid color-mix(in srgb,var(--c) 60%, transparent)}
+.brow .bi{flex:1; min-width:0; cursor:pointer}
+.brow .bn{font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.brow .bs{font-size:12px; color:var(--muted)}
+.brow.off .ic, .brow.off .bn{opacity:.5}
+.brow.gone .bn{text-decoration:line-through; text-decoration-color:var(--muted)}
+.state{font-size:11.5px; padding:1px 7px; border-radius:10px; border:1px solid var(--line2); white-space:nowrap}
+.state.on{color:var(--soul); border-color:color-mix(in srgb,var(--soul) 50%, transparent)}
+.state.need{color:var(--muted)}
+.actt{font-size:11.5px; padding:2px 8px; border-radius:10px; border:1px solid var(--line2); background:none; color:var(--muted); white-space:nowrap}
+.actt[aria-pressed="true"]{color:var(--brass); border-color:var(--brass)}
+.empty{font-size:13px; color:var(--faint); padding:8px 2px}
+.addphase{margin-top:12px}
+textarea.notes{width:100%; min-height:60px; background:var(--bg2); border:1px solid var(--line); border-radius:3px; padding:8px; font-size:14px; resize:vertical; margin-top:12px}
+
+/* abilities */
+.abgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+@media (max-width:980px){ .abgrid{grid-template-columns:1fr} }
+.ab{border:1px solid var(--line); background:var(--bg2); border-radius:3px; padding:10px}
+.abh{display:flex; gap:10px; align-items:center}
+.abh .ic{width:46px; height:46px; border-radius:50%; background:#000; outline:1px solid var(--brass2)}
+.abn{font-family:var(--display); font-weight:700; font-size:19px; line-height:1}
+.abk{font-size:11.5px; color:var(--muted)}
+.pips{display:flex; gap:4px; margin-top:5px}
+.pip{width:18px; height:6px; border-radius:2px; background:var(--line)}
+.pip.on{background:var(--brass)}
+.pip.u{width:10px}
+.abctl{margin-left:auto; display:flex; gap:4px}
+.abctl button{width:30px; height:30px; border-radius:50%; background:var(--panel); border:1px solid var(--line2); font-weight:700}
+.abctl button:disabled{opacity:.35; cursor:default}
+.abd{font-size:13px; color:var(--muted); margin:8px 0 6px}
+.props{display:grid; grid-template-columns:1fr auto; gap:2px 10px; font-size:13px}
+.props .pv{text-align:right; font-weight:700}
+.props .pv small{font-weight:400; color:var(--faint); margin-right:4px}
+.sp{color:var(--s)}
+.ups{margin-top:8px; display:grid; gap:4px}
+.up{display:flex; gap:8px; font-size:12.5px; padding:5px 7px; border-radius:3px; border:1px solid var(--line); color:var(--muted)}
+.up b{font-family:var(--display); font-size:14px; color:var(--faint); min-width:24px}
+.up.on{border-color:var(--brass2); color:var(--text); background:color-mix(in srgb,var(--brass) 8%, transparent)}
+.up.on b{color:var(--brass)}
+.order{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; align-items:center}
+.ostep{display:inline-flex; align-items:center; gap:4px; font-size:12px; border:1px solid var(--line2); border-radius:14px; padding:2px 8px 2px 3px; background:var(--bg2)}
+.ostep .ic{width:20px; height:20px; border-radius:50%}
+.ostep.pend{opacity:.5}
+.ostep i{font-style:normal; color:var(--faint)}
+.aprow{font-size:13px; color:var(--muted); display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px}
+.aprow b{color:var(--text)} .aprow .over{color:var(--bad)}
+
+/* stats */
+.sgroup{margin-top:10px}
+.sgroup h3{margin:0 0 4px; font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:.03em; color:var(--c)}
+.srow{display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:baseline; padding:4px 2px; border-bottom:1px solid var(--line); font-size:13.5px; cursor:pointer; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left}
+.srow:hover{background:color-mix(in srgb,var(--c) 7%, transparent)}
+.srow .sv{font-weight:700; text-align:right}
+.srow .sd{font-size:12px; min-width:52px; text-align:right}
+.up1{color:var(--good)} .dn1{color:var(--bad)}
+.srcs{font-size:12px; color:var(--muted); padding:4px 4px 8px 12px; border-bottom:1px solid var(--line); display:grid; grid-template-columns:1fr auto; gap:1px 10px}
+.hl{font-family:var(--display); font-weight:800; font-size:30px; line-height:1}
+.heads{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:6px}
+.heads div{background:var(--c-bg); border-radius:3px; padding:7px 8px}
+.heads span{font-size:11.5px; color:var(--muted); display:block}
+.heads .hl{font-size:24px; color:var(--c)}
+
+/* sheet */
+.sheet{position:fixed; inset:0; z-index:50; display:none; background:rgba(8,6,4,.62); padding:max(20px, env(safe-area-inset-top,0px)) 14px max(20px, env(safe-area-inset-bottom,0px)); overflow:auto}
+.sheet.open{display:flex; align-items:flex-start; justify-content:center}
+.card{background:var(--panel); border:1px solid var(--line2); border-radius:5px; width:100%; max-width:560px; box-shadow:var(--shadow); position:relative; margin:auto 0}
+.card::before{content:""; position:absolute; inset:4px; border:1px solid color-mix(in srgb,var(--brass2) 40%, transparent); pointer-events:none; border-radius:3px}
+.card.wide{max-width:880px}
+.ch{display:flex; gap:12px; align-items:center; padding:16px 16px 10px; border-bottom:1px solid var(--line)}
+.ch .ic{width:64px; height:64px; border-radius:4px}
+.ch h2{margin:0; font-family:var(--display); font-weight:800; font-size:28px; line-height:1}
+.close{margin-left:auto; align-self:flex-start}
+.cb{padding:12px 16px 16px; display:grid; gap:12px}
+.meta{display:flex; gap:10px; flex-wrap:wrap; font-size:13px; color:var(--muted); margin-top:4px}
+.meta .cost{color:var(--soul); font-weight:700}
+.sec{border:1px solid var(--line); border-radius:3px; padding:8px 10px}
+.sec h4{margin:0 0 5px; font-size:12px; font-weight:700; color:var(--c)}
+.sec p{margin:0 0 6px; font-size:13.5px; white-space:pre-line}
+.cond{font-size:10.5px; color:var(--brass); border:1px solid var(--brass2); border-radius:8px; padding:0 5px; margin-left:4px}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line2); border-radius:3px; background:var(--bg2); padding:3px 8px 3px 3px; font-size:13px}
+.chip .ic{width:24px; height:24px; border-radius:2px}
+.delta{display:grid; grid-template-columns:1fr auto auto; gap:2px 12px; font-size:13.5px}
+.cf{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.cf select{background:var(--bg2); border:1px solid var(--line2); border-radius:3px; padding:7px}
+.heroes{display:grid; grid-template-columns:repeat(auto-fill,minmax(104px,1fr)); gap:10px; padding:14px 16px 18px}
+.hcard{background:var(--bg2); border:1px solid var(--line); border-radius:4px; padding:8px 6px; display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center}
+.hcard:hover{border-color:var(--hc)}
+.hcard .ic{width:64px; height:64px; border-radius:50%; background:var(--hc); outline:2px solid var(--hc)}
+.hcard .n{font-family:var(--display); font-weight:700; font-size:16px; line-height:1}
+.hcard .t{font-size:11px; color:var(--muted)}
+.hcard.cur{border-color:var(--brass)}
+.lib{display:grid; gap:6px}
+.lrow{display:flex; align-items:center; gap:10px; padding:6px; border:1px solid var(--line); border-radius:3px; background:var(--bg2)}
+.lrow.cur{border-color:var(--brass)}
+.lrow .ic{width:36px; height:36px; border-radius:50%}
+.lrow .li{flex:1; min-width:0; cursor:pointer}
+.lrow .li div:first-child{font-weight:500}
+.code{width:100%; min-height:70px; background:var(--bg2); border:1px solid var(--line); border-radius:3px; font-family:ui-monospace,Menlo,monospace; font-size:12px; padding:8px; word-break:break-all}
+.toast{position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:var(--panel2); border:1px solid var(--brass2); padding:8px 14px; border-radius:3px; z-index:60; font-size:14px; display:none}
+.foot{font-size:12px; color:var(--faint); padding:0 16px 24px}
+@media (prefers-reduced-motion:no-preference){ .sheet.open .card{animation:rise .18s ease-out} @keyframes rise{from{transform:translateY(8px);opacity:0}} }
+</style>
+</head>
+<body data-m="build">
+<header class="top">
+  <button class="herobtn" id="heroBtn" aria-label="Change hero"></button>
+  <div class="bname"><input id="bName" aria-label="Build name" maxlength="60"></div>
+  <button class="tbtn" id="libBtn">Builds</button>
+  <button class="tbtn primary" id="shareBtn">Share code</button>
+</header>
+<section class="souls" aria-label="Souls and level">
+  <label class="soulval"><svg class="soulglyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c3 4 7 6.5 7 11.2A7 7 0 0 1 5 13.2c0-2.4 1.2-4 2.7-5.3-.1 2 .6 3.4 1.9 4.1C9.3 8 10.5 5 12 2z"/></svg><input id="soulIn" type="number" inputmode="numeric" min="0" max="60000" step="100" aria-label="Souls (net worth)"></label>
+  <div class="slider"><input id="soulRange" type="range" min="0" max="50000" step="50" aria-label="Souls slider">
+    <div class="presets"><span>Jump to</span><button data-s="1500">Lane 1.5k</button><button data-s="5000">5k</button><button data-s="10000">10k</button><button data-s="18000">18k</button><button data-s="28000">28k</button><button data-s="45000">45k</button></div></div>
+  <div class="lvl"><button id="lvDn" aria-label="Previous level">−</button><div class="lvlnum" id="lvNum"></div><button id="lvUp" aria-label="Next level">+</button></div>
+  <div class="pill" id="spentPill"></div>
+  <label class="toggle" title="Ignore the soul budget: every item in the build and every skill step counts"><input type="checkbox" id="sandbox">Sandbox</label>
+</section>
+<main>
+  <div class="col">
+    <section class="panel view v-shop" aria-label="Shop">
+      <div class="ph"><h2>Shop</h2><span class="muted" style="font-size:12px" id="shopNote"></span></div>
+      <div class="cats" id="cats"></div>
+      <div class="search"><input id="q" type="search" placeholder="Search items or stats" aria-label="Search items"></div>
+      <div class="pb" id="shop"></div>
+    </section>
+  </div>
+  <div class="col">
+    <section class="panel view v-build" aria-label="Build">
+      <div class="ph"><h2>Build order</h2><button class="tbtn primary" id="tlBtn" style="font-size:13px;padding:5px 10px">Tracklock build</button></div>
+      <div class="pb" id="build"></div>
+    </section>
+    <section class="panel view v-abil" aria-label="Abilities">
+      <div class="ph"><h2>Abilities</h2><button class="tbtn" id="clrSkill" style="font-size:12px;padding:4px 9px">Clear skill order</button></div>
+      <div class="pb" id="abil"></div>
+    </section>
+  </div>
+  <div class="col c3">
+    <section class="panel view v-stats" aria-label="Stats">
+      <div class="ph"><h2>Stats</h2><span class="muted" style="font-size:12px">Change vs. no items</span></div>
+      <div class="pb" id="stats"></div>
+    </section>
+  </div>
+</main>
+<p class="foot">Data from Deadlock's game files via SteamDB's GameTracking-Deadlock. Icons load from the current Deadlock asset CDN when your browser allows it. Builds from tracklock.gg: live when the app runs on its server, otherwise a snapshot. Numbers are an estimate of passive stats; actives count only when switched on.</p>
+<nav class="mnav" id="mnav" aria-label="Sections">
+  <button data-m="build">Build</button><button data-m="shop">Shop</button><button data-m="abil">Abilities</button><button data-m="stats">Stats</button>
+</nav>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="gamedata">__DATA__</script>
+<script>
+(()=>{
+const D=JSON.parse(document.getElementById('gamedata').textContent);
+const IMG='https://static.bigbrain.gg/deadlock-img/assets-api-res/images/';
+const IMG2='https://media.githubusercontent.com/media/0xThiagoAmaral/deadlock-open-assets/main/images/deadlock/';
+window.__imgFail=el=>{const alt=el.getAttribute('data-alt'); if(alt){el.removeAttribute('data-alt'); el.src=alt;} else el.remove();};
+const ITEMS={}; D.items.forEach(i=>ITEMS[i.id]=i);
+const HEROES={}; D.heroes.forEach(h=>HEROES[h.id]=h);
+const INTO={}; D.items.forEach(i=>(i.cp||[]).forEach(c=>(INTO[c]=INTO[c]||[]).push(i.id)));
+const CAT={W:'Weapon',V:'Vitality',S:'Spirit'};
+const UPCOST=[1,2,5];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=(v,d=0)=>{if(v==null||isNaN(v))return '–'; const r=Math.round(v*10**d)/10**d; return r.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:d});};
+const sgn=(v,d=0)=>(v>0?'+':v<0?'−':'')+fmt(Math.abs(v),d);
+
+/* ---------- glyphs (fallback when icons can't load) ---------- */
+const G={
+ bullet:'<path d="M9 21V10c0-3.2 1.4-5.9 3-7 1.6 1.1 3 3.8 3 7v11z M9 16h6" />',
+ mag:'<path d="M8 3h8v18H8z M8 8h8 M8 13h8"/>',
+ cross:'<circle cx="12" cy="12" r="7"/><path d="M12 2v5 M12 17v5 M2 12h5 M17 12h5"/>',
+ range:'<path d="M3 12h15 M13 7l5 5-5 5 M3 8v8"/>',
+ heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+ shield:'<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+ sshield:'<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9.5 12.5a2.5 2.5 0 1 0 2.5-2.5"/>',
+ drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',
+ plus:'<path d="M12 5v14 M5 12h14"/>',
+ speed:'<path d="M5 6l6 6-6 6 M13 6l6 6-6 6"/>',
+ star:'<path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/>',
+ clock:'<circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/>',
+ glass:'<path d="M7 3h10 M7 21h10 M8 3c0 5 8 5 8 9s-8 4-8 9 M16 3c0 5-8 5-8 9s8 4 8 9"/>',
+ burst:'<path d="M12 2v5 M12 17v5 M2 12h5 M17 12h5 M5 5l3.5 3.5 M15.5 15.5L19 19 M19 5l-3.5 3.5 M8.5 15.5L5 19"/>',
+ snow:'<path d="M12 3v18 M4.2 7.5l15.6 9 M4.2 16.5l15.6-9"/>',
+ chain:'<rect x="3" y="9" width="10" height="6" rx="3"/><rect x="11" y="9" width="10" height="6" rx="3"/>',
+ eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ blade:'<path d="M5 19L18 6 M14 5h5v5 M7 14l3 3 M4 20l2-2"/>',
+ bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+ anti:'<path d="M12 5v14 M5 12h14 M4 20L20 4"/>',
+ bars:'<path d="M6 19V9 M12 19V5 M18 19v-7"/>',
+ fist:'<path d="M7 11V7a2 2 0 0 1 4 0v4 M11 10V6a2 2 0 0 1 4 0v5 M15 10a2 2 0 0 1 4 0v3c0 4-3 7-7 7s-7-3-7-7v-2a2 2 0 0 1 2-2"/>',
+ diamond:'<path d="M12 3l8 9-8 9-8-9z"/>'
+};
+const GRP={Magazines:'mag',RateOfFire:'bullet',BulletVelocity:'range',HeadshotEnthusiasts:'cross',WeaponRange:'range',SpiritSlinger:'star',Misc:'diamond',TankingBullets:'shield',Actives:'bolt',Healing:'plus',SlowingBullets:'snow',
+ SpiritProtection:'sshield',MovementAndAgility:'speed',AdditionalProtection:'shield',MoreHealth:'heart',Revitalization:'plus',BulletProtection:'shield',Lifesteal:'drop',Debuffs:'anti',Melee:'fist',AntiHealing:'anti',
+ MoreSpirit:'star',BurstDamage:'burst',Duration:'glass',SpiritRange:'range',Cooldown:'clock',SlowingMagic:'snow',CrownControl:'chain',MiscSpirit:'diamond',Charges:'bars',MeleeSpirit:'blade',MagicVulnerability:'eye',AntiGun:'shield'};
+const svgG=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${G[k]||G.diamond}</svg>`;
+function icon(path,fb,alt){
+  const src=path?IMG+path:(alt?IMG2+alt:'');
+  const al=path&&alt?` data-alt="${IMG2}${alt}"`:'';
+  return `<span class="ic"><span class="fb">${fb}</span>${src?`<img src="${src}"${al} alt="" loading="lazy" decoding="async" onerror="__imgFail(this)">`:''}</span>`;
+}
+const itemIcon=it=>icon(it.im,`<span style="color:var(--c)">${svgG(GRP[it.g])}</span>`,it.im2);
+const heroCol=h=>`rgb(${(h.col||[120,110,90]).join(',')})`;
+const heroIcon=(h,big)=>icon(big?h.im[1]:h.im[0],`<span style="font-size:${big?26:18}px">${esc(h.n.replace('The ','')[0])}</span>`,big?h.im2[1]:h.im2[0]);
+const abIcon=(ab,i)=>icon(ab.im,`<span style="font-size:16px;color:var(--brass)">${i+1}</span>`,ab.im2);
+
+/* ---------- persistence ---------- */
+const KEY='buildlock-v1';
+let S;
+function blank(heroId){
+  const h=HEROES[heroId];
+  return {id:'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:`${h.n} build`,hero:heroId,
+    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},notes:'',t:Date.now()};
+}
+function load(){
+  try{const raw=localStorage.getItem(KEY); if(raw){const o=JSON.parse(raw); if(o&&o.builds&&o.cur&&o.builds[o.cur]) return o;}}catch(e){}
+  const def=D.heroes.find(h=>h.n==='Haze')||D.heroes[0];
+  const b=blank(def.id);
+  return {builds:{[b.id]:b},cur:b.id,souls:12000,sandbox:false,cat:'W'};
+}
+let saveT;
+function save(){clearTimeout(saveT); saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}},250);}
+S=load();
+const B=()=>S.builds[S.cur];
+const H=()=>HEROES[B().hero]||D.heroes[0];
+
+/* ---------- core math ---------- */
+function levelFor(h,souls){let l=1; h.lv.forEach((e,i)=>{if(e[0]<=souls)l=i+1}); return l;}
+function levelInfo(h,lvl){
+  let boons=0,ap=0,un=0;
+  for(let i=0;i<lvl;i++){const e=h.lv[i]; if(!e)break; boons+=e[1]; ap+=e[2]; un+=e[3];}
+  return {boons,ap,un};
+}
+function orderRows(b,souls,sandbox){
+  const rows=[]; const held=[]; let cum=0; const replaced={};
+  const ghost=[];
+  b.phases.forEach((ph,pi)=>ph.items.forEach((id,ii)=>{
+    const it=ITEMS[id]; if(!it) return;
+    const comps=(it.cp||[]).filter(c=>ghost.includes(c));
+    const eff=Math.max(0,it.c-comps.reduce((a,c)=>a+ITEMS[c].c,0));
+    comps.forEach(c=>ghost.splice(ghost.indexOf(c),1)); ghost.push(id);
+    cum+=eff;
+    const on=sandbox||cum<=souls;
+    if(on){(it.cp||[]).forEach(c=>{const k=held.indexOf(c); if(k>=0){held.splice(k,1); replaced[c]=id;}}); held.push(id);}
+    rows.push({id,pi,ii,eff,need:cum,on});
+  }));
+  const spent=rows.filter(r=>r.on).reduce((a,r)=>a+r.eff,0);
+  return {rows,held,replaced,spent};
+}
+const MULT=new Set(['BULLET_ARMOR_DAMAGE_RESIST','TECH_RESIST','MELEE_RESIST','STATUS_RESISTANCE','COOLDOWN_REDUCTION_PERCENTAGE','MOVEMENT_SLOW_RESISTANCE','ITEM_COOLDOWN_REDUCTION_PERCENTAGE']);
+function invBonus(h,cat,spent){let v=0,next=null; for(const [t,b] of h.inv[cat]){ if(spent>=t) v=b; else {next=[t,b]; break;} } return {v,next};}
+function compute(h,lvl,held,act){
+  const L=levelInfo(h,lvl);
+  const T={}; const src={};
+  const add=(t,v,s)=>{ if(!v) return; (T[t]=T[t]||[]).push(v); (src[t]=src[t]||[]).push([s,v]); };
+  const spentBy={W:0,V:0,S:0};
+  held.forEach(id=>{const it=ITEMS[id]; spentBy[it.s]+=it.c;
+    it.x.forEach(sec=>sec.p.forEach(p=>{ if(!p.t||p.v==null) return;
+      const on= sec.ty==='Innate' ? (!p.c || act[id]) : !!act[id];
+      if(on) add(p.t,p.v,it.n+(sec.ty!=='Innate'||p.c?' (active)':''));
+    }));
+  });
+  const inv={W:invBonus(h,'W',spentBy.W),V:invBonus(h,'V',spentBy.V),S:invBonus(h,'S',spentBy.S)};
+  const sum=t=>(T[t]||[]).reduce((a,b)=>a+b,0);
+  const mul=t=>{const a=T[t]||[]; let pos=1,neg=0; a.forEach(v=>{ if(v>0) pos*=1-v/100; else neg+=v; }); return (1-pos)*100+neg;};
+  const lu=h.lu, st=h.st, w=h.w;
+  const R={}; const SRC={};
+  // level contributions
+  const lvB=(lu.BASE_BULLET_DAMAGE_FROM_LEVEL||0)*L.boons, lvH=(lu.BASE_HEALTH_FROM_LEVEL||0)*L.boons, lvM=(lu.BASE_MELEE_DAMAGE_FROM_LEVEL||0)*L.boons, lvS=(lu.TECH_POWER||0)*L.boons;
+  if(inv.W.v) add('WEAPON_DAMAGE_INCREASE',inv.W.v,'Weapon investment');
+  if(inv.S.v) add('TECH_POWER',inv.S.v,'Spirit investment');
+  if(inv.V.v) add('BASE_HEALTH_PERCENT',inv.V.v,'Vitality investment');
+  if(lvS) add('TECH_POWER',lvS,`Level boons (${L.boons})`);
+  const wd=sum('WEAPON_DAMAGE_INCREASE'), fr=sum('FIRE_RATE');
+  R.bullet=(w.dmg+lvB)*(1+wd/100); R.pel=w.pel; R.wd=wd; R.fr=fr;
+  const burst=w.burst||1, cyc=w.cyc+(burst-1)*(w.ibc||0);
+  R.sps=burst/cyc*(1+fr/100);
+  R.dps=R.bullet*w.pel*R.sps;
+  R.clip=Math.max(1,Math.round(w.clip*(1+sum('AMMO_CLIP_SIZE_PERCENT')/100)+sum('AMMO_CLIP_SIZE')));
+  R.reload=w.rs? w.rl*R.clip : w.rl;
+  const magT=R.clip/R.sps; R.sdps=R.bullet*w.pel*R.clip/(magT+R.reload);
+  R.bvel=sum('BONUS_BULLET_SPEED_PERCENT'); R.bls=sum('BULLET_LIFESTEAL');
+  R.light=(st.LightMeleeDamage+lvM)*(1+sum('MELEE_DAMAGE_INCREASE')/100);
+  R.heavy=st.HeavyMeleeDamage*((st.LightMeleeDamage+lvM)/st.LightMeleeDamage)*(1+sum('MELEE_DAMAGE_INCREASE')/100);
+  R.melee=sum('MELEE_DAMAGE_INCREASE');
+  R.hp=((st.MaxHealth+lvH)*(1+sum('BASE_HEALTH_PERCENT')/100)+sum('HEALTH_MAX'))*(1+sum('HEALTH_MAX_PERCENT')/100);
+  R.regen=(st.BaseHealthRegen||0)+sum('HEALTH_REGEN_PER_SECOND'); R.ooc=sum('OUT_OF_COMBAT_HEALTH_REGEN');
+  R.bres=mul('BULLET_ARMOR_DAMAGE_RESIST'); R.sres=mul('TECH_RESIST'); R.mres=mul('MELEE_RESIST'); R.dres=mul('STATUS_RESISTANCE'); R.slowres=mul('MOVEMENT_SLOW_RESISTANCE');
+  R.move=st.MaxMoveSpeed+sum('MOVEMENT_SPEED_MAX'); R.sprint=st.SprintSpeed+sum('SPRINT_SPEED_BONUS');
+  R.stam=st.Stamina+sum('STAMINA'); R.stamrec=sum('STAMINA_REGEN_PER_SECOND_PERCENTAGE');
+  R.sp=sum('TECH_POWER')*(1+sum('TECH_POWER_PERCENT')/100);
+  R.cdr=mul('COOLDOWN_REDUCTION_PERCENTAGE'); R.dur=sum('BONUS_ABILITY_DURATION_PERCENTAGE'); R.rng=sum('TECH_RANGE_PERCENT');
+  R.chg=sum('BONUS_ABILITY_CHARGES'); R.chgcd=sum('COOLDOWN_BETWEEN_CHARGE_REDUCTION_PERCENTAGE'); R.sls=sum('TECH_LIFESTEAL');
+  R.heal=sum('HEAL_AMP_CAST_PERCENT'); R.icdr=mul('ITEM_COOLDOWN_REDUCTION_PERCENTAGE');
+  R.boons=L.boons; R.lvl=lvl; R.T=T; R.src=src; R.inv=inv; R.spentBy=spentBy;
+  // level sources for display
+  R.lvsrc={bullet:lvB,hp:lvH,melee:lvM,sp:lvS};
+  return R;
+}
+// stat sheet definition: key, label, group, decimals, unit, provided-types for breakdown, higherIsBetter
+const STATS=[
+ ['W','dps','Burst DPS',0,'',['WEAPON_DAMAGE_INCREASE','FIRE_RATE']],
+ ['W','sdps','Sustained DPS (with reloads)',0,'',['WEAPON_DAMAGE_INCREASE','FIRE_RATE','AMMO_CLIP_SIZE_PERCENT','AMMO_CLIP_SIZE']],
+ ['W','bullet','Damage per bullet',2,'',['WEAPON_DAMAGE_INCREASE']],
+ ['W','wd','Weapon damage',0,'%',['WEAPON_DAMAGE_INCREASE']],
+ ['W','sps','Shots per second',2,'',['FIRE_RATE']],
+ ['W','fr','Fire rate',0,'%',['FIRE_RATE']],
+ ['W','clip','Ammo',0,'',['AMMO_CLIP_SIZE_PERCENT','AMMO_CLIP_SIZE']],
+ ['W','reload','Reload time',2,'s',[],-1],
+ ['W','bvel','Bullet velocity',0,'%',['BONUS_BULLET_SPEED_PERCENT']],
+ ['W','bls','Bullet lifesteal',0,'%',['BULLET_LIFESTEAL']],
+ ['W','light','Light melee',0,'',['MELEE_DAMAGE_INCREASE']],
+ ['W','heavy','Heavy melee',0,'',['MELEE_DAMAGE_INCREASE']],
+ ['V','hp','Max health',0,'',['HEALTH_MAX','BASE_HEALTH_PERCENT','HEALTH_MAX_PERCENT']],
+ ['V','regen','Health regen',1,'/s',['HEALTH_REGEN_PER_SECOND']],
+ ['V','ooc','Out of combat regen',1,'/s',['OUT_OF_COMBAT_HEALTH_REGEN']],
+ ['V','bres','Bullet resist',0,'%',['BULLET_ARMOR_DAMAGE_RESIST']],
+ ['V','sres','Spirit resist',0,'%',['TECH_RESIST']],
+ ['V','mres','Melee resist',0,'%',['MELEE_RESIST']],
+ ['V','dres','Debuff resist',0,'%',['STATUS_RESISTANCE']],
+ ['V','slowres','Slow resist',0,'%',['MOVEMENT_SLOW_RESISTANCE']],
+ ['V','move','Move speed',2,' m/s',['MOVEMENT_SPEED_MAX']],
+ ['V','sprint','Sprint speed',2,' m/s',['SPRINT_SPEED_BONUS']],
+ ['V','stam','Stamina',0,'',['STAMINA']],
+ ['V','stamrec','Stamina recovery',0,'%',['STAMINA_REGEN_PER_SECOND_PERCENTAGE']],
+ ['S','sp','Spirit power',1,'',['TECH_POWER','TECH_POWER_PERCENT']],
+ ['S','cdr','Ability cooldown reduction',0,'%',['COOLDOWN_REDUCTION_PERCENTAGE']],
+ ['S','dur','Ability duration',0,'%',['BONUS_ABILITY_DURATION_PERCENTAGE']],
+ ['S','rng','Ability range',0,'%',['TECH_RANGE_PERCENT']],
+ ['S','chg','Bonus charges',0,'',['BONUS_ABILITY_CHARGES']],
+ ['S','chgcd','Time between charges',0,'% faster',['COOLDOWN_BETWEEN_CHARGE_REDUCTION_PERCENTAGE']],
+ ['S','sls','Spirit lifesteal',0,'%',['TECH_LIFESTEAL']],
+ ['S','heal','Healing output',0,'%',['HEAL_AMP_CAST_PERCENT']],
+ ['S','icdr','Item cooldown reduction',0,'%',['ITEM_COOLDOWN_REDUCTION_PERCENTAGE']],
+];
+const KNOWN=new Set(STATS.flatMap(s=>s[5]).concat(['BASE_HEALTH_PERCENT']));
+
+function skillState(h,b,lvl,sandbox){
+  const L=levelInfo(h,lvl); const lev=[0,0,0,0]; let uU=0,uP=0,blocked=false; const steps=[];
+  let needU=0,needP=0;
+  b.skill.forEach(ai=>{
+    const cur=steps.filter(s=>s.ai===ai&&!s.bad).length; // planned level before this step
+    if(cur>=4){steps.push({ai,bad:1}); return;}
+    const cu=cur===0?1:0, cp=cur===0?0:UPCOST[cur-1];
+    needU+=cu; needP+=cp;
+    let li=h.lv.length; let aU=0,aP=0; for(let i=0;i<h.lv.length;i++){aU+=h.lv[i][3]; aP+=h.lv[i][2]; if(aU>=needU&&aP>=needP){li=i;break;}}
+    const soulsAt=h.lv[li]?h.lv[li][0]:null;
+    const ok=sandbox||(!blocked&&uU+cu<=L.un&&uP+cp<=L.ap);
+    if(ok){lev[ai]++; uU+=cu; uP+=cp;} else blocked=true;
+    steps.push({ai,on:ok,tier:cur,soulsAt,lvlAt:li+1});
+  });
+  return {lev,uU,uP,L,steps};
+}
+function abilityVals(ab,lv,R){
+  const out=[]; if(lv<1) lv=1;
+  const ups=ab.u.slice(0,lv-1);
+  const seen=new Set();
+  const calc=(k,base,sc,unit,label)=>{
+    let v=base; let s=sc?sc[1]:0; const type=sc?sc[0]:null;
+    ups.forEach(u=>{ if(u.b&&u.b[k]!=null) v+=u.b[k]; if(u.s&&u.s[k]!=null) s+=u.s[k]; });
+    let f=v, note='';
+    if(type==='ETechPower'&&s){ f=v+R.sp*s; note=`${fmt(v,1)} + ${fmt(s,2)}×SP`; }
+    else if(type==='ELevelUpBoons'&&s){ f=v+R.boons*s; }
+    else if(type==='ETechCooldown'){ f=v*(1-R.cdr/100); }
+    else if(type==='ETechDuration'){ f=v*(1+R.dur/100); }
+    else if(type==='ETechRange'||type==='ETechRadius'){ f=v*(1+R.rng/100); }
+    if(k==='AbilityCharges'&&v>1) f=v+R.chg;
+    if(k==='AbilityCooldownBetweenCharge') f=v*(1-R.chgcd/100);
+    return {k,l:label,v:f,base:v,u:unit,sp:type==='ETechPower'&&s,note};
+  };
+  ab.p.forEach(p=>{ if(p.v==null) return; seen.add(p.k); if(p.v===0&&!ups.some(u=>u.b&&u.b[p.k])) return; out.push(calc(p.k,p.v,p.sc,p.u,p.l)); });
+  ups.forEach(u=>Object.keys(u.b||{}).forEach(k=>{ if(seen.has(k)) return; seen.add(k); const [l,un]=(u.bl||{})[k]||[k,'']; out.push(calc(k,0,null,un,l)); }));
+  return out;
+}
+
+/* ---------- rendering ---------- */
+let OPEN={}; // expanded stat rows
+function derive(){
+  const b=B(), h=H(), souls=S.souls, sb=S.sandbox;
+  const lvl=levelFor(h,souls);
+  const o=orderRows(b,souls,sb);
+  const R=compute(h,lvl,o.held,b.act);
+  const R0=compute(h,lvl,[],{});
+  const sk=skillState(h,b,lvl,sb);
+  return {b,h,souls,lvl,o,R,R0,sk};
+}
+function renderAll(){
+  const X=derive(); window.__X=X;
+  renderTop(X); renderShop(X); renderBuild(X); renderAbil(X); renderStats(X); save();
+}
+function renderTop(X){
+  const {h,b,lvl,o}=X;
+  $('#heroBtn').innerHTML=`${heroIcon(h)}<span><div class="heroname" style="color:color-mix(in srgb, ${heroCol(h)} 70%, var(--text))">${esc(h.n)}</div><div class="herosub">${(h.tags||[]).filter(Boolean).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></span>`;
+  const rgb=(h.col||[138,113,65]).join(','); document.documentElement.style.setProperty('--hero-rgb',rgb); document.documentElement.style.setProperty('--hero',`rgb(${rgb})`);
+  const mt=document.querySelector('meta[name=theme-color]'); if(mt) mt.content=`rgb(${rgb})`;
+  $('#heroBtn .ic').style.background=heroCol(h);
+  if(document.activeElement!==$('#bName')) $('#bName').value=b.name;
+  if(document.activeElement!==$('#soulIn')) $('#soulIn').value=S.souls;
+  $('#soulRange').value=Math.min(50000,S.souls);
+  $('#lvNum').innerHTML=`Lv ${lvl}<small>${X.R.boons} boons</small>`;
+  const left=X.souls-o.spent;
+  $('#spentPill').innerHTML=S.sandbox?`<span>Sandbox: <b class="num">${fmt(o.spent)}</b> souls of items</span>`:`<span>Spent <b class="num">${fmt(o.spent)}</b></span><span>Unspent <b class="num" style="color:var(--soul)">${fmt(left)}</b></span>`;
+  $('#sandbox').checked=S.sandbox;
+  document.title=`${b.name} | Buildlock`;
+}
+function renderShop(X){
+  const cat=S.cat||'W'; const q=($('#q').value||'').trim().toLowerCase();
+  $('#cats').innerHTML=['W','V','S'].map(c=>`<button class="${c}" data-cat="${c}" aria-pressed="${!q&&c===cat}">${CAT[c]}</button>`).join('');
+  const inB=new Set(X.b.phases.flatMap(p=>p.items));
+  const left=X.souls-X.o.spent;
+  let list=D.items.filter(i=>{
+    if(i.dh&&i.dh.includes(X.h.id)) return false;
+    if(!q) return i.s===cat;
+    return i.n.toLowerCase().includes(q)||i.x.some(s=>s.p.some(p=>(p.l||'').toLowerCase().includes(q)));
+  });
+  $('#shopNote').textContent=q?`${list.length} matches`:'Tap an item for details';
+  let html='';
+  [1,2,3,4].forEach(t=>{
+    const L=list.filter(i=>i.t===t).sort((a,b)=>a.s.localeCompare(b.s)||a.n.localeCompare(b.n)); if(!L.length) return;
+    html+=`<div class="tier"><div class="tierh"><b>Tier ${['','I','II','III','IV'][t]}</b><span class="num">${fmt(L[0].c)} souls</span></div><div class="grid">`+
+      L.map(i=>{const lock=!S.sandbox&&!inB.has(i.id)&&i.c>left;
+        return `<div class="tile c${i.s} ${lock?'locked':''} ${inB.has(i.id)?'inb':''}" data-item="${i.id}" role="button" tabindex="0" aria-label="${esc(i.n)}${lock?', not affordable yet':''}">
+        ${i.a?'<span class="act">Active</span>':''}
+        ${inB.has(i.id)?'':`<button class="qa" data-quick="${i.id}" aria-label="Add ${esc(i.n)} to build">+</button>`}
+        ${itemIcon(i)}<span class="tn">${esc(i.n)}</span></div>`;}).join('')+`</div></div>`;
+  });
+  $('#shop').innerHTML=html||'<p class="empty">No items match that search.</p>';
+}
+const IC={up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg>',dn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>',x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
+const hasAct=it=>it.x.some(s=>s.p.some(p=>p.t&&(s.ty!=='Innate'||p.c)));
+function renderBuild(X){
+  const {b,h,o,R}=X;
+  let html=`<div class="inv">`+['W','V','S'].map(c=>{const iv=R.inv[c]; const sp=R.spentBy[c]; const nx=iv.next; const prev=h.inv[c].filter(t=>t[0]<=sp).pop();
+    const lo=prev?prev[0]:0, hi=nx?nx[0]:lo||1; const pct=nx?Math.max(0,Math.min(100,(sp-lo)/(hi-lo)*100)):100;
+    const unit=c==='W'?'% weapon damage':c==='V'?'% base health':' spirit power';
+    return `<div class="invc c${c}"><div class="muted">${CAT[c]} investment</div><div class="big num">+${fmt(iv.v)}<span style="font-size:13px;font-family:var(--body);font-weight:500">${unit}</span></div>
+      <div class="bar"><i style="width:${pct}%"></i></div><div class="muted num">${fmt(sp)} spent${nx?`, next +${nx[1]} at ${fmt(nx[0])}`:''}</div></div>`;}).join('')+`</div>`;
+  const slots=[]; for(let i=0;i<12;i++){const id=o.held[i]; slots.push(id?`<div class="slot c${ITEMS[id].s}" data-item="${id}" title="${esc(ITEMS[id].n)}" role="button" tabindex="0">${itemIcon(ITEMS[id])}</div>`:`<div class="slot ${i>=9?'flex':''}">${i>=9?'Flex':''}</div>`);}
+  html+=`<div class="slots">${slots.join('')}</div>`;
+  const over=o.held.length>12;
+  html+=`<div class="slotnote ${over?'warn':''}">${over?`${o.held.length} items held: that's more than 12 slots. Remove or upgrade something earlier in the order.`:`${o.held.length} of 12 slots in use at ${fmt(S.souls)} souls. The last 3 are flex slots unlocked by objectives.`}</div>`;
+  b.phases.forEach((ph,pi)=>{
+    const rows=o.rows.filter(r=>r.pi===pi);
+    const cost=rows.reduce((a,r)=>a+r.eff,0);
+    html+=`<div class="phase"><div class="phaseh"><input value="${esc(ph.n)}" data-phname="${pi}" aria-label="Phase name"><span class="sum num">${fmt(cost)} souls</span>
+      <button class="iconbtn" data-phdel="${pi}" aria-label="Remove phase" title="Remove phase">${IC.x}</button></div>`;
+    if(!rows.length) html+=`<div class="empty">Add items from the shop with the + button or from an item's details.</div>`;
+    rows.forEach(r=>{const it=ITEMS[r.id]; const rep=o.replaced[r.id];
+      const st=r.on?(rep?`<span class="state">Upgraded</span>`:`<span class="state on">Online</span>`):`<span class="state need num">at ${fmt(r.need)}</span>`;
+      html+=`<div class="brow c${it.s} ${r.on?'':'off'} ${rep?'gone':''}">
+        ${itemIcon(it)}<div class="bi" data-item="${it.id}" role="button" tabindex="0"><div class="bn">${esc(it.n)}</div><div class="bs num">${r.eff<it.c?`${fmt(r.eff)} after components`:`${fmt(it.c)} souls`}</div></div>
+        ${hasAct(it)?`<button class="actt" data-act="${it.id}" aria-pressed="${!!b.act[it.id]}" title="Count active and conditional effects in stats">${b.act[it.id]?'Active on':'Active off'}</button>`:''}
+        ${st}
+        <button class="iconbtn" data-mv="${pi},${r.ii},-1" aria-label="Move up">${IC.up}</button>
+        <button class="iconbtn" data-mv="${pi},${r.ii},1" aria-label="Move down">${IC.dn}</button>
+        <button class="iconbtn" data-rm="${pi},${r.ii}" aria-label="Remove">${IC.x}</button></div>`;});
+    html+=`</div>`;
+  });
+  html+=`<button class="tbtn addphase" id="addPhase">Add phase</button>`;
+  html+=`<textarea class="notes" id="notes" placeholder="Notes: matchups, when to sell, alternatives">${esc(b.notes||'')}</textarea>`;
+  $('#build').innerHTML=html;
+}
+function renderAbil(X){
+  const {h,b,sk,R}=X; const L=sk.L;
+  let html=`<div class="aprow"><span>Unlocks used <b class="num ${sk.uU>L.un?'over':''}">${sk.uU}/${L.un}</b></span><span>Ability points used <b class="num">${sk.uP}/${L.ap}</b></span><span>Upgrades cost 1, 2 and 5 points</span></div>`;
+  html+=`<div class="order">${b.skill.length?b.skill.map((ai,i)=>{const s=sk.steps[i]||{}; const ab=h.ab[ai]; if(!ab) return '';
+      return `<span class="ostep ${s.on?'':'pend'}" title="${esc(ab.n)} ${s.tier===0?'unlock':'T'+s.tier}${s.on?'':', needs '+fmt(s.soulsAt)+' souls'}">${abIcon(ab,ai)}${s.tier===0?'Unlock':'T'+s.tier}${s.on?'':` <i class="num">${fmt(s.soulsAt)}</i>`}</span>`;}).join('')
+    :'<span class="empty">Use + on an ability to add unlocks and upgrades to your skill order. They switch on as your souls reach each level.</span>'}</div>`;
+  html+=`<div class="abgrid">`+h.ab.map((ab,ai)=>{
+    const lv=sk.lev[ai]; const planned=b.skill.filter(x=>x===ai).length;
+    const vals=abilityVals(ab,lv,R);
+    const pips=[0,1,2,3].map(i=>`<span class="pip ${i===0?'u':''} ${lv>i?'on':''}"></span>`).join('');
+    return `<div class="ab"><div class="abh">${abIcon(ab,ai)}<div><div class="abn">${esc(ab.n)}</div><div class="abk">${ab.ult?'Ultimate':'Ability '+(ai+1)}${lv===0?', locked':lv===1?', unlocked':', upgrade '+(lv-1)}</div><div class="pips">${pips}</div></div>
+      <div class="abctl"><button data-sk="${ai},-1" ${planned?'':'disabled'} aria-label="Remove last ${esc(ab.n)} step">−</button><button data-sk="${ai},1" ${planned>=4?'disabled':''} aria-label="Add ${esc(ab.n)} step">+</button></div></div>
+      <div class="abd">${esc(ab.d)}</div>
+      <div class="props">${vals.map(v=>`<span>${esc(v.l)}</span><span class="pv num ${v.sp?'sp':''}">${v.note?`<small>${esc(v.note)}</small>`:''}${fmt(v.v,Math.abs(v.v)<10&&v.v%1?2:1)}${/^[a-z]{2}/i.test(v.u)?' ':''}${esc(v.u)}</span>`).join('')}</div>
+      <div class="ups">${ab.u.map((u,i)=>`<div class="up ${lv>i+1?'on':''}"><b>T${i+1}</b><span>${esc(u.d||autoUp(u))}<span class="muted"> (${UPCOST[i]} pt${UPCOST[i]>1?'s':''})</span></span></div>`).join('')}</div></div>`;
+  }).join('')+`</div>`;
+  $('#abil').innerHTML=html;
+}
+function autoUp(u){
+  const parts=Object.entries(u.b||{}).map(([k,v])=>{const [l,un]=(u.bl||{})[k]||[k,'']; return `${v>0?'+':'−'}${fmt(Math.abs(v),2)}${un} ${l}`;});
+  Object.entries(u.s||{}).forEach(([k,v])=>{const [l]=(u.bl||{})[k]||[k]; parts.push(`+${v} spirit scaling on ${l}`);});
+  return parts.join(', ')||'Upgrade';
+}
+function renderStats(X){
+  const {R,R0,h}=X;
+  let html=`<div class="heads">
+    <div class="cW"><span>Burst DPS</span><div class="hl num">${fmt(R.dps)}</div></div>
+    <div class="cV"><span>Max health</span><div class="hl num">${fmt(R.hp)}</div></div>
+    <div class="cS"><span>Spirit power</span><div class="hl num">${fmt(R.sp)}</div></div></div>`;
+  ['W','V','S'].forEach(g=>{
+    html+=`<div class="sgroup c${g}"><h3>${CAT[g]}</h3>`;
+    STATS.filter(s=>s[0]===g).forEach(([,k,l,d,u,types,dir])=>{
+      const v=R[k], v0=R0[k]; const dv=v-v0; const good=(dir===-1?-dv:dv)>0;
+      if(Math.abs(v)<1e-9&&Math.abs(v0)<1e-9&&!['bres','sres','sp','cdr'].includes(k)) return;
+      html+=`<button class="srow" data-stat="${k}" aria-expanded="${!!OPEN[k]}"><span>${esc(l)}</span><span class="sv num">${fmt(v,d)}${u}</span><span class="sd num ${Math.abs(dv)<1e-6?'':good?'up1':'dn1'}">${Math.abs(dv)<1e-6?'':sgn(dv,d)}</span></button>`;
+      if(OPEN[k]){
+        const rows=[];
+        if(k==='bullet'&&R.lvsrc.bullet) rows.push([`Level boons (base damage)`,`+${fmt(R.lvsrc.bullet,2)}`]);
+        if(k==='hp'&&R.lvsrc.hp) rows.push([`Level boons (base health)`,`+${fmt(R.lvsrc.hp)}`]);
+        if((k==='light'||k==='heavy')&&R.lvsrc.melee) rows.push([`Level boons`,`+${fmt(R.lvsrc.melee,1)} light`]);
+        types.forEach(t=>(R.src[t]||[]).forEach(([s,val])=>rows.push([s,`${val>0?'+':''}${fmt(val,2)}${t.includes('PERCENT')||['WEAPON_DAMAGE_INCREASE','FIRE_RATE','BULLET_LIFESTEAL','TECH_LIFESTEAL','MELEE_DAMAGE_INCREASE'].includes(t)||MULT.has(t)?'%':''}`])));
+        if(MULT.has(types[0])&&rows.length>1) rows.push(['Stacks multiplicatively','']);
+        html+=`<div class="srcs">${rows.length?rows.map(r=>`<span>${esc(r[0])}</span><span class="num">${r[1]}</span>`).join(''):'<span>Base value for your level, no item sources.</span><span></span>'}</div>`;
+      }
+    });
+    html+=`</div>`;
+  });
+  const other=Object.keys(R.src).filter(t=>!KNOWN.has(t));
+  if(other.length){
+    html+=`<div class="sgroup" style="--c:var(--brass)"><h3>Other bonuses</h3><div class="srcs" style="padding-left:2px">`+
+      other.map(t=>{const lab=labelFor(t); return (R.src[t]).map(([s,v])=>`<span>${esc(lab)} <span class="muted">from ${esc(s)}</span></span><span class="num">${v>0?'+':''}${fmt(v,2)}</span>`).join('');}).join('')+`</div></div>`;
+  }
+  html+=`<p class="muted" style="font-size:12px;margin:10px 0 0">Tap a stat to see where it comes from. Resists and cooldown reduction stack multiplicatively. The Vitality investment bonus is treated as a percentage of base health.</p>`;
+  $('#stats').innerHTML=html;
+}
+const LABEL_CACHE={};
+function labelFor(t){ if(LABEL_CACHE[t]) return LABEL_CACHE[t]; for(const i of D.items) for(const s of i.x) for(const p of s.p) if(p.t===t) return LABEL_CACHE[t]=p.l; return t; }
+
+/* ---------- item detail ---------- */
+function openItem(id){
+  const it=ITEMS[id]; const X=derive(); const b=X.b;
+  const inB=b.phases.some(p=>p.items.includes(id));
+  // effect on hero: add item (replacing components) vs current held
+  let held=X.o.held.slice(); let with_=held.filter(x=>!(it.cp||[]).includes(x)); if(!with_.includes(id)) with_.push(id); else with_=held.filter(x=>x!==id);
+  const act=Object.assign({},b.act);
+  const A=compute(X.h,X.lvl,held,act), Bz=compute(X.h,X.lvl,with_,act);
+  const sign=held.includes(id)?-1:1; // show "without it" if already held
+  const diffs=STATS.map(([g,k,l,d,u,,dir])=>{const dv=(Bz[k]-A[k]); return Math.abs(dv)>1e-6?{g,l,d,u,dv,good:(dir===-1?-dv:dv)>0,v:Bz[k]}:null}).filter(Boolean);
+  const secs=it.x.map(s=>{
+    const nm=s.ty==='Innate'?'Passive stats':s.ty==='Active'?'Active':s.ty==='Passive'?'Passive effect':s.ty;
+    const rows=s.p.filter(p=>p.v!=null&&p.v!==0).map(p=>`<span>${esc(p.l)}${(p.c||s.ty!=='Innate')&&p.t?'<span class="cond">conditional</span>':''}</span><span class="pv num">${p.v>0&&s.ty==='Innate'?'+':''}${fmt(p.v,2)}${esc(p.u)}</span>`).join('');
+    return `<div class="sec"><h4>${nm}</h4>${(s.tx||[]).map(t=>`<p>${esc(t)}</p>`).join('')}${rows?`<div class="props">${rows}</div>`:''}</div>`;
+  }).join('');
+  const chipsFor=ids=>ids.map(c=>{const x=ITEMS[c]; return x?`<button class="chip c${x.s}" data-item="${c}">${itemIcon(x)}${esc(x.n)}</button>`:''}).join('');
+  const phases=b.phases.map((p,i)=>`<option value="${i}">${esc(p.n)}</option>`).join('');
+  sheet(`<div class="card c${it.s}">
+    <div class="ch">${itemIcon(it).replace('class="ic ','class="ic ')}<div><h2>${esc(it.n)}</h2><div class="meta"><span style="color:var(--c)">${CAT[it.s]}</span><span>Tier ${it.t}</span><span class="cost num">${fmt(it.c)} souls</span>${it.a?'<span>Active item</span>':''}${it.cd?`<span class="num">${fmt(it.cd,1)}s cooldown</span>`:''}</div></div>
+    <button class="iconbtn close" data-close aria-label="Close">${IC.x}</button></div>
+    <div class="cb">
+      ${it.d?`<p style="margin:0">${esc(it.d)}</p>`:''}
+      ${secs}
+      ${it.cp&&it.cp.length?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Built from</div><div class="chips">${chipsFor(it.cp)}</div></div>`:''}
+      ${INTO[id]?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Upgrades into</div><div class="chips">${chipsFor(INTO[id])}</div></div>`:''}
+      <div class="sec" style="--c:var(--brass)"><h4>${sign>0?`Adding this to ${esc(X.h.n)} at level ${X.lvl}`:`Removing this from your current loadout`}</h4>
+        ${diffs.length?`<div class="delta">${diffs.map(x=>`<span>${esc(x.l)}</span><span class="num muted">${fmt(x.v,x.d)}${x.u}</span><span class="num ${x.good?'up1':'dn1'}">${sgn(x.dv,x.d)}</span>`).join('')}</div>`:`<p class="muted">No passive stat change. Its value is in its active or conditional effect${hasAct(it)?'. Switch it to Active on in your build to count it':''}.</p>`}
+      </div>
+      <div class="cf">${inB?`<button class="tbtn" data-remove-item="${id}">Remove from build</button>`:`<select id="addTo" aria-label="Phase">${phases}</select><button class="tbtn primary" data-add-item="${id}">Add to build</button>`}</div>
+    </div></div>`);
+  const sel=$('#addTo'); if(sel){ const lastNonEmpty=b.phases.map((p,i)=>p.items.length?i:-1).filter(i=>i>=0).pop(); sel.value=String(Math.max(0,lastNonEmpty??0)); }
+}
+function sheet(html){const s=$('#sheet'); s.innerHTML=html; s.classList.add('open'); const f=s.querySelector('button,select,input'); f&&f.focus({preventScroll:true});}
+function closeSheet(){ $('#sheet').classList.remove('open'); $('#sheet').innerHTML=''; }
+
+/* ---------- tracklock ---------- */
+const API=(window.BUILDLOCK_API!=null?String(window.BUILDLOCK_API):'').replace(/\/$/,'');
+const canLive=()=>!!API||/^https?:$/.test(location.protocol);
+const TLC={}; // live results per hero
+let STATIC=null; // tracklock.json published by the GitHub Action (GitHub Pages mode)
+async function loadStatic(force){
+  if(STATIC&&!force) return STATIC;
+  try{
+    const r=await fetch('tracklock.json'+(force?'?t='+Date.now():''),{cache:force?'reload':'default',signal:AbortSignal.timeout(20000)});
+    if(!r.ok) return STATIC=false;
+    const j=await r.json(); return STATIC=(j&&j.heroes)?j:false;
+  }catch(e){ return STATIC=false; }
+}
+async function tlLive(hid,force){
+  if(!canLive()) return {err:'Opened as a file, so there is no server to ask'};
+  if(!API){
+    const st=await loadStatic(force);
+    if(st){ const e=st.heroes[hid]; return e?{...e,source:'static',generatedAt:st.generatedAt}:{err:'No Tracklock data for this hero in the last update'}; }
+  }
+  try{
+    const r=await fetch(`${API?API+'/':''}api/tracklock/${hid}${force?'?refresh=1':''}`,{signal:AbortSignal.timeout(60000)});
+    const j=await r.json().catch(()=>null);
+    if(!r.ok||!j||j.error) return {err:(j&&j.error)||'No live data source found'};
+    return j;
+  }catch(e){ return {err:'Live data not reachable'}; }
+}
+const ago=t=>{const m=Math.round((Date.now()-t)/60000); return m<1?'just now':m<60?`${m} min ago`:m<1440?`${Math.round(m/60)} h ago`:`${Math.round(m/1440)} d ago`;};
+function openTL(force){
+  const h=H(); const hid=h.id; const live=TLC[hid];
+  if((!live||force)&&!openTL.busy){
+    openTL.busy=true;
+    tlLive(hid,force).then(r=>{openTL.busy=false; TLC[hid]=r; if($('#sheet').classList.contains('open')&&$('#sheet [data-tlsheet]')&&H().id===hid) openTL();});
+  }
+  const snap=D.tl[hid]; const ok=live&&!live.err;
+  const pro=ok&&live.pro?live.pro:snap; const stats=ok?live.build:null;
+  let tab=openTL.tab||'stats'; if(tab==='stats'&&!stats) tab='pro';
+  const thr=+(openTL.thr??50);
+  const slug=(ok&&live.slug)||(snap&&snap.slug)||h.n.toLowerCase().replace('&','and').replace(/ /g,'-');
+  const status=openTL.busy?`<span class="muted">Checking tracklock.gg for live data…</span>`
+    : ok?`<span style="color:var(--soul)">From tracklock.gg, updated ${ago(live.fetchedAt)}${live.stale?' (last good copy, the latest update failed)':''}${live.source==='static'?'. Refreshes automatically every 6 hours':''}</span>`
+    : `<span class="muted">Showing the snapshot from ${esc(D.tlDate)}. ${esc(live&&live.err||'')}</span>`;
+  const row=(id,p)=>{const it=ITEMS[id]; if(!it) return ''; return `<div class="tlrow c${it.s} ${p!=null&&p<thr?'dim':''}" data-item="${id}" role="button" tabindex="0">${itemIcon(it)}<span style="flex:1">${esc(it.n)}</span>${p!=null?`<span class="pb2"><i style="width:${p}%"></i></span><span class="num" style="width:38px;text-align:right">${p}%</span>`:`<span class="muted num">${fmt(it.c)}</span>`}</div>`;};
+  const chips=ids=>(ids||[]).map(c=>{const x=ITEMS[c]; return x?`<button class="chip c${x.s}" data-item="${c}">${itemIcon(x)}${esc(x.n)}</button>`:''}).join('')||'<span class="muted">None listed</span>';
+  let body='';
+  if(tab==='pro'){
+    body=pro?`<p class="muted" style="margin:0;font-size:13px">${pro.wr}% win rate over ${pro.g} pro games in the last 30 days. Percentages are how often top players bought each item in that phase.</p>
+    <div class="tl">${[['Early','Early game, 0 to 10 min'],['Mid','Mid game, 10 to 20 min'],['Late','Late game, 20+ min']].map(([k,l])=>`<div class="tlph"><h4>${l}</h4>${(pro.p[k]||[]).map(([id,p])=>row(id,p)).join('')}</div>`).join('')}</div>
+    <div class="cf"><label class="muted" style="font-size:13px">Include items bought in at least <select id="tlThr">${[80,60,50,40,25,0].map(v=>`<option value="${v}" ${v===thr?'selected':''}>${v}%</option>`).join('')}</select> of games</label></div>`
+    :'<p class="muted">No pro build data for this hero.</p>';
+  } else {
+    body=`<p class="muted" style="margin:0;font-size:13px">Tracklock's statistically strongest build${stats.wr!=null?`: ${stats.wr}% win rate over ${fmt(stats.matches)} matches`:''}. Buy the core in order.</p>
+    ${stats.unlock&&stats.unlock.length?`<div><h4 style="margin:0 0 6px;font-family:var(--display);font-size:17px">Ability unlock order</h4><div class="chips">${stats.unlock.map((ai,i)=>h.ab[ai]?`<span class="chip">${abIcon(h.ab[ai],ai)}${i+1}. ${esc(h.ab[ai].n)}</span>`:'').join('')}</div></div>`:''}
+    <div class="tlph"><h4>Core build</h4>${stats.core.map(id=>row(id,null)).join('')}</div>
+    ${[['early','Situational early'],['late','Situational late'],['defensive','Defensives'],['counters','Counter picks'],['actives','Actives']].map(([k,l])=>stats[k]&&stats[k].length?`<div><h4 style="margin:0 0 6px;font-family:var(--display);font-size:17px">${l}</h4><div class="chips">${chips(stats[k])}</div></div>`:'').join('')}`;
+  }
+  sheet(`<div class="card wide" data-tlsheet><div class="ch">${heroIcon(h)}<div><h2>Tracklock builds</h2><div class="meta"><span>${esc(h.n)}</span>${status}</div></div>
+    <button class="iconbtn close" data-close aria-label="Close">${IC.x}</button></div>
+    <div class="cb">
+    <div class="cats" style="padding:0;grid-template-columns:1fr 1fr"><button class="S" data-tltab="stats" aria-pressed="${tab==='stats'}" ${stats?'':'disabled title="Needs the live server"'}>Stats build</button><button class="W" data-tltab="pro" aria-pressed="${tab==='pro'}">Pro build</button></div>
+    ${body}
+    <div class="cf"><button class="tbtn primary" data-tlload="new" data-tlkind="${tab}">Load as new build</button><button class="tbtn" data-tlload="replace" data-tlkind="${tab}">Replace current build</button>
+    ${canLive()&&!(live&&live.source==='static')?`<button class="tbtn" data-tlrefresh>Refresh live data</button>`:''}
+    <a class="tbtn" href="https://tracklock.gg/heroes/${esc(slug)}/${tab==='pro'?'probuild':'build'}" target="_blank" rel="noopener">Open on tracklock.gg</a></div>
+    </div></div>`);
+}
+function loadTL(mode,kind){
+  const h=H(); const live=TLC[h.id]; const ok=live&&!live.err;
+  let phases, notes, skill=null, name;
+  if(kind==='stats'&&ok&&live.build){
+    const st=live.build;
+    phases=[{n:'Core build',items:st.core.slice()}];
+    const nm=ids=>(ids||[]).map(i=>ITEMS[i]&&ITEMS[i].n).filter(Boolean).join(', ')||'none';
+    notes=`Tracklock stats build${st.wr!=null?` (${st.wr}% win rate, ${st.matches} matches)`:''}, fetched ${new Date(live.fetchedAt).toLocaleDateString()}.\nSituational early: ${nm(st.early)}\nSituational late: ${nm(st.late)}\nDefensives: ${nm(st.defensive)}\nCounter picks: ${nm(st.counters)}\nActives: ${nm(st.actives)}`;
+    if(st.unlock&&st.unlock.length) skill=st.unlock.slice();
+    name=`${h.n} Tracklock stats build`;
+  } else {
+    const pro=ok&&live.pro?live.pro:D.tl[h.id]; if(!pro){toast('No Tracklock data for this hero');return;}
+    const thr=+(openTL.thr??50); const used=new Set();
+    phases=[['Early game','Early'],['Mid game','Mid'],['Late game','Late']].map(([n,k])=>({n,items:(pro.p[k]||[]).filter(([id,p])=>ITEMS[id]&&p>=thr&&!used.has(id)&&used.add(id)).map(([id])=>id)}));
+    notes=`Tracklock pro build: ${pro.wr}% win rate over ${pro.g} pro games, last 30 days (${ok?'live, fetched '+new Date(live.fetchedAt).toLocaleDateString():'snapshot '+D.tlDate}). Items bought in at least ${thr}% of games.`;
+    name=`${h.n} Tracklock pro build`;
+  }
+  let b; if(mode==='new'){ b=blank(h.id); b.name=name; S.builds[b.id]=b; S.cur=b.id; } else { b=B(); b.act={}; }
+  b.phases=phases; b.notes=notes; if(skill) b.skill=skill; b.t=Date.now();
+  closeSheet(); renderAll(); toast(`Loaded ${phases.reduce((a,p)=>a+p.items.length,0)} items from Tracklock`);
+}
+document.addEventListener('change',e=>{ if(e.target.id==='tlThr'){ openTL.thr=+e.target.value; openTL(); } });
+
+/* ---------- hero picker & library ---------- */
+function openHeroes(){
+  const cur=B().hero;
+  sheet(`<div class="card wide"><div class="ch"><h2>Choose a hero</h2><button class="iconbtn close" data-close aria-label="Close">${IC.x}</button></div>
+  <div class="heroes">${D.heroes.map(h=>`<button class="hcard ${h.id===cur?'cur':''}" data-hero="${h.id}" style="--hc:${heroCol(h)}">${heroIcon(h,true)}<span class="n">${esc(h.n)}</span><span class="tags">${esc((h.tags||[]).join(', '))}</span></button>`).join('')}</div></div>`);
+}
+function pickHero(id){
+  const mine=Object.values(S.builds).filter(b=>b.hero===id).sort((a,b)=>b.t-a.t);
+  if(mine.length) S.cur=mine[0].id; else { const b=blank(id); S.builds[b.id]=b; S.cur=b.id; }
+  closeSheet(); renderAll();
+}
+function openLib(){
+  const list=Object.values(S.builds).sort((a,b)=>b.t-a.t);
+  sheet(`<div class="card"><div class="ch"><h2>Your builds</h2><button class="iconbtn close" data-close aria-label="Close">${IC.x}</button></div>
+  <div class="cb"><div class="cf"><button class="tbtn primary" data-newbuild>New build for ${esc(H().n)}</button><button class="tbtn" data-dup>Duplicate current</button></div>
+  <div class="lib">${list.map(b=>{const h=HEROES[b.hero]; const n=b.phases.reduce((a,p)=>a+p.items.length,0);
+    return `<div class="lrow ${b.id===S.cur?'cur':''}">${heroIcon(h)}<div class="li" data-open="${b.id}" role="button" tabindex="0"><div>${esc(b.name)}</div><div class="muted" style="font-size:12px">${esc(h.n)}, ${n} item${n===1?'':'s'}</div></div>
+      <button class="iconbtn" data-del="${b.id}" aria-label="Delete ${esc(b.name)}">${IC.x}</button></div>`;}).join('')}</div>
+  <div><div class="muted" style="font-size:12px;margin-bottom:4px">Import a build code</div><textarea class="code" id="impCode" placeholder="Paste a code that starts with DLB1:"></textarea><button class="tbtn" data-import style="margin-top:6px">Import</button></div>
+  </div></div>`);
+  document.querySelectorAll('#sheet .lrow .ic').forEach((el,i)=>el.style.background=heroCol(HEROES[list[i].hero]));
+}
+function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),no:b.notes};
+  return 'DLB1:'+btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
+function decode(code){const s=code.trim().replace(/^DLB1:/,''); const o=JSON.parse(decodeURIComponent(escape(atob(s))));
+  if(!HEROES[o.h]) throw new Error('Unknown hero');
+  const b=blank(o.h); b.name=String(o.n||b.name).slice(0,60); b.phases=(o.p||[]).map(([n,it])=>({n:String(n).slice(0,40),items:(it||[]).filter(x=>ITEMS[x])})); if(!b.phases.length)b.phases=blank(o.h).phases;
+  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true); b.notes=String(o.no||''); return b;}
+function openShare(){
+  const code=encode(B());
+  sheet(`<div class="card"><div class="ch"><h2>Share this build</h2><button class="iconbtn close" data-close aria-label="Close">${IC.x}</button></div>
+  <div class="cb"><p style="margin:0" class="muted">Anyone with this app can paste the code under Builds, then Import.</p><textarea class="code" id="expCode" readonly>${code}</textarea><div class="cf"><button class="tbtn primary" data-copy>Copy code</button></div></div></div>`);
+  $('#expCode').select();
+}
+function toast(t){const e=$('#toast'); e.textContent=t; e.style.display='block'; clearTimeout(toast.t); toast.t=setTimeout(()=>e.style.display='none',1800);}
+
+/* ---------- mutations ---------- */
+function touch(){B().t=Date.now();}
+function addItem(id,pi){
+  const b=B(); if(b.phases.some(p=>p.items.includes(id))) return;
+  if(pi==null){ pi=b.phases.map((p,i)=>p.items.length?i:-1).filter(i=>i>=0).pop(); if(pi==null) pi=0; }
+  b.phases[pi].items.push(id); touch(); renderAll(); toast(`Added ${ITEMS[id].n}`);
+}
+function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; touch(); renderAll();}
+function move(pi,ii,d){
+  const b=B(); const ph=b.phases[pi]; const id=ph.items[ii];
+  const j=ii+d;
+  if(j>=0&&j<ph.items.length){ ph.items.splice(ii,1); ph.items.splice(j,0,id); }
+  else if(d<0&&pi>0){ ph.items.splice(ii,1); b.phases[pi-1].items.push(id); }
+  else if(d>0&&pi<b.phases.length-1){ ph.items.splice(ii,1); b.phases[pi+1].items.unshift(id); }
+  touch(); renderAll();
+}
+function setSouls(v){ S.souls=Math.max(0,Math.min(60000,Math.round(+v||0))); renderAll(); }
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,[data-item],[data-open],[data-stat]'); if(!t) { if(e.target===$('#sheet')) closeSheet(); return; }
+  const d=t.dataset;
+  if(d.quick){ e.stopPropagation(); addItem(d.quick); return; }
+  if(d.close!==undefined){ closeSheet(); return; }
+  if(d.addItem){ addItem(d.addItem, +($('#addTo')?.value||0)); closeSheet(); return; }
+  if(d.removeItem){ removeItem(d.removeItem); closeSheet(); return; }
+  if(d.item){ openItem(d.item); return; }
+  if(d.cat){ S.cat=d.cat; $('#q').value=''; renderShop(derive()); save(); return; }
+  if(d.mv){ const [pi,ii,dd]=d.mv.split(',').map(Number); move(pi,ii,dd); return; }
+  if(d.rm){ const [pi,ii]=d.rm.split(',').map(Number); const id=B().phases[pi].items[ii]; removeItem(id); return; }
+  if(d.act){ const b=B(); b.act[d.act]=!b.act[d.act]; touch(); renderAll(); return; }
+  if(d.phdel!==undefined){ const b=B(); const pi=+d.phdel; if(b.phases.length<=1){toast('A build needs at least one phase');return;}
+    const moved=b.phases[pi].items; b.phases.splice(pi,1); b.phases[Math.max(0,pi-1)].items.push(...moved); touch(); renderAll(); return; }
+  if(t.id==='addPhase'){ B().phases.push({n:`Phase ${B().phases.length+1}`,items:[]}); touch(); renderAll(); return; }
+  if(d.sk){ const [ai,dd]=d.sk.split(',').map(Number); const b=B();
+    if(dd>0){ if(b.skill.filter(x=>x===ai).length<4) b.skill.push(ai); }
+    else { const k=b.skill.lastIndexOf(ai); if(k>=0) b.skill.splice(k,1); }
+    touch(); renderAll(); return; }
+  if(t.id==='clrSkill'){ B().skill=[]; touch(); renderAll(); return; }
+  if(d.stat){ OPEN[d.stat]=!OPEN[d.stat]; renderStats(derive()); return; }
+  if(d.s){ setSouls(d.s); return; }
+  if(d.m){ document.body.dataset.m=d.m; syncNav(); window.scrollTo({top:0}); return; }
+  if(t.id==='heroBtn'){ openHeroes(); return; }
+  if(d.hero){ pickHero(d.hero); return; }
+  if(t.id==='libBtn'){ openLib(); return; }
+  if(t.id==='tlBtn'){ openTL(); return; }
+  if(d.tlload){ loadTL(d.tlload,d.tlkind); return; }
+  if(d.tltab){ openTL.tab=d.tltab; openTL(); return; }
+  if(d.tlrefresh!==undefined){ openTL(true); return; }
+  if(t.id==='shareBtn'){ openShare(); return; }
+  if(d.open){ S.cur=d.open; closeSheet(); renderAll(); return; }
+  if(d.del){ if(Object.keys(S.builds).length<=1){ toast('Keep at least one build'); return; } if(!confirm('Delete this build?')) return;
+    delete S.builds[d.del]; if(S.cur===d.del) S.cur=Object.values(S.builds).sort((a,b)=>b.t-a.t)[0].id; renderAll(); openLib(); return; }
+  if(d.newbuild!==undefined){ const b=blank(H().id); S.builds[b.id]=b; S.cur=b.id; closeSheet(); renderAll(); return; }
+  if(d.dup!==undefined){ const c=JSON.parse(JSON.stringify(B())); c.id='b'+Date.now().toString(36); c.name=(c.name+' copy').slice(0,60); c.t=Date.now(); S.builds[c.id]=c; S.cur=c.id; closeSheet(); renderAll(); toast('Duplicated'); return; }
+  if(d.import!==undefined){ try{ const b=decode($('#impCode').value); S.builds[b.id]=b; S.cur=b.id; closeSheet(); renderAll(); toast('Build imported'); }catch(err){ toast('That code could not be read. Check it starts with DLB1:'); } return; }
+  if(d.copy!==undefined){ const ta=$('#expCode'); ta.select(); (navigator.clipboard?navigator.clipboard.writeText(ta.value):Promise.reject()).then(()=>toast('Code copied'),()=>{try{document.execCommand('copy');toast('Code copied');}catch(e){toast('Select the code and copy it');}}); return; }
+  if(t.id==='lvUp'||t.id==='lvDn'){ const h=H(); const l=levelFor(h,S.souls); const nl=Math.max(1,Math.min(h.lv.length,l+(t.id==='lvUp'?1:-1))); setSouls(h.lv[nl-1][0]); return; }
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&$('#sheet').classList.contains('open')) closeSheet();
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[role=button]')){ e.preventDefault(); e.target.click(); }
+});
+$('#soulRange').addEventListener('input',e=>setSouls(e.target.value));
+$('#soulIn').addEventListener('change',e=>setSouls(e.target.value));
+$('#sandbox').addEventListener('change',e=>{S.sandbox=e.target.checked; renderAll();});
+$('#bName').addEventListener('input',e=>{B().name=e.target.value||'Untitled build'; touch(); save(); document.title=`${B().name} | Buildlock`;});
+$('#q').addEventListener('input',()=>renderShop(derive()));
+document.addEventListener('input',e=>{
+  if(e.target.dataset.phname!==undefined){ B().phases[+e.target.dataset.phname].n=e.target.value; touch(); save(); }
+  if(e.target.id==='notes'){ B().notes=e.target.value; touch(); save(); }
+});
+function syncNav(){ document.querySelectorAll('#mnav button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.m===document.body.dataset.m))); }
+syncNav();
+renderAll();
+if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>

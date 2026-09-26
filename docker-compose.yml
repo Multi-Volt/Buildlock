@@ -1,0 +1,10 @@
+services:
+  buildlock:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      - CACHE_HOURS=6
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
