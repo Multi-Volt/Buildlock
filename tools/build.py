@@ -166,16 +166,19 @@ def extract():
         if css: d['css']=css
         return d
     SLOT={'EItemSlotType_WeaponMod':'W','EItemSlotType_Armor':'V','EItemSlotType_Tech':'S'}
+    # Only items buyable in a standard match: disabled (retired) items and tier 5 (Street Brawl legendaries) are skipped.
+    def disabled(r): return r.get('m_bDisabled') not in (None,False,'false')
+    def standard(r): return r.get('m_iItemTier') and r['m_iItemTier']!='EModTier_5' and not disabled(r)
     shop=[]; seen=set()
     for k in ('m_vecWeaponGroups','m_vecArmorGroups','m_vecSpiritGroups'):
         for grp in g[k]:
             for u in grp.get('m_vecUpgrades',[]):
-                if u in a: shop.append((u,grp.get('m_eShopGroup',''))); seen.add(u)
+                if u in a and u not in seen and standard(resolve(a,u)): shop.append((u,grp.get('m_eShopGroup',''))); seen.add(u)
     for k,v in a.items():
         if k in seen or not isinstance(v,dict) or v.get('_not_pickable') is not None: continue
         r=resolve(a,k)
-        if r.get('m_eAbilityType')!='EAbilityType_Item' or not r.get('m_iItemTier') or r['m_iItemTier']=='EModTier_5': continue
-        if r.get('m_bDisabled') not in (None,False,'false') or r.get('_editor',{}).get('folder_name')=='Base' or k not in LOC: continue
+        if r.get('m_eAbilityType')!='EAbilityType_Item' or not standard(r): continue
+        if r.get('_editor',{}).get('folder_name')=='Base' or k not in LOC: continue
         act=r.get('m_eAbilityActivation') not in (None,'CITADEL_ABILITY_ACTIVATION_PASSIVE')
         shop.append((k,'EActives' if act else 'EMisc'))
     items=[]

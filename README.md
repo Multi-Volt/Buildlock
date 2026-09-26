@@ -5,7 +5,8 @@
 A Deadlock build planner that runs for free on GitHub Pages. A scheduled GitHub Action refreshes every hero's Tracklock builds every 6 hours.
 
 - Plan builds for any hero, arranged in phases (early, mid, late).
-- Set a soul count to see which items are online at that point, your level and boons, your ability points, and your investment bonuses.
+- Choose which items in the build are online (up to 12 slots). Set a soul count to see your level, boons and ability points at that point.
+- Organise items into categories (Core, Situational, Defensives...). A build can list an item and its components, but only one of them can be online: switching an upgrade online takes its components offline.
 - See how every item changes your passive stats. Tap any stat to see where its value comes from.
 - Test ability upgrades. Ability values scale with your spirit power, cooldown reduction, duration and range.
 - Load Tracklock's **Stats build** (core items, situational items, ability unlock order) or **Pro build** (items top players bought, with pick rates) for the current hero with one tap.

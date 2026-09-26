@@ -150,6 +150,7 @@ main{display:grid; gap:14px; padding:14px 16px 90px; grid-template-columns:minma
 .tile .tn{font-size:11.5px; line-height:1.1; font-weight:500}
 .tile.locked{opacity:.45}
 .tile.inb{box-shadow:0 0 0 2px var(--c) inset}
+.tile.sub{opacity:.45; box-shadow:0 0 0 1px var(--c) inset}
 .tile .qa{position:absolute; top:2px; right:2px; width:20px; height:20px; border-radius:50%; border:1px solid var(--c); background:var(--panel); color:var(--c); font-weight:700; line-height:1; padding:0; font-size:14px; z-index:2}
 .tile .act{position:absolute; top:3px; left:4px; font-size:10px; color:var(--c); font-weight:700; z-index:2}
 .cW{--c:var(--w); --c-bg:var(--w-bg)} .cV{--c:var(--v); --c-bg:var(--v-bg)} .cS{--c:var(--s); --c-bg:var(--s-bg)}
@@ -180,10 +181,8 @@ main{display:grid; gap:14px; padding:14px 16px 90px; grid-template-columns:minma
 .brow .bn{font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .brow .bs{font-size:12px; color:var(--muted)}
 .brow.off .ic, .brow.off .bn{opacity:.5}
-.brow.gone .bn{text-decoration:line-through; text-decoration-color:var(--muted)}
-.state{font-size:11.5px; padding:1px 7px; border-radius:10px; border:1px solid var(--line2); white-space:nowrap}
-.state.on{color:var(--soul); border-color:color-mix(in srgb,var(--soul) 50%, transparent)}
-.state.need{color:var(--muted)}
+.state{font-size:11.5px; padding:2px 8px; border-radius:10px; border:1px solid var(--line2); background:none; color:var(--muted); white-space:nowrap}
+.state[aria-pressed="true"]{color:var(--soul); border-color:color-mix(in srgb,var(--soul) 50%, transparent)}
 .actt{font-size:11.5px; padding:2px 8px; border-radius:10px; border:1px solid var(--line2); background:none; color:var(--muted); white-space:nowrap}
 .actt[aria-pressed="true"]{color:var(--brass); border-color:var(--brass)}
 .empty{font-size:13px; color:var(--faint); padding:8px 2px}
@@ -288,12 +287,12 @@ textarea.notes{width:100%; min-height:60px; background:var(--bg2); border:1px so
   <button class="tbtn primary" id="shareBtn">Share code</button>
 </header>
 <section class="souls" aria-label="Souls and level">
-  <label class="soulval"><svg class="soulglyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c3 4 7 6.5 7 11.2A7 7 0 0 1 5 13.2c0-2.4 1.2-4 2.7-5.3-.1 2 .6 3.4 1.9 4.1C9.3 8 10.5 5 12 2z"/></svg><input id="soulIn" type="number" inputmode="numeric" min="0" max="60000" step="100" aria-label="Souls (net worth)"></label>
+  <label class="soulval"><svg class="soulglyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c3 4 7 6.5 7 11.2A7 7 0 0 1 5 13.2c0-2.4 1.2-4 2.7-5.3-.1 2 .6 3.4 1.9 4.1C9.3 8 10.5 5 12 2z"/></svg><input id="soulIn" type="number" inputmode="numeric" min="0" step="100" aria-label="Souls (net worth)"></label>
   <div class="slider"><input id="soulRange" type="range" min="0" max="50000" step="50" aria-label="Souls slider">
     <div class="presets"><span>Jump to</span><button data-s="1500">Lane 1.5k</button><button data-s="5000">5k</button><button data-s="10000">10k</button><button data-s="18000">18k</button><button data-s="28000">28k</button><button data-s="45000">45k</button></div></div>
   <div class="lvl"><button id="lvDn" aria-label="Previous level">−</button><div class="lvlnum" id="lvNum"></div><button id="lvUp" aria-label="Next level">+</button></div>
   <div class="pill" id="spentPill"></div>
-  <label class="toggle" title="Ignore the soul budget: every item in the build and every skill step counts"><input type="checkbox" id="sandbox">Sandbox</label>
+  <label class="toggle" title="Ignore the soul budget for the skill order: every unlock and upgrade counts"><input type="checkbox" id="sandbox">Sandbox</label>
 </section>
 <main>
   <div class="col">
@@ -337,6 +336,10 @@ window.__imgFail=el=>{const alt=el.getAttribute('data-alt'); if(alt){el.removeAt
 const ITEMS={}; D.items.forEach(i=>ITEMS[i.id]=i);
 const HEROES={}; D.heroes.forEach(h=>HEROES[h.id]=h);
 const INTO={}; D.items.forEach(i=>(i.cp||[]).forEach(c=>(INTO[c]=INTO[c]||[]).push(i.id)));
+// Every item an item is built from (DOWN) or builds into (UP), through any number of upgrade steps.
+const walk=(id,next,out=new Set())=>{(next(id)||[]).forEach(x=>{if(!out.has(x)){out.add(x); walk(x,next,out);}}); return out;};
+const DOWN={}, UP={}; D.items.forEach(i=>{DOWN[i.id]=walk(i.id,x=>ITEMS[x]&&ITEMS[x].cp); UP[i.id]=walk(i.id,x=>INTO[x]);});
+const MAXSLOTS=12;
 const CAT={W:'Weapon',V:'Vitality',S:'Spirit'};
 const UPCOST=[1,2,5];
 const $=s=>document.querySelector(s);
@@ -390,10 +393,38 @@ let S;
 function blank(heroId){
   const h=HEROES[heroId];
   return {id:'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:`${h.n} build`,hero:heroId,
-    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},notes:'',t:Date.now()};
+    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},on:{},notes:'',t:Date.now()};
+}
+const allItems=b=>b.phases.flatMap(p=>p.items);
+const onCount=b=>allItems(b).filter(id=>b.on[id]).length;
+// An online upgrade of this item, if any: while it is online, this item can't be.
+const onlineUpgrade=(b,id)=>allItems(b).find(x=>b.on[x]&&UP[id].has(x));
+// Switch an item online. Online components are upgraded into it (switched offline); a component of an
+// online item, or a 13th item, is refused. Returns {err} or {comps}.
+function setOnline(b,id){
+  const sup=onlineUpgrade(b,id);
+  if(sup) return {err:`${ITEMS[id].n} is part of ${ITEMS[sup].n}, which is online`};
+  const comps=allItems(b).filter(x=>b.on[x]&&DOWN[id].has(x));
+  if(onCount(b)-comps.length>=MAXSLOTS) return {err:`All ${MAXSLOTS} slots are online. Switch an item offline first`};
+  comps.forEach(x=>delete b.on[x]); b.on[id]=true;
+  return {comps};
+}
+// Drop unknown or duplicate items, then re-apply the online rules in build order.
+function tidy(b){
+  const seen=new Set();
+  b.phases.forEach(p=>p.items=p.items.filter(id=>ITEMS[id]&&!seen.has(id)&&seen.add(id)));
+  const ids=allItems(b);
+  const want=b.on?ids.filter(id=>b.on[id]):ids; // builds saved before online was a choice: try everything
+  b.on={}; want.forEach(id=>setOnline(b,id));
+  b.act=Object.fromEntries(Object.keys(b.act||{}).filter(id=>b.act[id]&&ids.includes(id)).map(id=>[id,true]));
+  return b;
 }
 function load(){
-  try{const raw=localStorage.getItem(KEY); if(raw){const o=JSON.parse(raw); if(o&&o.builds&&o.cur&&o.builds[o.cur]) return o;}}catch(e){}
+  try{const raw=localStorage.getItem(KEY); if(raw){const o=JSON.parse(raw); if(o&&o.builds&&o.cur&&o.builds[o.cur]){
+    Object.keys(o.builds).forEach(k=>{ if(HEROES[o.builds[k].hero]) tidy(o.builds[k]); else delete o.builds[k]; });
+    if(!o.builds[o.cur]) o.cur=Object.keys(o.builds)[0];
+    if(o.cur) return o;
+  }}}catch(e){}
   const def=D.heroes.find(h=>h.n==='Haze')||D.heroes[0];
   const b=blank(def.id);
   return {builds:{[b.id]:b},cur:b.id,souls:12000,sandbox:false,cat:'W'};
@@ -411,21 +442,17 @@ function levelInfo(h,lvl){
   for(let i=0;i<lvl;i++){const e=h.lv[i]; if(!e)break; boons+=e[1]; ap+=e[2]; un+=e[3];}
   return {boons,ap,un};
 }
-function orderRows(b,souls,sandbox){
-  const rows=[]; const held=[]; let cum=0; const replaced={};
-  const ghost=[];
+// Which items are online is the player's choice (b.on); souls only set the level.
+function orderRows(b){
+  const rows=[]; const held=[]; let cum=0;
   b.phases.forEach((ph,pi)=>ph.items.forEach((id,ii)=>{
     const it=ITEMS[id]; if(!it) return;
-    const comps=(it.cp||[]).filter(c=>ghost.includes(c));
-    const eff=Math.max(0,it.c-comps.reduce((a,c)=>a+ITEMS[c].c,0));
-    comps.forEach(c=>ghost.splice(ghost.indexOf(c),1)); ghost.push(id);
-    cum+=eff;
-    const on=sandbox||cum<=souls;
-    if(on){(it.cp||[]).forEach(c=>{const k=held.indexOf(c); if(k>=0){held.splice(k,1); replaced[c]=id;}}); held.push(id);}
-    rows.push({id,pi,ii,eff,need:cum,on});
+    cum+=it.c;
+    const on=!!b.on[id]; if(on) held.push(id);
+    rows.push({id,pi,ii,need:cum,on});
   }));
-  const spent=rows.filter(r=>r.on).reduce((a,r)=>a+r.eff,0);
-  return {rows,held,replaced,spent};
+  const spent=held.reduce((a,id)=>a+ITEMS[id].c,0);
+  return {rows,held,spent};
 }
 const MULT=new Set(['BULLET_ARMOR_DAMAGE_RESIST','TECH_RESIST','MELEE_RESIST','STATUS_RESISTANCE','COOLDOWN_REDUCTION_PERCENTAGE','MOVEMENT_SLOW_RESISTANCE','ITEM_COOLDOWN_REDUCTION_PERCENTAGE']);
 function invBonus(h,cat,spent){let v=0,next=null; for(const [t,b] of h.inv[cat]){ if(spent>=t) v=b; else {next=[t,b]; break;} } return {v,next};}
@@ -558,7 +585,7 @@ let OPEN={}; // expanded stat rows
 function derive(){
   const b=B(), h=H(), souls=S.souls, sb=S.sandbox;
   const lvl=levelFor(h,souls);
-  const o=orderRows(b,souls,sb);
+  const o=orderRows(b);
   const R=compute(h,lvl,o.held,b.act);
   const R0=compute(h,lvl,[],{});
   const sk=skillState(h,b,lvl,sb);
@@ -579,14 +606,15 @@ function renderTop(X){
   $('#soulRange').value=Math.min(50000,S.souls);
   $('#lvNum').innerHTML=`Lv ${lvl}<small>${X.R.boons} boons</small>`;
   const left=X.souls-o.spent;
-  $('#spentPill').innerHTML=S.sandbox?`<span>Sandbox: <b class="num">${fmt(o.spent)}</b> souls of items</span>`:`<span>Spent <b class="num">${fmt(o.spent)}</b></span><span>Unspent <b class="num" style="color:var(--soul)">${fmt(left)}</b></span>`;
+  $('#spentPill').innerHTML=`<span>Online items <b class="num">${fmt(o.spent)}</b></span>`+(left>=0?`<span>Unspent <b class="num" style="color:var(--soul)">${fmt(left)}</b></span>`:`<span>Over budget by <b class="num" style="color:var(--bad)">${fmt(-left)}</b></span>`);
   $('#sandbox').checked=S.sandbox;
   document.title=`${b.name} | Buildlock`;
 }
 function renderShop(X){
   const cat=S.cat||'W'; const q=($('#q').value||'').trim().toLowerCase();
   $('#cats').innerHTML=['W','V','S'].map(c=>`<button class="${c}" data-cat="${c}" aria-pressed="${!q&&c===cat}">${CAT[c]}</button>`).join('');
-  const inB=new Set(X.b.phases.flatMap(p=>p.items));
+  const inB=new Set(allItems(X.b));
+  const subOf=id=>onlineUpgrade(X.b,id);
   const left=X.souls-X.o.spent;
   let list=D.items.filter(i=>{
     if(i.dh&&i.dh.includes(X.h.id)) return false;
@@ -598,10 +626,10 @@ function renderShop(X){
   [1,2,3,4].forEach(t=>{
     const L=list.filter(i=>i.t===t).sort((a,b)=>a.s.localeCompare(b.s)||a.n.localeCompare(b.n)); if(!L.length) return;
     html+=`<div class="tier"><div class="tierh"><b>Tier ${['','I','II','III','IV'][t]}</b><span class="num">${fmt(L[0].c)} souls</span></div><div class="grid">`+
-      L.map(i=>{const lock=!S.sandbox&&!inB.has(i.id)&&i.c>left;
-        return `<div class="tile c${i.s} ${lock?'locked':''} ${inB.has(i.id)?'inb':''}" data-item="${i.id}" role="button" tabindex="0" aria-label="${esc(i.n)}${lock?', not affordable yet':''}">
+      L.map(i=>{const has=inB.has(i.id), sub=subOf(i.id); const lock=!has&&!sub&&i.c>left;
+        return `<div class="tile c${i.s} ${lock?'locked':''} ${has?'inb':''} ${sub?'sub':''}" data-item="${i.id}" role="button" tabindex="0" aria-label="${esc(i.n)}${sub?`, part of ${esc(ITEMS[sub].n)}, which is online`:lock?', costs more than your unspent souls':''}"${sub?` title="Part of ${esc(ITEMS[sub].n)}, which is online"`:''}>
         ${i.a?'<span class="act">Active</span>':''}
-        ${inB.has(i.id)?'':`<button class="qa" data-quick="${i.id}" aria-label="Add ${esc(i.n)} to build">+</button>`}
+        ${has?'':`<button class="qa" data-quick="${i.id}" aria-label="Add ${esc(i.n)} to build">+</button>`}
         ${itemIcon(i)}<span class="tn">${esc(i.n)}</span></div>`;}).join('')+`</div></div>`;
   });
   $('#shop').innerHTML=html||'<p class="empty">No items match that search.</p>';
@@ -617,18 +645,18 @@ function renderBuild(X){
       <div class="bar"><i style="width:${pct}%"></i></div><div class="muted num">${fmt(sp)} spent${nx?`, next +${nx[1]} at ${fmt(nx[0])}`:''}</div></div>`;}).join('')+`</div>`;
   const slots=[]; for(let i=0;i<12;i++){const id=o.held[i]; slots.push(id?`<div class="slot c${ITEMS[id].s}" data-item="${id}" title="${esc(ITEMS[id].n)}" role="button" tabindex="0">${itemIcon(ITEMS[id])}</div>`:`<div class="slot ${i>=9?'flex':''}">${i>=9?'Flex':''}</div>`);}
   html+=`<div class="slots">${slots.join('')}</div>`;
-  const over=o.held.length>12;
-  html+=`<div class="slotnote ${over?'warn':''}">${over?`${o.held.length} items held: that's more than 12 slots. Remove or upgrade something earlier in the order.`:`${o.held.length} of 12 slots in use at ${fmt(S.souls)} souls. The last 3 are flex slots unlocked by objectives.`}</div>`;
+  const left=S.souls-o.spent;
+  html+=`<div class="slotnote ${left<0?'warn':''}">${o.held.length} of ${MAXSLOTS} slots online. Switch items online or offline to choose what counts in your stats. The last 3 are flex slots unlocked by objectives.${left<0?` Online items cost ${fmt(-left)} more than your ${fmt(S.souls)} souls.`:''}</div>`;
   b.phases.forEach((ph,pi)=>{
     const rows=o.rows.filter(r=>r.pi===pi);
-    const cost=rows.reduce((a,r)=>a+r.eff,0);
-    html+=`<div class="phase"><div class="phaseh"><input value="${esc(ph.n)}" data-phname="${pi}" aria-label="Phase name"><span class="sum num">${fmt(cost)} souls</span>
-      <button class="iconbtn" data-phdel="${pi}" aria-label="Remove phase" title="Remove phase">${IC.x}</button></div>`;
+    const cost=rows.reduce((a,r)=>a+ITEMS[r.id].c,0);
+    html+=`<div class="phase"><div class="phaseh"><input value="${esc(ph.n)}" data-phname="${pi}" aria-label="Category name"><span class="sum num">${fmt(cost)} souls</span>
+      <button class="iconbtn" data-phdel="${pi}" aria-label="Remove category" title="Remove category (its items move to the one above)">${IC.x}</button></div>`;
     if(!rows.length) html+=`<div class="empty">Add items from the shop with the + button or from an item's details.</div>`;
-    rows.forEach(r=>{const it=ITEMS[r.id]; const rep=o.replaced[r.id];
-      const st=r.on?(rep?`<span class="state">Upgraded</span>`:`<span class="state on">Online</span>`):`<span class="state need num">at ${fmt(r.need)}</span>`;
-      html+=`<div class="brow c${it.s} ${r.on?'':'off'} ${rep?'gone':''}">
-        ${itemIcon(it)}<div class="bi" data-item="${it.id}" role="button" tabindex="0"><div class="bn">${esc(it.n)}</div><div class="bs num">${r.eff<it.c?`${fmt(r.eff)} after components`:`${fmt(it.c)} souls`}</div></div>
+    rows.forEach(r=>{const it=ITEMS[r.id]; const sup=!r.on&&onlineUpgrade(b,it.id);
+      const st=`<button class="state" data-on="${it.id}" aria-pressed="${r.on}" title="${sup?`Part of ${esc(ITEMS[sup].n)}, which is online`:'Choose whether this item counts in your stats'}">${r.on?'Online':sup?'Upgraded':'Offline'}</button>`;
+      html+=`<div class="brow c${it.s} ${r.on?'':'off'}">
+        ${itemIcon(it)}<div class="bi" data-item="${it.id}" role="button" tabindex="0"><div class="bn">${esc(it.n)}</div><div class="bs num">${fmt(it.c)} souls</div></div>
         ${hasAct(it)?`<button class="actt" data-act="${it.id}" aria-pressed="${!!b.act[it.id]}" title="Count active and conditional effects in stats">${b.act[it.id]?'Active on':'Active off'}</button>`:''}
         ${st}
         <button class="iconbtn" data-mv="${pi},${r.ii},-1" aria-label="Move up">${IC.up}</button>
@@ -636,7 +664,7 @@ function renderBuild(X){
         <button class="iconbtn" data-rm="${pi},${r.ii}" aria-label="Remove">${IC.x}</button></div>`;});
     html+=`</div>`;
   });
-  html+=`<button class="tbtn addphase" id="addPhase">Add phase</button>`;
+  html+=`<button class="tbtn addphase" id="addPhase">Add category</button>`;
   html+=`<textarea class="notes" id="notes" placeholder="Notes: matchups, when to sell, alternatives">${esc(b.notes||'')}</textarea>`;
   $('#build').innerHTML=html;
 }
@@ -701,9 +729,10 @@ function labelFor(t){ if(LABEL_CACHE[t]) return LABEL_CACHE[t]; for(const i of D
 /* ---------- item detail ---------- */
 function openItem(id){
   const it=ITEMS[id]; const X=derive(); const b=X.b;
-  const inB=b.phases.some(p=>p.items.includes(id));
-  // effect on hero: add item (replacing components) vs current held
-  let held=X.o.held.slice(); let with_=held.filter(x=>!(it.cp||[]).includes(x)); if(!with_.includes(id)) with_.push(id); else with_=held.filter(x=>x!==id);
+  const ids=allItems(b); const inB=ids.includes(id);
+  const sup=onlineUpgrade(b,id); const comps=X.o.held.filter(x=>DOWN[id].has(x));
+  // effect on hero: add item (replacing its components) vs current online items
+  let held=X.o.held.slice(); let with_=held.filter(x=>!DOWN[id].has(x)); if(!with_.includes(id)) with_.push(id); else with_=held.filter(x=>x!==id);
   const act=Object.assign({},b.act);
   const A=compute(X.h,X.lvl,held,act), Bz=compute(X.h,X.lvl,with_,act);
   const sign=held.includes(id)?-1:1; // show "without it" if already held
@@ -726,7 +755,10 @@ function openItem(id){
       <div class="sec" style="--c:var(--brass)"><h4>${sign>0?`Adding this to ${esc(X.h.n)} at level ${X.lvl}`:`Removing this from your current loadout`}</h4>
         ${diffs.length?`<div class="delta">${diffs.map(x=>`<span>${esc(x.l)}</span><span class="num muted">${fmt(x.v,x.d)}${x.u}</span><span class="num ${x.good?'up1':'dn1'}">${sgn(x.dv,x.d)}</span>`).join('')}</div>`:`<p class="muted">No passive stat change. Its value is in its active or conditional effect${hasAct(it)?'. Switch it to Active on in your build to count it':''}.</p>`}
       </div>
-      <div class="cf">${inB?`<button class="tbtn" data-remove-item="${id}">Remove from build</button>`:`<select id="addTo" aria-label="Phase">${phases}</select><button class="tbtn primary" data-add-item="${id}">Add to build</button>`}</div>
+      <div class="cf">${inB?`<button class="tbtn" data-remove-item="${id}">Remove from build</button>${sup?'':`<button class="tbtn" data-on="${id}" data-close-after>${b.on[id]?'Switch offline':'Switch online'}</button>`}`
+        :`<select id="addTo" aria-label="Category">${phases}</select><button class="tbtn primary" data-add-item="${id}">Add to build</button>`}
+        ${sup?`<span class="muted" style="font-size:13px">Can't be online while ${esc(ITEMS[sup].n)} is online: it's built from this item.</span>`
+        :!b.on[id]&&comps.length?`<span class="muted" style="font-size:13px">Switching it online upgrades ${esc(comps.map(x=>ITEMS[x].n).join(' and '))}, which go offline.</span>`:''}</div>
     </div></div>`);
   const sel=$('#addTo'); if(sel){ const lastNonEmpty=b.phases.map((p,i)=>p.items.length?i:-1).filter(i=>i>=0).pop(); sel.value=String(Math.max(0,lastNonEmpty??0)); }
 }
@@ -780,7 +812,7 @@ function openTL(force){
   if(tab==='pro'){
     body=pro?`<p class="muted" style="margin:0;font-size:13px">${pro.wr}% win rate over ${pro.g} pro games in the last 30 days. Percentages are how often top players bought each item in that phase.</p>
     <div class="tl">${[['Early','Early game, 0 to 10 min'],['Mid','Mid game, 10 to 20 min'],['Late','Late game, 20+ min']].map(([k,l])=>`<div class="tlph"><h4>${l}</h4>${(pro.p[k]||[]).map(([id,p])=>row(id,p)).join('')}</div>`).join('')}</div>
-    <div class="cf"><label class="muted" style="font-size:13px">Include items bought in at least <select id="tlThr">${[80,60,50,40,25,0].map(v=>`<option value="${v}" ${v===thr?'selected':''}>${v}%</option>`).join('')}</select> of games</label></div>`
+    <div class="cf"><label class="muted" style="font-size:13px">Every item is imported. Switch online items bought in at least <select id="tlThr">${[80,60,50,40,25,0].map(v=>`<option value="${v}" ${v===thr?'selected':''}>${v}%</option>`).join('')}</select> of games</label></div>`
     :'<p class="muted">No pro build data for this hero.</p>';
   } else {
     body=`<p class="muted" style="margin:0;font-size:13px">Tracklock's statistically strongest build${stats.wr!=null?`: ${stats.wr}% win rate over ${fmt(stats.matches)} matches`:''}. Buy the core in order.</p>
@@ -800,24 +832,32 @@ function openTL(force){
 }
 function loadTL(mode,kind){
   const h=H(); const live=TLC[h.id]; const ok=live&&!live.err;
-  let phases, notes, skill=null, name;
+  // Every listed item is imported, each Tracklock list as its own category. tidy() then switches the
+  // chosen items online in order, so a later upgrade takes over from its components.
+  let phases, notes, skill=null, name; const on={}; const used=new Set();
+  const take=ids=>(ids||[]).filter(id=>ITEMS[id]&&!used.has(id)&&used.add(id));
   if(kind==='stats'&&ok&&live.build){
     const st=live.build;
-    phases=[{n:'Core build',items:st.core.slice()}];
-    const nm=ids=>(ids||[]).map(i=>ITEMS[i]&&ITEMS[i].n).filter(Boolean).join(', ')||'none';
-    notes=`Tracklock stats build${st.wr!=null?` (${st.wr}% win rate, ${st.matches} matches)`:''}, fetched ${new Date(live.fetchedAt).toLocaleDateString()}.\nSituational early: ${nm(st.early)}\nSituational late: ${nm(st.late)}\nDefensives: ${nm(st.defensive)}\nCounter picks: ${nm(st.counters)}\nActives: ${nm(st.actives)}`;
+    phases=[['Core build','core'],['Situational early','early'],['Situational late','late'],['Defensives','defensive'],['Counter picks','counters'],['Actives','actives']]
+      .map(([n,k])=>({n,items:take(st[k])})).filter((p,i)=>i===0||p.items.length);
+    phases[0].items.forEach(id=>on[id]=true);
+    notes=`Tracklock stats build${st.wr!=null?` (${st.wr}% win rate, ${st.matches} matches)`:''}, fetched ${new Date(live.fetchedAt).toLocaleDateString()}. The core build is online; situational items are offline until you switch them on.`;
     if(st.unlock&&st.unlock.length) skill=st.unlock.slice();
     name=`${h.n} Tracklock stats build`;
   } else {
     const pro=ok&&live.pro?live.pro:D.tl[h.id]; if(!pro){toast('No Tracklock data for this hero');return;}
-    const thr=+(openTL.thr??50); const used=new Set();
-    phases=[['Early game','Early'],['Mid game','Mid'],['Late game','Late']].map(([n,k])=>({n,items:(pro.p[k]||[]).filter(([id,p])=>ITEMS[id]&&p>=thr&&!used.has(id)&&used.add(id)).map(([id])=>id)}));
-    notes=`Tracklock pro build: ${pro.wr}% win rate over ${pro.g} pro games, last 30 days (${ok?'live, fetched '+new Date(live.fetchedAt).toLocaleDateString():'snapshot '+D.tlDate}). Items bought in at least ${thr}% of games.`;
+    const thr=+(openTL.thr??50);
+    phases=[['Early game','Early'],['Mid game','Mid'],['Late game','Late']].map(([n,k])=>{
+      const list=(pro.p[k]||[]).filter(([id])=>ITEMS[id]&&!used.has(id));
+      list.forEach(([id,p])=>{ if(p>=thr) on[id]=true; });
+      return {n,items:take(list.map(([id])=>id))};
+    });
+    notes=`Tracklock pro build: ${pro.wr}% win rate over ${pro.g} pro games, last 30 days (${ok?'live, fetched '+new Date(live.fetchedAt).toLocaleDateString():'snapshot '+D.tlDate}). Items bought in at least ${thr}% of games start online.`;
     name=`${h.n} Tracklock pro build`;
   }
   let b; if(mode==='new'){ b=blank(h.id); b.name=name; S.builds[b.id]=b; S.cur=b.id; } else { b=B(); b.act={}; }
-  b.phases=phases; b.notes=notes; if(skill) b.skill=skill; b.t=Date.now();
-  closeSheet(); renderAll(); toast(`Loaded ${phases.reduce((a,p)=>a+p.items.length,0)} items from Tracklock`);
+  b.phases=phases; b.on=on; b.notes=notes; if(skill) b.skill=skill; b.t=Date.now(); tidy(b);
+  closeSheet(); renderAll(); toast(`Loaded ${allItems(b).length} items from Tracklock, ${onCount(b)} online`);
 }
 document.addEventListener('change',e=>{ if(e.target.id==='tlThr'){ openTL.thr=+e.target.value; openTL(); } });
 
@@ -843,12 +883,14 @@ function openLib(){
   </div></div>`);
   document.querySelectorAll('#sheet .lrow .ic').forEach((el,i)=>el.style.background=heroCol(HEROES[list[i].hero]));
 }
-function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),no:b.notes};
+function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),on:Object.keys(b.on).filter(k=>b.on[k]),no:b.notes};
   return 'DLB1:'+btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
 function decode(code){const s=code.trim().replace(/^DLB1:/,''); const o=JSON.parse(decodeURIComponent(escape(atob(s))));
   if(!HEROES[o.h]) throw new Error('Unknown hero');
   const b=blank(o.h); b.name=String(o.n||b.name).slice(0,60); b.phases=(o.p||[]).map(([n,it])=>({n:String(n).slice(0,40),items:(it||[]).filter(x=>ITEMS[x])})); if(!b.phases.length)b.phases=blank(o.h).phases;
-  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true); b.notes=String(o.no||''); return b;}
+  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true);
+  if(Array.isArray(o.on)) o.on.forEach(k=>b.on[k]=true); else delete b.on; // older codes: tidy switches the first 12 online
+  b.notes=String(o.no||''); return tidy(b);}
 function openShare(){
   const code=encode(B());
   sheet(`<div class="card"><div class="ch"><h2>Share this build</h2><button class="iconbtn close" data-close aria-label="Close">${IC.x}</button></div>
@@ -859,12 +901,24 @@ function toast(t){const e=$('#toast'); e.textContent=t; e.style.display='block';
 
 /* ---------- mutations ---------- */
 function touch(){B().t=Date.now();}
+const upMsg=(r,id)=>`Upgraded ${r.comps.map(x=>ITEMS[x].n).join(' and ')} into ${ITEMS[id].n}`;
+// New items try to come online; if the online rules refuse, they're added offline.
 function addItem(id,pi){
-  const b=B(); if(b.phases.some(p=>p.items.includes(id))) return;
+  const b=B(); const it=ITEMS[id];
+  if(allItems(b).includes(id)) return;
   if(pi==null){ pi=b.phases.map((p,i)=>p.items.length?i:-1).filter(i=>i>=0).pop(); if(pi==null) pi=0; }
-  b.phases[pi].items.push(id); touch(); renderAll(); toast(`Added ${ITEMS[id].n}`);
+  b.phases[pi].items.push(id);
+  const r=setOnline(b,id);
+  touch(); renderAll();
+  toast(r.err?`Added ${it.n} offline. ${r.err}`:r.comps.length?`Added ${it.n}. ${upMsg(r,id)}`:`Added ${it.n}`);
 }
-function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; touch(); renderAll();}
+function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; delete b.on[id]; touch(); renderAll();}
+function toggleOn(id){
+  const b=B();
+  if(b.on[id]) delete b.on[id];
+  else { const r=setOnline(b,id); if(r.err){ toast(r.err); return; } if(r.comps.length) toast(upMsg(r,id)); }
+  touch(); renderAll();
+}
 function move(pi,ii,d){
   const b=B(); const ph=b.phases[pi]; const id=ph.items[ii];
   const j=ii+d;
@@ -873,13 +927,14 @@ function move(pi,ii,d){
   else if(d>0&&pi<b.phases.length-1){ ph.items.splice(ii,1); b.phases[pi+1].items.unshift(id); }
   touch(); renderAll();
 }
-function setSouls(v){ S.souls=Math.max(0,Math.min(60000,Math.round(+v||0))); renderAll(); }
+function setSouls(v){ S.souls=Math.max(0,Math.round(+v||0)); renderAll(); }
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
   const t=e.target.closest('button,[data-item],[data-open],[data-stat]'); if(!t) { if(e.target===$('#sheet')) closeSheet(); return; }
   const d=t.dataset;
   if(d.quick){ e.stopPropagation(); addItem(d.quick); return; }
+  if(d.on){ toggleOn(d.on); if(d.closeAfter!==undefined) closeSheet(); return; }
   if(d.close!==undefined){ closeSheet(); return; }
   if(d.addItem){ addItem(d.addItem, +($('#addTo')?.value||0)); closeSheet(); return; }
   if(d.removeItem){ removeItem(d.removeItem); closeSheet(); return; }
@@ -888,9 +943,9 @@ document.addEventListener('click',e=>{
   if(d.mv){ const [pi,ii,dd]=d.mv.split(',').map(Number); move(pi,ii,dd); return; }
   if(d.rm){ const [pi,ii]=d.rm.split(',').map(Number); const id=B().phases[pi].items[ii]; removeItem(id); return; }
   if(d.act){ const b=B(); b.act[d.act]=!b.act[d.act]; touch(); renderAll(); return; }
-  if(d.phdel!==undefined){ const b=B(); const pi=+d.phdel; if(b.phases.length<=1){toast('A build needs at least one phase');return;}
+  if(d.phdel!==undefined){ const b=B(); const pi=+d.phdel; if(b.phases.length<=1){toast('A build needs at least one category');return;}
     const moved=b.phases[pi].items; b.phases.splice(pi,1); b.phases[Math.max(0,pi-1)].items.push(...moved); touch(); renderAll(); return; }
-  if(t.id==='addPhase'){ B().phases.push({n:`Phase ${B().phases.length+1}`,items:[]}); touch(); renderAll(); return; }
+  if(t.id==='addPhase'){ B().phases.push({n:`Category ${B().phases.length+1}`,items:[]}); touch(); renderAll(); return; }
   if(d.sk){ const [ai,dd]=d.sk.split(',').map(Number); const b=B();
     if(dd>0){ if(b.skill.filter(x=>x===ai).length<4) b.skill.push(ai); }
     else { const k=b.skill.lastIndexOf(ai); if(k>=0) b.skill.splice(k,1); }

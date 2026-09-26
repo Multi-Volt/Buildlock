@@ -40,7 +40,8 @@ const build = `<body><h1>Warden</h1><h2>Build Summary</h2><div>60.0% WR (633 Mat
 <div>Late<span>· Situational late-game items</span></div>${item('Silencer', 'IV')}
 <div>Defensives<span>· Increase your survivability</span></div>${item('Spirit Resilience', 'III')}
 <div>Counter Picks<span>·</span></div>${item('Metal Skin', 'III')}
-<div>Actives<span>·</span></div>${item('Unstoppable', 'IV')}</body>`;
+<div>Actives<span>·</span></div>${item('Unstoppable', 'IV')}
+<div class="summary"><img alt="Hollow Point"><div>III</div><img alt="Battle Vest"><div>II</div></div></body>`;
 const b = parseBuild(build, 'hero_warden');
 assert.strictEqual(b.wr, 60);
 assert.strictEqual(b.matches, 633);
@@ -48,7 +49,7 @@ assert.strictEqual(b.core.length, 3);
 assert.strictEqual(b.early.length, 1);
 assert.strictEqual(b.late.length, 1);
 assert.strictEqual(b.defensive.length, 1);
-assert.strictEqual(b.actives.length, 1);
+assert.strictEqual(b.actives.length, 1, 'unnamed icons after the last section are not part of it');
 assert.deepStrictEqual(b.unlock, [0, 1, 2, 3]);
 
 console.log('All parser tests passed.');

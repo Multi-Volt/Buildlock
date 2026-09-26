@@ -177,13 +177,20 @@ function parseBuild(html, heroId) {
   const out = {};
   idx.forEach(([k, start], i) => {
     const stop = i + 1 < idx.length ? idx[i + 1][1] : toks.length;
-    const ids = [];
-    for (let j = start + 1; j < stop; j++) {
-      if (toks[j].t !== 'alt') continue;
-      const id = itemId(toks[j].v);
-      if (id && !ids.includes(id)) ids.push(id);
-    }
-    out[k] = ids;
+    // A listed item is its icon followed by tier and name text. The last section otherwise runs on into
+    // unrelated icons further down the page, which carry no name, so those are skipped.
+    const named = j => [toks[j + 1], toks[j + 2]].some(t => t && t.t === 'text' && norm(t.v) === norm(toks[j].v));
+    const collect = strict => {
+      const ids = [];
+      for (let j = start + 1; j < stop; j++) {
+        if (toks[j].t !== 'alt' || (strict && !named(j))) continue;
+        const id = itemId(toks[j].v);
+        if (id && !ids.includes(id)) ids.push(id);
+      }
+      return ids;
+    };
+    const strict = collect(true);
+    out[k] = strict.length ? strict : collect(false);
   });
   // Ability unlock order: ability icons between "Unlock Order" and the next heading
   const abNames = (LOOKUP.heroes[heroId]?.abilities || []).map(norm);

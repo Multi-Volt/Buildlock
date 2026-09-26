@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {
  "hero_atlas": {
   "hero": "hero_atlas",
@@ -7334,3 +7335,6 @@
   "errors": []
  }
 }
+=======
+{"hero_haze":{"hero":"hero_haze","name":"Haze","slug":"haze","fetchedAt":1790453368355,"pro":{"wr":62.9,"g":197,"p":{"Early":[["upgrade_blitz_bullets",96],["upgrade_rapid_rounds",89],["upgrade_improved_spirit",84],["upgrade_active_reload",59],["upgrade_sprint_booster",54],["upgrade_veil_walker",49],["upgrade_health",44],["upgrade_goose_egg",26]],"Mid":[["upgrade_magic_storm",69],["upgrade_burst_fire",60],["upgrade_bullet_resist_shredder",52],["upgrade_cardio_calibrator",51],["upgrade_rechargingbullets",44],["upgrade_fleetfoot_boots",42],["upgrade_quick_silver",39],["upgrade_headshot_booster2",38]],"Late":[["upgrade_ricochet",47],["upgrade_tech_overflow",30],["upgrade_ethereal_bullets",27],["upgrade_siphon_bullets",26],["upgrade_tech_purge",25],["upgrade_health_stealing_magic",23],["upgrade_proc_silence",16],["upgrade_extra_charge",15]]},"unknown":[]},"build":{"wr":60,"matches":728,"core":["upgrade_improved_spirit","upgrade_rapid_rounds","upgrade_blitz_bullets","upgrade_regenerating_bullet_shield","upgrade_bullet_resist_shredder","upgrade_magic_storm","upgrade_headshot_booster2","upgrade_burst_fire","upgrade_hollow_point_rounds","upgrade_proc_silence","upgrade_unstoppable","upgrade_banshee_slugs"],"early":["upgrade_active_reload","upgrade_clip_size","upgrade_containment","upgrade_cardio_calibrator","upgrade_vampire","upgrade_extra_charge","upgrade_fleetfoot_boots","upgrade_endurance"],"late":["upgrade_ricochet","upgrade_rapid_recharge","upgrade_siphon_bullets","upgrade_critshot","upgrade_fury_trance","upgrade_chain_lightning","upgrade_capacitor"],"defensive":["upgrade_health","upgrade_chonky","upgrade_reinforcing_casings","upgrade_debuff_reducer","upgrade_tech_purge"],"counters":["upgrade_debuff_reducer","upgrade_tech_purge","upgrade_inhibitor","upgrade_counterspell","upgrade_glitch"],"actives":["upgrade_containment","upgrade_fleetfoot_boots","upgrade_fury_trance","upgrade_capacitor","upgrade_surging_power","upgrade_glitch"],"unlock":[2,0,1,3]},"errors":[]}}
+>>>>>>> Stashed changes
