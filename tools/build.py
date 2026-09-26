@@ -107,6 +107,87 @@ def cdn(p):
     return re.sub(r'\.(psd|png|tga)$', '.webp', p)
 slug = lambda n: n.lower().replace('&', 'and').replace(' ', '-')
 
+# Items with stacks the player can set in a build: (what a stack is, max stacks, [(per-stack property, stat it adds to)]).
+# Max is a property name, a number, or (cap property, per-stack property) when the game caps the total instead.
+# A stat of None means the effect is shown but doesn't change your own stats (enemy debuffs, heals, souls).
+# The game files name these inconsistently, so the list is kept by hand; values still come from the game files.
+ENEMIES = 6
+STACK_UNITS = {'StackingBonusSprintSpeed': 'm/s', 'StackingTechRangeMultiplier': '%'}
+STACKS = {
+    'upgrade_reinforcing_casings': ('Hero hits', ('MaxArmorStacks', 'BulletResistPerStack'), [('BulletResistPerStack', 'BULLET_ARMOR_DAMAGE_RESIST')]),
+    'upgrade_split_shot': ('Stacks', 'MaxStacks', [('WeaponDamagePerStack', 'WEAPON_DAMAGE_INCREASE')]),
+    'upgrade_berserker': ('Stacks', 'MaxStacks', [('WeaponPowerPerStack', 'WEAPON_DAMAGE_INCREASE')]),
+    'upgrade_glass_cannon': ('Kills', 'MaxStacks', [('FireRatePerKill', 'FIRE_RATE'), ('BonusClipPerKill', 'AMMO_CLIP_SIZE')]),
+    'upgrade_trophy_collector': ('Kills and assists', 'MaxStacks', [('StackingBonusSprintSpeed', 'SPRINT_SPEED_BONUS'), ('StackingTechRangeMultiplier', 'TECH_RANGE_PERCENT'), ('StackingGoldPerMinute', None)]),
+    'upgrade_enchanted_holsters': ('Casts', 'MaxStacks', [('BonusFireRate', 'FIRE_RATE'), ('ReloadSpeedMultipler', None)]),
+    'upgrade_bulletshredimbue': ('Heroes hit', ENEMIES, [('WeaponPowerPerStack', 'WEAPON_DAMAGE_INCREASE')]),
+    'upgrade_mystic_regeneration': ('Heroes damaged', ENEMIES, [('Regeneration', 'HEALTH_REGEN_PER_SECOND')]),
+    'upgrade_resonant_healing': ('Heroes damaged', ENEMIES, [('Regeneration', 'HEALTH_REGEN_PER_SECOND')]),
+    'upgrade_escalating_exposure': ('Stacks on target', 'MaxStacks', [('MagicIncreasePerStack', None)]),
+    'upgrade_crushing_fists': ('Stacks on target', 'MaxStacks', [('BulletResistReduction', None)]),
+    'upgrade_restorative_locket': ('Stored stacks', 'MaxStacks', [('HealPerStack', None)]),
+}
+
+# Ability stacks: {ability: [(counter suffix, what a stack is, max, [(property, stat or None, label, unit[, 'pow'])])]}.
+# Max is None (no cap), a number, a property (upgrades that raise it are applied in the app), or
+# (property A, property B) for A / B, e.g. pulses = duration / pulse interval. Values come from the game files,
+# and upgrade tiers that add to a property are applied in the app. 'pow' marks a multiplier per stack (x2 each).
+ABILITY_STACKS = {
+    # permanent self stacks
+    'ability_guided_arrow': [('', 'Hero kills with Guided Owl', None, [('BonusTechPowerPerKill', 'TECH_POWER', 'Spirit Power', '')])],
+    'citadel_ability_hornet_snipe': [('', 'Hero kills with Assassinate', None, [('WeaponDamageBonusPerKill', 'WEAPON_DAMAGE_INCREASE', 'Weapon Damage', '%')])],
+    'ability_ult_combo': [('', 'Hero kills with Combo', None, [('BonusHealthOnKill', 'HEALTH_MAX', 'Max Health', '')])],
+    'ability_drifter_hunger': [('', 'Isolated hero deaths nearby', None, [('WeaponDmgPerIsolationKill', 'WEAPON_DAMAGE_INCREASE', 'Weapon Damage', '%')])],
+    'citadel_ability_sticky_bomb': [
+        ('hits', 'Sticky Bomb hero hits (halves after 60)', None, [('BonusDamagePctPerPlayerHit', None, 'Sticky Bomb damage', '%')]),
+        ('kills', 'Sticky Bomb hero kills (halves after 7)', None, [('BonusDamagePctPerPlayerKilled', None, 'Sticky Bomb damage', '%')])],
+    'ability_vampirebat_batswarm': [('', 'Love Bites procs on heroes', ('BonusBatsMax', 'BonusBatsPerProc'), [('BonusBatsPerProc', None, 'Bats', '')])],
+    # in-fight self stacks
+    'ability_stacking_damage': [('', 'Fixation stacks on target', 'MaxStacks', [('DamageBonusFixedPerStack', None, 'Bullet damage vs target', '')])],
+    'ability_unicorn_luminousstrike': [('', 'Radiant Daggers hero hits', 'BuffMaxStacks', [('MagicIncreasePerStack', None, 'Spirit damage', '%'), ('FireRatePerStack', 'FIRE_RATE', 'Fire Rate', '%')])],
+    'ability_punkgoat_tether': [('', 'Heroes chained', ENEMIES, [('UnstoppablePerHero', None, 'Unstoppable', 's')])],
+    'synth_barrage': [('', 'Barrage hero hits', None, [('AmpPercentPerStack', None, 'Damage amp', '%')])],
+    # enemy debuff stacks
+    'ability_blood_shards': [('', 'Malice stacks on target', 'MaxStacks', [('VulnerabilityPerStack', None, 'Damage taken from you', '%'), ('MoveSpeedPenaltyPerStack', None, 'Slow', '%')])],
+    'ability_viper_debuffdagger': [('', 'Daggers on target', 'MaxStacks', [('DamagePerStack', None, 'Dagger spirit damage', ''), ('SlowPercentPerStack', None, 'Slow', '%'), ('BulletResistReductionPerStack', None, 'Target bullet resist', '%')])],
+    'citadel_ability_chrono_pulse_grenade': [('', 'Pulses on target', ('AbilityDuration', 'PulseInterval'), [('DamageAmplificationPerStack', None, 'Damage taken', '%')])],
+    'citadel_ability_shiv_dagger': [('', 'Knife stacks on target', None, [('BleedDPSPerStack', None, 'Bleed damage per second', '')])],
+    'mirage_sand_phantom': [('', "Djinn's Marks on target", 'MaxStacks', [('DMarkMultiplierPerStack', None, 'Mark damage', '×', 'pow')])],
+    'ability_necro_gravestone': [('', 'Borrowed Decree stacks on target', 'MaxStacks', [('SlowPercentPerStack', None, 'Slow', '%'), ('TechArmorDamageReductionPerStack', None, 'Target spirit resist', '%')])],
+    'ability_intimidate': [('', 'Scorn debuffs on target', None, [('DamageBonus', None, 'Damage taken', '%')])],
+}
+
+# Permanent buffs (golden statues, Sinner's Sacrifice, mid-boss, Soul Urn, Golden Goose Egg). They aren't in the
+# files this script reads, so the values are from https://deadlock.wiki/Permanent_Buff: level 1 / 2 / 3 buffs are
+# the ones picked up from 0, 10 and 30 minutes.
+PERMANENT_BUFFS = [
+    {'k': 'fr', 'l': 'Fire Rate', 't': 'FIRE_RATE', 'u': '%', 'v': [1.5, 2, 2.5]},
+    {'k': 'ammo', 'l': 'Max Ammo', 't': 'AMMO_CLIP_SIZE_PERCENT', 'u': '%', 'v': [3, 5, 7]},
+    {'k': 'cdr', 'l': 'Cooldown Reduction', 't': 'COOLDOWN_REDUCTION_PERCENTAGE', 'u': '%', 'v': [0.5, 0.75, 1]},
+    {'k': 'wd', 'l': 'Weapon Damage', 't': 'WEAPON_DAMAGE_INCREASE', 'u': '%', 'v': [3, 4, 6]},
+    {'k': 'hp', 'l': 'Max Health', 't': 'HEALTH_MAX', 'u': '', 'v': [15, 20, 30]},
+    {'k': 'sp', 'l': 'Spirit Power', 't': 'TECH_POWER', 'u': '', 'v': [2, 3, 4]},
+]
+
+def ability_stack(aid, P, e):
+    suf, lab, mx, per = e
+    v = lambda k: num(P.get(k, {}).get('m_strValue')) or 0   # missing = 0, added by an upgrade tier
+    d = {'id': aid + ('#' + suf if suf else ''), 'l': lab}
+    if isinstance(mx, tuple): d['mdiv'] = [mx[0], v(mx[0]), mx[1], v(mx[1])]
+    elif isinstance(mx, str): d['mk'] = mx; d['mx'] = v(mx)
+    else: d['mx'] = mx
+    d['p'] = []
+    for x in per:
+        k, t, l, u = x[:4]
+        q = {'k': k, 'l': l, 'u': u, 'v': v(k)}
+        sf = P.get(k, {}).get('m_subclassScaleFunction') or {}
+        st = sf.get('m_eSpecificStatScaleType') or ('ETechPower' if sf.get('_class') == 'scale_function_tech_damage' else None)
+        if st in ('ETechPower', 'ELevelUpBoons') and sf.get('m_flStatScale'): q['sc'] = [st, sf['m_flStatScale']]
+        if t: q['t'] = t
+        if len(x) > 4: q['pow'] = 1
+        d['p'].append(q)
+    return d
+
 def extract():
     global a, h, g, LOC
     print('Downloading game files from GameTracking-Deadlock...')
@@ -211,6 +292,23 @@ def extract():
         it['x']=secs
         cd=num(P.get('AbilityCooldown',{}).get('m_strValue'))
         if cd: it['cd']=cd
+        if iid in STACKS:
+            lab,mx,per=STACKS[iid]
+            pv=lambda k: num(P.get(k,{}).get('m_strValue'))
+            if isinstance(mx,tuple): mx=pv(mx[0])/pv(mx[1])   # a cap on the total, e.g. 30% max resist at 2% per stack
+            elif isinstance(mx,str): mx=pv(mx)
+            pl=[]
+            for k,t in per:
+                if k not in P: continue
+                d=prop(iid,k,P[k]); d.pop('c',None); d.pop('t',None)
+                d['l']=re.sub(r'(?i)^stacking\s+|\s+per\s+(stack|kill)$','',d['l']).replace('Bonus Ammo','Ammo').replace('Tech Range Multiplier','Ability Range')
+                d['u']=STACK_UNITS.get(k,d['u'])
+                if t: d['t']=t   # only self stats feed the stat sheet; the rest (enemy debuffs, heals) are shown
+                pl.append(d)
+            it['sk']={'l':lab,'max':int(round(mx)) if mx and mx<1000 else None,'p':pl}
+            for sec in secs:
+                for p in sec['p']:
+                    if any(p['k']==k for k,_ in per): p['stk']=1   # counted per stack, not as a flat bonus
         items.append(it)
 
     ids={i['id'] for i in items}
@@ -270,6 +368,7 @@ def extract():
                 ups.append({'d':txt,'b':bon,'bl':bl,**({'s':sca} if sca else {})})
             abil.append({'id':aid,'n':L(aid,aid),'q':clean(L(aid+'_quip','')),'d':desc,'p':props,'u':ups,
                          'ult':1 if slot.endswith('4') else 0})
+            if aid in ABILITY_STACKS: abil[-1]['sk']=[ability_stack(aid,P,e) for e in ABILITY_STACKS[aid]]
         st=statmap(r['m_mapStartingStats'])
         lu={k.replace('MODIFIER_VALUE_',''):v for k,v in r['m_mapStandardLevelUpUpgrades'].items() if v}
         heroes.append({'id':hid,'n':L(hid,hid),'col':r.get('m_colorUI'),'type':str(r.get('m_eHeroType','')).replace('ECitadelHeroType_',''),
@@ -327,7 +426,7 @@ def main():
     ids = {i['id'] for i in items}
     for t in tl.values():
         for k in t.get('p', {}): t['p'][k] = [x for x in t['p'][k] if x[0] in ids]
-    D = {'heroes': heroes, 'items': items, 'tl': tl, 'tlDate': tl_date}
+    D = {'heroes': heroes, 'items': items, 'pb': PERMANENT_BUFFS, 'tl': tl, 'tlDate': tl_date}
     json.dump(D, open(os.path.join(DATA, 'gamedata.json'), 'w', encoding='utf-8'), separators=(',', ':'))
     lookup = {'heroes': {x['id']: {'name': x['n'], 'slug': slug(x['n']), 'abilities': [b['n'] for b in x['ab']]} for x in heroes},
               'items': {i['n']: i['id'] for i in items}}

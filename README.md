@@ -6,6 +6,7 @@ A Deadlock build planner that runs for free on GitHub Pages. A scheduled GitHub 
 
 - Plan builds for any hero, arranged in phases (early, mid, late).
 - Choose which items in the build are online (up to 12 slots). Set a soul count to see your level, boons and ability points at that point.
+- Stacks panel: set stacks for stacking items (Trophy Collector, Glass Cannon, Berserker...), hero abilities (Grey Talon's Guided Owl kills, Haze's Fixation, Lady Geist's Malice...) and permanent buffs from golden statues and other sources. Stacks that boost your own stats show up in the stat sheet.
 - Organise items into categories (Core, Situational, Defensives...). A build can list an item and its components, but only one of them can be online: switching an upgrade online takes its components offline.
 - See how every item changes your passive stats. Tap any stat to see where its value comes from.
 - Test ability upgrades. Ability values scale with your spirit power, cooldown reduction, duration and range.

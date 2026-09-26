@@ -113,14 +113,14 @@ main{display:grid; gap:14px; padding:14px 16px 90px; grid-template-columns:minma
   .slider{flex-basis:100%}
   .col{display:contents}
   .view{display:none}
-  body[data-m="shop"] .v-shop, body[data-m="build"] .v-build, body[data-m="abil"] .v-abil, body[data-m="stats"] .v-stats{display:block}
+  body[data-m="shop"] .v-shop, body[data-m="build"] .v-build, body[data-m="abil"] .v-abil, body[data-m="stacks"] .v-stacks, body[data-m="stats"] .v-stats{display:block}
   .top{flex-wrap:wrap; gap:8px 12px} .heroname{font-size:24px} .herobtn .ic{width:44px;height:44px}
   .bname{order:3; flex-basis:100%}
   .souls{gap:8px 12px}
 }
 .mnav{display:none}
 @media (max-width:760px){
-  .mnav{display:grid; grid-template-columns:repeat(4,1fr); position:fixed; left:0; right:0; bottom:0; z-index:30; background:var(--bg2); border-top:1px solid var(--line2); padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+  .mnav{display:grid; grid-template-columns:repeat(5,1fr); position:fixed; left:0; right:0; bottom:0; z-index:30; background:var(--bg2); border-top:1px solid var(--line2); padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
   .mnav button{background:none; border:0; color:var(--muted); padding:6px 2px; font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.03em; border-radius:3px}
   .mnav button[aria-current="true"]{color:var(--brass); background:var(--panel)}
 }
@@ -175,7 +175,25 @@ main{display:grid; gap:14px; padding:14px 16px 90px; grid-template-columns:minma
 .iconbtn{background:none; border:1px solid transparent; color:var(--muted); width:28px; height:28px; border-radius:3px; display:inline-grid; place-items:center; padding:0; flex:none}
 .iconbtn:hover{border-color:var(--line2); color:var(--text)}
 .iconbtn svg{width:15px; height:15px}
-.brow{display:flex; align-items:center; gap:9px; padding:6px 4px; border-bottom:1px solid var(--line)}
+.brow{display:flex; flex-wrap:wrap; align-items:center; gap:9px; padding:6px 4px; border-bottom:1px solid var(--line)}
+.stkrow{flex-basis:100%; display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; padding-left:47px; font-size:12.5px}
+.stk{display:inline-flex; align-items:center; gap:3px}
+.stk .iconbtn{width:24px; height:24px; border-color:var(--line2); font-weight:700}
+.stk .iconbtn:disabled{opacity:.35; cursor:default}
+.stk input{width:46px; background:var(--bg2); border:1px solid var(--line2); border-radius:3px; padding:2px 4px; text-align:center}
+.stks{color:var(--text)}
+.sgh{margin:12px 0 2px; font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:.03em; color:var(--brass)}
+.sgh:first-child{margin-top:0}
+.srow2{display:grid; grid-template-columns:auto minmax(0,1fr); gap:3px 10px; align-items:center; padding:7px 2px; border-bottom:1px solid var(--line); font-size:13px}
+.srow2 .ic{width:32px; height:32px; border-radius:3px; grid-row:span 2; background:color-mix(in srgb,var(--c,var(--brass)) 30%, #000)}
+.srow2 .ic.round{border-radius:50%}
+.srow2 .nm{font-weight:500} .srow2 .nm small{font-weight:400; color:var(--muted)}
+.srow2 .ctl{display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px}
+.srow2.off .nm,.srow2.off .ic{opacity:.55}
+.pbt{display:grid; grid-template-columns:minmax(0,1fr) repeat(3,52px) minmax(64px,auto); gap:4px 6px; align-items:center; font-size:13px}
+.pbt .h{font-size:11.5px; color:var(--muted); text-align:center}
+.pbt input{width:100%; background:var(--bg2); border:1px solid var(--line2); border-radius:3px; padding:3px 4px; text-align:center}
+.pbt .tot{text-align:right; font-weight:700}
 .brow .ic{width:38px; height:38px; border-radius:3px; background:color-mix(in srgb,var(--c) 30%, #000); outline:1px solid color-mix(in srgb,var(--c) 60%, transparent)}
 .brow .bi{flex:1; min-width:0; cursor:pointer}
 .brow .bn{font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
@@ -308,6 +326,10 @@ textarea.notes{width:100%; min-height:60px; background:var(--bg2); border:1px so
       <div class="ph"><h2>Build order</h2><button class="tbtn primary" id="tlBtn" style="font-size:13px;padding:5px 10px">Tracklock build</button></div>
       <div class="pb" id="build"></div>
     </section>
+    <section class="panel view v-stacks" aria-label="Stacks">
+      <div class="ph"><h2>Stacks</h2><span class="muted" style="font-size:12px">Kills, hits and buffs to count in your stats</span></div>
+      <div class="pb" id="stacks"></div>
+    </section>
     <section class="panel view v-abil" aria-label="Abilities">
       <div class="ph"><h2>Abilities</h2><button class="tbtn" id="clrSkill" style="font-size:12px;padding:4px 9px">Clear skill order</button></div>
       <div class="pb" id="abil"></div>
@@ -322,7 +344,7 @@ textarea.notes{width:100%; min-height:60px; background:var(--bg2); border:1px so
 </main>
 <p class="foot">Data from Deadlock's game files via SteamDB's GameTracking-Deadlock. Icons load from the current Deadlock asset CDN when your browser allows it. Builds from tracklock.gg: live when the app runs on its server, otherwise a snapshot. Numbers are an estimate of passive stats; actives count only when switched on.</p>
 <nav class="mnav" id="mnav" aria-label="Sections">
-  <button data-m="build">Build</button><button data-m="shop">Shop</button><button data-m="abil">Abilities</button><button data-m="stats">Stats</button>
+  <button data-m="build">Build</button><button data-m="shop">Shop</button><button data-m="abil">Abilities</button><button data-m="stacks">Stacks</button><button data-m="stats">Stats</button>
 </nav>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 <div class="toast" id="toast"></div>
@@ -340,6 +362,23 @@ const INTO={}; D.items.forEach(i=>(i.cp||[]).forEach(c=>(INTO[c]=INTO[c]||[]).pu
 const walk=(id,next,out=new Set())=>{(next(id)||[]).forEach(x=>{if(!out.has(x)){out.add(x); walk(x,next,out);}}); return out;};
 const DOWN={}, UP={}; D.items.forEach(i=>{DOWN[i.id]=walk(i.id,x=>ITEMS[x]&&ITEMS[x].cp); UP[i.id]=walk(i.id,x=>INTO[x]);});
 const MAXSLOTS=12;
+// Ability stack values depend on the ability's level: upgrade tiers add to per-stack values and max stacks.
+const upSum=(ab,lev,k,f)=>ab.u.slice(0,Math.max(0,lev-1)).reduce((a,u)=>a+((u[f]||{})[k]||0),0);
+function abStackMax(ab,lev,e){
+  if(e.mdiv){ const [ka,va,kb,vb]=e.mdiv; return Math.floor((va+upSum(ab,lev,ka,'b'))/(vb+upSum(ab,lev,kb,'b'))+1e-9); }
+  return e.mk?e.mx+upSum(ab,lev,e.mk,'b'):e.mx;
+}
+const abStackN=(ab,lev,e,n)=>{ const m=abStackMax(ab,lev,e); return Math.max(0,m==null?(n||0):Math.min(m,n||0)); };
+function abStackPer(ab,lev,p,sp,boons){ // sp null: leave spirit scaling out (stat sheet), a number: include it (display)
+  const s=(p.sc?p.sc[1]:0)+upSum(ab,lev,p.k,'s'), ty=p.sc?p.sc[0]:'ETechPower';
+  let v=p.v+upSum(ab,lev,p.k,'b');
+  if(ty==='ETechPower'&&sp!=null) v+=sp*s; if(ty==='ELevelUpBoons') v+=boons*s;
+  return v;
+}
+// Every stack counter the app knows, with its highest possible max (ability maxes shrink at lower levels).
+const STK={}; D.items.forEach(i=>{ if(i.sk) STK[i.id]={max:i.sk.max}; });
+D.heroes.forEach(h=>h.ab.forEach(ab=>(ab.sk||[]).forEach(e=>STK[e.id]={max:abStackMax(ab,4,e)})));
+function clampStk(id,n){ const m=STK[id]&&STK[id].max; n=Math.max(0,Math.round(+n||0)); return m!=null?Math.min(m,n):Math.min(9999,n); }
 const CAT={W:'Weapon',V:'Vitality',S:'Spirit'};
 const UPCOST=[1,2,5];
 const $=s=>document.querySelector(s);
@@ -393,7 +432,7 @@ let S;
 function blank(heroId){
   const h=HEROES[heroId];
   return {id:'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:`${h.n} build`,hero:heroId,
-    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},on:{},notes:'',t:Date.now()};
+    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},on:{},stk:{},pb:{},notes:'',t:Date.now()};
 }
 const allItems=b=>b.phases.flatMap(p=>p.items);
 const onCount=b=>allItems(b).filter(id=>b.on[id]).length;
@@ -417,6 +456,9 @@ function tidy(b){
   const want=b.on?ids.filter(id=>b.on[id]):ids; // builds saved before online was a choice: try everything
   b.on={}; want.forEach(id=>setOnline(b,id));
   b.act=Object.fromEntries(Object.keys(b.act||{}).filter(id=>b.act[id]&&ids.includes(id)).map(id=>[id,true]));
+  const heroStk=new Set((HEROES[b.hero]?HEROES[b.hero].ab:[]).flatMap(ab=>(ab.sk||[]).map(e=>e.id)));
+  b.stk=Object.fromEntries(Object.entries(b.stk||{}).filter(([id])=>STK[id]&&(ITEMS[id]?ids.includes(id):heroStk.has(id))).map(([id,n])=>[id,clampStk(id,n)]).filter(([,n])=>n>0));
+  b.pb=Object.fromEntries(D.pb.map(x=>[x.k,[0,1,2].map(i=>Math.max(0,Math.min(99,Math.round(+((b.pb||{})[x.k]||[])[i]||0))))]).filter(([,c])=>c.some(Boolean)));
   return b;
 }
 function load(){
@@ -456,17 +498,28 @@ function orderRows(b){
 }
 const MULT=new Set(['BULLET_ARMOR_DAMAGE_RESIST','TECH_RESIST','MELEE_RESIST','STATUS_RESISTANCE','COOLDOWN_REDUCTION_PERCENTAGE','MOVEMENT_SLOW_RESISTANCE','ITEM_COOLDOWN_REDUCTION_PERCENTAGE']);
 function invBonus(h,cat,spent){let v=0,next=null; for(const [t,b] of h.inv[cat]){ if(spent>=t) v=b; else {next=[t,b]; break;} } return {v,next};}
-function compute(h,lvl,held,act){
+// ctx: {stk: stack counts, abLev: ability levels, pb: permanent buff counts}
+function compute(h,lvl,held,act,ctx={}){
+  const stk=ctx.stk||{};
   const L=levelInfo(h,lvl);
   const T={}; const src={};
   const add=(t,v,s)=>{ if(!v) return; (T[t]=T[t]||[]).push(v); (src[t]=src[t]||[]).push([s,v]); };
   const spentBy={W:0,V:0,S:0};
   held.forEach(id=>{const it=ITEMS[id]; spentBy[it.s]+=it.c;
-    it.x.forEach(sec=>sec.p.forEach(p=>{ if(!p.t||p.v==null) return;
+    it.x.forEach(sec=>sec.p.forEach(p=>{ if(!p.t||p.v==null||p.stk) return;
       const on= sec.ty==='Innate' ? (!p.c || act[id]) : !!act[id];
       if(on) add(p.t,p.v,it.n+(sec.ty!=='Innate'||p.c?' (active)':''));
     }));
+    const n=it.sk&&stk[id]; // per-stack effects, at the stack count the player set
+    if(n) it.sk.p.forEach(p=>{ if(p.t) add(p.t,p.v*n,`${it.n} (${n} ${it.sk.l.toLowerCase()})`); });
   });
+  h.ab.forEach((ab,ai)=>{ const lev=(ctx.abLev||[])[ai]||0; if(!lev) return; // ability stacks count once the ability is unlocked
+    (ab.sk||[]).forEach(e=>{ const n=abStackN(ab,lev,e,stk[e.id]); if(!n) return;
+      e.p.forEach(p=>{ if(p.t) add(p.t,abStackPer(ab,lev,p,null,L.boons)*n,`${ab.n} (${n} ${e.l.toLowerCase()})`); });
+    });
+  });
+  D.pb.forEach(x=>{ const c=(ctx.pb||{})[x.k]; if(!c) return; const n=c[0]+c[1]+c[2];
+    if(n) add(x.t,c.reduce((a,m,i)=>a+m*x.v[i],0),`Permanent buffs (${n})`); });
   const inv={W:invBonus(h,'W',spentBy.W),V:invBonus(h,'V',spentBy.V),S:invBonus(h,'S',spentBy.S)};
   const sum=t=>(T[t]||[]).reduce((a,b)=>a+b,0);
   const mul=t=>{const a=T[t]||[]; let pos=1,neg=0; a.forEach(v=>{ if(v>0) pos*=1-v/100; else neg+=v; }); return (1-pos)*100+neg;};
@@ -586,14 +639,15 @@ function derive(){
   const b=B(), h=H(), souls=S.souls, sb=S.sandbox;
   const lvl=levelFor(h,souls);
   const o=orderRows(b);
-  const R=compute(h,lvl,o.held,b.act);
-  const R0=compute(h,lvl,[],{});
   const sk=skillState(h,b,lvl,sb);
-  return {b,h,souls,lvl,o,R,R0,sk};
+  const ctx={stk:b.stk,abLev:sk.lev,pb:b.pb};
+  const R=compute(h,lvl,o.held,b.act,ctx);
+  const R0=compute(h,lvl,[],{},ctx); // "no items" still includes ability stacks and permanent buffs
+  return {b,h,souls,lvl,o,R,R0,sk,ctx};
 }
 function renderAll(){
   const X=derive(); window.__X=X;
-  renderTop(X); renderShop(X); renderBuild(X); renderAbil(X); renderStats(X); save();
+  renderTop(X); renderShop(X); renderBuild(X); renderStacks(X); renderAbil(X); renderStats(X); save();
 }
 function renderTop(X){
   const {h,b,lvl,o}=X;
@@ -635,7 +689,41 @@ function renderShop(X){
   $('#shop').innerHTML=html||'<p class="empty">No items match that search.</p>';
 }
 const IC={up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg>',dn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>',x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
-const hasAct=it=>it.x.some(s=>s.p.some(p=>p.t&&(s.ty!=='Innate'||p.c)));
+const hasAct=it=>it.x.some(s=>s.p.some(p=>p.t&&!p.stk&&(s.ty!=='Innate'||p.c)));
+/* ---------- stacks ---------- */
+const unitStr=u=>u&&!/^[a-z]/i.test(u)?u:u?' '+u:'';
+// ps: [{l,u,v,t,pow}] with v per stack
+const perSum=(ps,n)=>ps.filter(p=>p.v).map(p=>p.pow?`×${fmt(p.v**(n-1),0)} ${p.l}`:`${sgn(p.v*n,2)}${unitStr(p.u)} ${p.l}`).join(', ');
+const perList=ps=>ps.map(p=>`<span>${esc(p.l)} per stack${p.t?'':' <span class="cond">not in stats</span>'}</span><span class="pv num">${p.pow?'×'+fmt(p.v,2):sgn(p.v,2)+esc(p.pow?'':p.u)}</span>`).join('');
+const stackSum=(it,n)=>perSum(it.sk.p,n);
+const stackPer=it=>perList(it.sk.p);
+function stackCtl(id,label,n,max,name){
+  return `<span class="stk"><button class="iconbtn" data-stk="${esc(id)},-1" aria-label="Fewer ${esc(label.toLowerCase())}" ${n<=0?'disabled':''}>−</button><input type="number" inputmode="numeric" class="num" min="0" ${max!=null?`max="${max}"`:''} value="${n}" data-stkin="${esc(id)}" aria-label="${esc(name)}: ${esc(label.toLowerCase())}"><button class="iconbtn" data-stk="${esc(id)},1" aria-label="More ${esc(label.toLowerCase())}" ${max!=null&&n>=max?'disabled':''}>+</button>
+    <span class="muted">${max!=null?`max ${max}`:'no cap'}</span></span>`;
+}
+function renderStacks(X){
+  const {b,h,sk,R}=X; let html='';
+  const items=allItems(b).filter(id=>ITEMS[id].sk);
+  html+=`<div class="sgh">Items</div>`;
+  html+=items.length?items.map(id=>{const it=ITEMS[id]; const n=b.stk[id]||0; const on=!!b.on[id];
+    return `<div class="srow2 c${it.s} ${on?'':'off'}">${itemIcon(it)}<div class="nm">${esc(it.n)} <small>${esc(it.sk.l)}${on?'':'. Offline, not counted'}</small></div>
+      <div class="ctl">${stackCtl(id,it.sk.l,n,it.sk.max,it.n)}${n?`<span class="stks num">${esc(perSum(it.sk.p,n))}</span>`:''}</div></div>`;}).join('')
+    :`<p class="empty">No stacking items in this build. Trophy Collector, Glass Cannon, Berserker and others appear here once added.</p>`;
+  const abRows=h.ab.flatMap((ab,ai)=>(ab.sk||[]).map(e=>{
+    const lev=sk.lev[ai]||0, L=Math.max(1,lev), max=abStackMax(ab,L,e), raw=b.stk[e.id]||0, n=abStackN(ab,L,e,raw);
+    const ps=e.p.map(p=>({...p,v:abStackPer(ab,L,p,R.sp,R.boons)}));
+    const need=ps.every(p=>!p.v)&&ab.u.findIndex(u=>e.p.some(p=>(u.b||{})[p.k]));
+    const note=!lev?'Locked at this soul count, not counted':need>=0&&need!==false?`Needs the T${need+1} upgrade`:'';
+    return `<div class="srow2 ${lev?'':'off'}">${abIcon(ab,ai).replace('class="ic"','class="ic round"')}<div class="nm">${esc(ab.n)} <small>${esc(e.l)}${note?`. ${note}`:''}</small></div>
+      <div class="ctl">${stackCtl(e.id,e.l,raw,max,ab.n)}${n?`<span class="stks num">${esc(perSum(ps,n))}${raw>n?` (only ${n} count at this upgrade level)`:''}</span>`:''}</div></div>`;
+  }));
+  html+=`<div class="sgh">${esc(h.n)}'s abilities</div>`+(abRows.join('')||`<p class="empty">${esc(h.n)} has no stacking abilities.</p>`);
+  const tot=x=>{const c=b.pb[x.k]||[0,0,0]; return c.reduce((a,m,i)=>a+m*x.v[i],0);};
+  html+=`<div class="sgh">Permanent buffs</div><p class="muted" style="font-size:12px;margin:0 0 6px">From golden statues, Sinner's Sacrifice, the mid-boss, the Soul Urn and Golden Goose Egg. Level 2 buffs drop from 10 minutes, level 3 from 30.</p>
+    <div class="pbt"><span></span><span class="h">Lv 1</span><span class="h">Lv 2</span><span class="h">Lv 3</span><span class="h" style="text-align:right">Total</span>
+    ${D.pb.map(x=>`<span>${esc(x.l)} <small class="muted">(${x.v.map(v=>'+'+fmt(v,2)).join(' / ')}${esc(x.u)})</small></span>${[0,1,2].map(i=>`<input type="number" inputmode="numeric" min="0" max="99" class="num" value="${(b.pb[x.k]||[0,0,0])[i]}" data-pbin="${x.k},${i}" aria-label="${esc(x.l)} level ${i+1} buffs">`).join('')}<span class="tot num">${tot(x)?`+${fmt(tot(x),2)}${esc(x.u)}`:''}</span>`).join('')}</div>`;
+  $('#stacks').innerHTML=html;
+}
 function renderBuild(X){
   const {b,h,o,R}=X;
   let html=`<div class="inv">`+['W','V','S'].map(c=>{const iv=R.inv[c]; const sp=R.spentBy[c]; const nx=iv.next; const prev=h.inv[c].filter(t=>t[0]<=sp).pop();
@@ -661,7 +749,8 @@ function renderBuild(X){
         ${st}
         <button class="iconbtn" data-mv="${pi},${r.ii},-1" aria-label="Move up">${IC.up}</button>
         <button class="iconbtn" data-mv="${pi},${r.ii},1" aria-label="Move down">${IC.dn}</button>
-        <button class="iconbtn" data-rm="${pi},${r.ii}" aria-label="Remove">${IC.x}</button></div>`;});
+        <button class="iconbtn" data-rm="${pi},${r.ii}" aria-label="Remove">${IC.x}</button>
+        ${it.sk&&b.stk[it.id]?(n=>`<div class="stkrow"><span class="muted num">${n} ${esc(it.sk.l.toLowerCase())}:</span><span class="stks num">${esc(stackSum(it,n))}</span></div>`)(b.stk[it.id]):''}</div>`;});
     html+=`</div>`;
   });
   html+=`<button class="tbtn addphase" id="addPhase">Add category</button>`;
@@ -682,6 +771,7 @@ function renderAbil(X){
       <div class="abctl"><button data-sk="${ai},-1" ${planned?'':'disabled'} aria-label="Remove last ${esc(ab.n)} step">−</button><button data-sk="${ai},1" ${planned>=4?'disabled':''} aria-label="Add ${esc(ab.n)} step">+</button></div></div>
       <div class="abd">${esc(ab.d)}</div>
       <div class="props">${vals.map(v=>`<span>${esc(v.l)}</span><span class="pv num ${v.sp?'sp':''}">${v.note?`<small>${esc(v.note)}</small>`:''}${fmt(v.v,Math.abs(v.v)<10&&v.v%1?2:1)}${/^[a-z]{2}/i.test(v.u)?' ':''}${esc(v.u)}</span>`).join('')}</div>
+      ${lv?(ab.sk||[]).map(e=>{const n=abStackN(ab,lv,e,b.stk[e.id]); return n?`<div class="abd" style="margin:6px 0 0">With ${n} ${esc(e.l.toLowerCase())}: <span style="color:var(--text)">${esc(perSum(e.p.map(p=>({...p,v:abStackPer(ab,lv,p,R.sp,R.boons)})),n))}</span></div>`:'';}).join(''):''}
       <div class="ups">${ab.u.map((u,i)=>`<div class="up ${lv>i+1?'on':''}"><b>T${i+1}</b><span>${esc(u.d||autoUp(u))}<span class="muted"> (${UPCOST[i]} pt${UPCOST[i]>1?'s':''})</span></span></div>`).join('')}</div></div>`;
   }).join('')+`</div>`;
   $('#abil').innerHTML=html;
@@ -734,12 +824,12 @@ function openItem(id){
   // effect on hero: add item (replacing its components) vs current online items
   let held=X.o.held.slice(); let with_=held.filter(x=>!DOWN[id].has(x)); if(!with_.includes(id)) with_.push(id); else with_=held.filter(x=>x!==id);
   const act=Object.assign({},b.act);
-  const A=compute(X.h,X.lvl,held,act), Bz=compute(X.h,X.lvl,with_,act);
+  const A=compute(X.h,X.lvl,held,act,X.ctx), Bz=compute(X.h,X.lvl,with_,act,X.ctx);
   const sign=held.includes(id)?-1:1; // show "without it" if already held
   const diffs=STATS.map(([g,k,l,d,u,,dir])=>{const dv=(Bz[k]-A[k]); return Math.abs(dv)>1e-6?{g,l,d,u,dv,good:(dir===-1?-dv:dv)>0,v:Bz[k]}:null}).filter(Boolean);
   const secs=it.x.map(s=>{
     const nm=s.ty==='Innate'?'Passive stats':s.ty==='Active'?'Active':s.ty==='Passive'?'Passive effect':s.ty;
-    const rows=s.p.filter(p=>p.v!=null&&p.v!==0).map(p=>`<span>${esc(p.l)}${(p.c||s.ty!=='Innate')&&p.t?'<span class="cond">conditional</span>':''}</span><span class="pv num">${p.v>0&&s.ty==='Innate'?'+':''}${fmt(p.v,2)}${esc(p.u)}</span>`).join('');
+    const rows=s.p.filter(p=>p.v!=null&&p.v!==0).map(p=>`<span>${esc(p.l)}${p.stk?'<span class="cond">per stack</span>':(p.c||s.ty!=='Innate')&&p.t?'<span class="cond">conditional</span>':''}</span><span class="pv num">${p.v>0&&s.ty==='Innate'?'+':''}${fmt(p.v,2)}${esc(p.u)}</span>`).join('');
     return `<div class="sec"><h4>${nm}</h4>${(s.tx||[]).map(t=>`<p>${esc(t)}</p>`).join('')}${rows?`<div class="props">${rows}</div>`:''}</div>`;
   }).join('');
   const chipsFor=ids=>ids.map(c=>{const x=ITEMS[c]; return x?`<button class="chip c${x.s}" data-item="${c}">${itemIcon(x)}${esc(x.n)}</button>`:''}).join('');
@@ -750,6 +840,9 @@ function openItem(id){
     <div class="cb">
       ${it.d?`<p style="margin:0">${esc(it.d)}</p>`:''}
       ${secs}
+      ${it.sk?(n=>`<div class="sec"><h4>Stacks</h4><div class="props">${stackPer(it)}</div>
+        ${inB?`<div class="cf" style="margin-top:8px">${stackCtl(id,it.sk.l,n,it.sk.max,it.n)}<span class="muted">${esc(it.sk.l)}</span></div>${n?`<p class="num" style="margin:6px 0 0">${esc(stackSum(it,n))}${b.on[id]?'':'. Counts once the item is online'}</p>`:''}`
+          :`<p class="muted" style="margin:6px 0 0">Add it to your build to set how many ${esc(it.sk.l.toLowerCase())} to count.</p>`}</div>`)(b.stk[id]||0):''}
       ${it.cp&&it.cp.length?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Built from</div><div class="chips">${chipsFor(it.cp)}</div></div>`:''}
       ${INTO[id]?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Upgrades into</div><div class="chips">${chipsFor(INTO[id])}</div></div>`:''}
       <div class="sec" style="--c:var(--brass)"><h4>${sign>0?`Adding this to ${esc(X.h.n)} at level ${X.lvl}`:`Removing this from your current loadout`}</h4>
@@ -859,7 +952,9 @@ function loadTL(mode,kind){
   b.phases=phases; b.on=on; b.notes=notes; if(skill) b.skill=skill; b.t=Date.now(); tidy(b);
   closeSheet(); renderAll(); toast(`Loaded ${allItems(b).length} items from Tracklock, ${onCount(b)} online`);
 }
-document.addEventListener('change',e=>{ if(e.target.id==='tlThr'){ openTL.thr=+e.target.value; openTL(); } });
+document.addEventListener('change',e=>{ if(e.target.id==='tlThr'){ openTL.thr=+e.target.value; openTL(); } if(e.target.dataset.stkin) setStacks(e.target.dataset.stkin,e.target.value);
+  if(e.target.dataset.pbin){ const [k,i]=e.target.dataset.pbin.split(','); const b=B(); const c=(b.pb[k]||[0,0,0]).slice(); c[+i]=Math.max(0,Math.min(99,Math.round(+e.target.value||0))); b.pb[k]=c; touch(); renderAll(); }
+});
 
 /* ---------- hero picker & library ---------- */
 function openHeroes(){
@@ -883,12 +978,12 @@ function openLib(){
   </div></div>`);
   document.querySelectorAll('#sheet .lrow .ic').forEach((el,i)=>el.style.background=heroCol(HEROES[list[i].hero]));
 }
-function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),on:Object.keys(b.on).filter(k=>b.on[k]),no:b.notes};
+function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),k:b.stk,pb:b.pb,on:Object.keys(b.on).filter(k=>b.on[k]),no:b.notes};
   return 'DLB1:'+btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
 function decode(code){const s=code.trim().replace(/^DLB1:/,''); const o=JSON.parse(decodeURIComponent(escape(atob(s))));
   if(!HEROES[o.h]) throw new Error('Unknown hero');
   const b=blank(o.h); b.name=String(o.n||b.name).slice(0,60); b.phases=(o.p||[]).map(([n,it])=>({n:String(n).slice(0,40),items:(it||[]).filter(x=>ITEMS[x])})); if(!b.phases.length)b.phases=blank(o.h).phases;
-  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true);
+  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true); if(o.k&&typeof o.k==='object') b.stk=o.k; if(o.pb&&typeof o.pb==='object') b.pb=o.pb;
   if(Array.isArray(o.on)) o.on.forEach(k=>b.on[k]=true); else delete b.on; // older codes: tidy switches the first 12 online
   b.notes=String(o.no||''); return tidy(b);}
 function openShare(){
@@ -912,7 +1007,12 @@ function addItem(id,pi){
   touch(); renderAll();
   toast(r.err?`Added ${it.n} offline. ${r.err}`:r.comps.length?`Added ${it.n}. ${upMsg(r,id)}`:`Added ${it.n}`);
 }
-function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; delete b.on[id]; touch(); renderAll();}
+function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; delete b.on[id]; delete b.stk[id]; touch(); renderAll();}
+function setStacks(id,n){
+  const b=B(); n=clampStk(id,n); if(n) b.stk[id]=n; else delete b.stk[id];
+  touch(); renderAll();
+  if(ITEMS[id]&&$('#sheet').classList.contains('open')&&$('#sheet [data-stkin]')) openItem(id); // refresh the item sheet's numbers
+}
 function toggleOn(id){
   const b=B();
   if(b.on[id]) delete b.on[id];
@@ -934,6 +1034,7 @@ document.addEventListener('click',e=>{
   const t=e.target.closest('button,[data-item],[data-open],[data-stat]'); if(!t) { if(e.target===$('#sheet')) closeSheet(); return; }
   const d=t.dataset;
   if(d.quick){ e.stopPropagation(); addItem(d.quick); return; }
+  if(d.stk){ const [id,dd]=d.stk.split(','); setStacks(id,(B().stk[id]||0)+(+dd)); return; }
   if(d.on){ toggleOn(d.on); if(d.closeAfter!==undefined) closeSheet(); return; }
   if(d.close!==undefined){ closeSheet(); return; }
   if(d.addItem){ addItem(d.addItem, +($('#addTo')?.value||0)); closeSheet(); return; }
