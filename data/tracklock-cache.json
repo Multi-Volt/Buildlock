@@ -3,7 +3,7 @@
   "hero": "hero_atlas",
   "name": "Abrams",
   "slug": "abrams",
-  "fetchedAt": 1790452098422,
+  "fetchedAt": 1790452264284,
   "pro": {
    "wr": 57.9,
    "g": 171,
@@ -197,7 +197,7 @@
   "hero": "hero_fencer",
   "name": "Apollo",
   "slug": "apollo",
-  "fetchedAt": 1790452101348,
+  "fetchedAt": 1790452266958,
   "pro": {
    "wr": 59.1,
    "g": 171,
@@ -388,7 +388,7 @@
   "hero": "hero_bebop",
   "name": "Bebop",
   "slug": "bebop",
-  "fetchedAt": 1790452104333,
+  "fetchedAt": 1790452269938,
   "pro": {
    "wr": 62.6,
    "g": 195,
@@ -589,7 +589,7 @@
   "hero": "hero_punkgoat",
   "name": "Billy",
   "slug": "billy",
-  "fetchedAt": 1790452107601,
+  "fetchedAt": 1790452272961,
   "pro": {
    "wr": 73,
    "g": 89,
@@ -789,7 +789,7 @@
   "hero": "hero_nano",
   "name": "Calico",
   "slug": "calico",
-  "fetchedAt": 1790452110474,
+  "fetchedAt": 1790452276704,
   "pro": {
    "wr": 46.7,
    "g": 197,
@@ -979,7 +979,7 @@
   "hero": "hero_unicorn",
   "name": "Celeste",
   "slug": "celeste",
-  "fetchedAt": 1790452113339,
+  "fetchedAt": 1790452278961,
   "pro": {
    "wr": 58.9,
    "g": 151,
@@ -1172,7 +1172,7 @@
   "hero": "hero_drifter",
   "name": "Drifter",
   "slug": "drifter",
-  "fetchedAt": 1790452116328,
+  "fetchedAt": 1790452281920,
   "pro": {
    "wr": 61.7,
    "g": 154,
@@ -1364,7 +1364,7 @@
   "hero": "hero_dynamo",
   "name": "Dynamo",
   "slug": "dynamo",
-  "fetchedAt": 1790452119347,
+  "fetchedAt": 1790452284943,
   "pro": {
    "wr": 67.2,
    "g": 116,
@@ -1556,7 +1556,7 @@
   "hero": "hero_necro",
   "name": "Graves",
   "slug": "graves",
-  "fetchedAt": 1790452122383,
+  "fetchedAt": 1790452287959,
   "pro": {
    "wr": 77.1,
    "g": 35,
@@ -1753,7 +1753,7 @@
   "hero": "hero_orion",
   "name": "Grey Talon",
   "slug": "grey-talon",
-  "fetchedAt": 1790452125333,
+  "fetchedAt": 1790452290905,
   "pro": {
    "wr": 58.2,
    "g": 79,
@@ -1937,7 +1937,7 @@
   "hero": "hero_haze",
   "name": "Haze",
   "slug": "haze",
-  "fetchedAt": 1790452128307,
+  "fetchedAt": 1790452293949,
   "pro": {
    "wr": 62.9,
    "g": 197,
@@ -2128,7 +2128,7 @@
   "hero": "hero_astro",
   "name": "Holliday",
   "slug": "holliday",
-  "fetchedAt": 1790452131623,
+  "fetchedAt": 1790452297136,
   "pro": {
    "wr": 52.4,
    "g": 103,
@@ -2324,7 +2324,7 @@
   "hero": "hero_inferno",
   "name": "Infernus",
   "slug": "infernus",
-  "fetchedAt": 1790452134495,
+  "fetchedAt": 1790452299950,
   "pro": {
    "wr": 65.5,
    "g": 165,
@@ -2515,7 +2515,7 @@
   "hero": "hero_tengu",
   "name": "Ivy",
   "slug": "ivy",
-  "fetchedAt": 1790452137505,
+  "fetchedAt": 1790452303032,
   "pro": {
    "wr": 58.8,
    "g": 97,
@@ -2703,7 +2703,7 @@
   "hero": "hero_kelvin",
   "name": "Kelvin",
   "slug": "kelvin",
-  "fetchedAt": 1790452140491,
+  "fetchedAt": 1790452305929,
   "pro": {
    "wr": 65.2,
    "g": 23,
@@ -2897,7 +2897,7 @@
   "hero": "hero_ghost",
   "name": "Lady Geist",
   "slug": "lady-geist",
-  "fetchedAt": 1790452143541,
+  "fetchedAt": 1790452308930,
   "pro": {
    "wr": 55.6,
    "g": 99,
@@ -3089,7 +3089,7 @@
   "hero": "hero_lash",
   "name": "Lash",
   "slug": "lash",
-  "fetchedAt": 1790452146527,
+  "fetchedAt": 1790452311952,
   "pro": {
    "wr": 61.4,
    "g": 220,
@@ -3283,7 +3283,7 @@
   "hero": "hero_forge",
   "name": "McGinnis",
   "slug": "mcginnis",
-  "fetchedAt": 1790452150019,
+  "fetchedAt": 1790452314968,
   "pro": {
    "wr": 68.8,
    "g": 32,
@@ -3468,7 +3468,7 @@
   "hero": "hero_vampirebat",
   "name": "Mina",
   "slug": "mina",
-  "fetchedAt": 1790452152521,
+  "fetchedAt": 1790452317914,
   "pro": {
    "wr": 61,
    "g": 182,
@@ -3652,7 +3652,7 @@
   "hero": "hero_mirage",
   "name": "Mirage",
   "slug": "mirage",
-  "fetchedAt": 1790452155532,
+  "fetchedAt": 1790452320986,
   "pro": {
    "wr": 59.5,
    "g": 205,
@@ -3841,7 +3841,7 @@
   "hero": "hero_krill",
   "name": "Mo & Krill",
   "slug": "mo-and-krill",
-  "fetchedAt": 1790452158541,
+  "fetchedAt": 1790452323991,
   "pro": {
    "wr": 67.2,
    "g": 131,
@@ -4036,7 +4036,7 @@
   "hero": "hero_bookworm",
   "name": "Paige",
   "slug": "paige",
-  "fetchedAt": 1790452161487,
+  "fetchedAt": 1790452326923,
   "pro": {
    "wr": 72.5,
    "g": 40,
@@ -4228,7 +4228,7 @@
   "hero": "hero_chrono",
   "name": "Paradox",
   "slug": "paradox",
-  "fetchedAt": 1790452164592,
+  "fetchedAt": 1790452329945,
   "pro": {
    "wr": 59.4,
    "g": 276,
@@ -4417,7 +4417,7 @@
   "hero": "hero_synth",
   "name": "Pocket",
   "slug": "pocket",
-  "fetchedAt": 1790452167508,
+  "fetchedAt": 1790452333008,
   "pro": {
    "wr": 59.5,
    "g": 116,
@@ -4602,7 +4602,7 @@
   "hero": "hero_familiar",
   "name": "Rem",
   "slug": "rem",
-  "fetchedAt": 1790452171233,
+  "fetchedAt": 1790452335946,
   "pro": {
    "wr": 73.8,
    "g": 61,
@@ -4804,7 +4804,7 @@
   "hero": "hero_gigawatt",
   "name": "Seven",
   "slug": "seven",
-  "fetchedAt": 1790452173523,
+  "fetchedAt": 1790452338936,
   "pro": {
    "wr": 52.4,
    "g": 21,
@@ -4996,7 +4996,7 @@
   "hero": "hero_shiv",
   "name": "Shiv",
   "slug": "shiv",
-  "fetchedAt": 1790452176495,
+  "fetchedAt": 1790452342780,
   "pro": {
    "wr": 57.3,
    "g": 239,
@@ -5188,7 +5188,7 @@
   "hero": "hero_werewolf",
   "name": "Silver",
   "slug": "silver",
-  "fetchedAt": 1790452184039,
+  "fetchedAt": 1790452345734,
   "pro": {
    "wr": 56.9,
    "g": 211,
@@ -5391,7 +5391,7 @@
   "hero": "hero_magician",
   "name": "Sinclair",
   "slug": "sinclair",
-  "fetchedAt": 1790452193614,
+  "fetchedAt": 1790452348737,
   "pro": {
    "wr": 64.8,
    "g": 125,
@@ -5595,7 +5595,7 @@
   "hero": "hero_doorman",
   "name": "The Doorman",
   "slug": "the-doorman",
-  "fetchedAt": 1790452198066,
+  "fetchedAt": 1790452351836,
   "pro": {
    "wr": 52.8,
    "g": 53,
@@ -5790,7 +5790,7 @@
   "hero": "hero_priest",
   "name": "Venator",
   "slug": "venator",
-  "fetchedAt": 1790452202917,
+  "fetchedAt": 1790452355493,
   "pro": {
    "wr": 58.1,
    "g": 241,
@@ -5986,7 +5986,7 @@
   "hero": "hero_frank",
   "name": "Victor",
   "slug": "victor",
-  "fetchedAt": 1790452207512,
+  "fetchedAt": 1790452357792,
   "pro": {
    "wr": 57.6,
    "g": 33,
@@ -6176,7 +6176,7 @@
   "hero": "hero_hornet",
   "name": "Vindicta",
   "slug": "vindicta",
-  "fetchedAt": 1790452210612,
+  "fetchedAt": 1790452360755,
   "pro": {
    "wr": 60,
    "g": 155,
@@ -6370,7 +6370,7 @@
   "hero": "hero_viscous",
   "name": "Viscous",
   "slug": "viscous",
-  "fetchedAt": 1790452215798,
+  "fetchedAt": 1790452363804,
   "pro": {
    "wr": 65.9,
    "g": 129,
@@ -6568,7 +6568,7 @@
   "hero": "hero_viper",
   "name": "Vyper",
   "slug": "vyper",
-  "fetchedAt": 1790452217533,
+  "fetchedAt": 1790452366711,
   "pro": {
    "wr": 64.3,
    "g": 129,
@@ -6757,7 +6757,7 @@
   "hero": "hero_warden",
   "name": "Warden",
   "slug": "warden",
-  "fetchedAt": 1790452220458,
+  "fetchedAt": 1790452369977,
   "pro": {
    "wr": 67.9,
    "g": 212,
@@ -6867,16 +6867,94 @@
    },
    "unknown": []
   },
-  "build": null,
-  "errors": [
-   "Stats build: Could not find the core build on the build page (tracklock may have changed its layout)"
-  ]
+  "build": {
+   "wr": 48,
+   "matches": 119,
+   "core": [
+    "upgrade_high_velocity_mag",
+    "upgrade_pristine_emblem",
+    "upgrade_rapid_rounds",
+    "upgrade_titan_round",
+    "upgrade_blitz_bullets",
+    "upgrade_regenerating_bullet_shield",
+    "upgrade_quick_silver",
+    "upgrade_cardio_calibrator",
+    "upgrade_bullet_resist_shredder",
+    "upgrade_fleetfoot_boots",
+    "upgrade_ethereal_bullets",
+    "upgrade_health_stealing_magic",
+    "upgrade_tech_overflow"
+   ],
+   "early": [
+    "upgrade_clip_size",
+    "upgrade_non_player_bonus",
+    "upgrade_endurance",
+    "upgrade_sprint_booster",
+    "upgrade_intensifying_clip",
+    "upgrade_kinetic_sash",
+    "upgrade_containment",
+    "upgrade_soaring_spirit"
+   ],
+   "late": [
+    "upgrade_siphon_bullets",
+    "upgrade_berserker",
+    "upgrade_magic_storm",
+    "upgrade_boundless_spirit"
+   ],
+   "defensive": [
+    "upgrade_tech_purge",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_chonky",
+    "upgrade_metal_skin",
+    "upgrade_deflecting_armor"
+   ],
+   "counters": [
+    "upgrade_tech_purge",
+    "upgrade_absorbing_armor",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_debuff_reducer",
+    "upgrade_metal_skin",
+    "upgrade_deflecting_armor",
+    "upgrade_counterspell",
+    "upgrade_proc_silence",
+    "upgrade_healbane",
+    "upgrade_toxic_bullets",
+    "upgrade_inhibitor",
+    "upgrade_juggernaut",
+    "upgrade_unstoppable"
+   ],
+   "actives": [
+    "upgrade_containment",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_metal_skin",
+    "upgrade_blood_tribute",
+    "upgrade_unstoppable",
+    "upgrade_surging_power",
+    "upgrade_non_player_bonus_sacrifice",
+    "upgrade_fleetfoot_boots",
+    "upgrade_titan_round",
+    "upgrade_ethereal_bullets",
+    "upgrade_blitz_bullets",
+    "upgrade_tech_purge",
+    "upgrade_regenerating_bullet_shield",
+    "upgrade_tech_overflow",
+    "upgrade_cardio_calibrator",
+    "upgrade_bullet_resist_shredder"
+   ],
+   "unlock": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  "errors": []
  },
  "hero_wraith": {
   "hero": "hero_wraith",
   "name": "Wraith",
   "slug": "wraith",
-  "fetchedAt": 1790452223739,
+  "fetchedAt": 1790452372691,
   "pro": {
    "wr": 57.3,
    "g": 82,
@@ -7069,7 +7147,7 @@
   "hero": "hero_yamato",
   "name": "Yamato",
   "slug": "yamato",
-  "fetchedAt": 1790452228243,
+  "fetchedAt": 1790452375818,
   "pro": {
    "wr": 55.7,
    "g": 287,
