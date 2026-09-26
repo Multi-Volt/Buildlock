@@ -1,5 +1,7 @@
 # Buildlock
 
+**Disclaimer:** A large portion of this project was written using AI programming tools. If you do not like that sort of thing feel free to ignore this project, it is not for you!
+
 A Deadlock build planner that runs for free on GitHub Pages. A scheduled GitHub Action refreshes every hero's Tracklock builds every 6 hours.
 
 - Plan builds for any hero, arranged in phases (early, mid, late).
