@@ -176,6 +176,12 @@ main{display:grid; gap:14px; padding:14px 16px 90px; grid-template-columns:minma
 .iconbtn:hover{border-color:var(--line2); color:var(--text)}
 .iconbtn svg{width:15px; height:15px}
 .brow{display:flex; flex-wrap:wrap; align-items:center; gap:9px; padding:6px 4px; border-bottom:1px solid var(--line)}
+.imbsel{font:inherit; font-size:11.5px; padding:2px 4px; border-radius:10px; border:1px solid var(--line2); background:var(--bg2,transparent); color:var(--muted); max-width:150px}
+.imbw{display:contents}
+@media (max-width:520px){ .imbw{display:block; order:9; flex-basis:100%; padding-left:47px} .imbw .imbsel{max-width:none} .stkrow{order:10} }
+.imbs{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 2px}
+.imbs .chip small{color:var(--muted); margin-left:4px}
+.imbs .chip.off{opacity:.55}
 .stkrow{flex-basis:100%; display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; padding-left:47px; font-size:12.5px}
 .stk{display:inline-flex; align-items:center; gap:3px}
 .stk .iconbtn{width:24px; height:24px; border-color:var(--line2); font-weight:700}
@@ -432,7 +438,7 @@ let S;
 function blank(heroId){
   const h=HEROES[heroId];
   return {id:'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:`${h.n} build`,hero:heroId,
-    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},on:{},stk:{},pb:{},notes:'',t:Date.now()};
+    phases:[{n:'Early game',items:[]},{n:'Mid game',items:[]},{n:'Late game',items:[]}],skill:[],act:{},on:{},stk:{},pb:{},imb:{},notes:'',t:Date.now()};
 }
 const allItems=b=>b.phases.flatMap(p=>p.items);
 const onCount=b=>allItems(b).filter(id=>b.on[id]).length;
@@ -458,6 +464,8 @@ function tidy(b){
   b.act=Object.fromEntries(Object.keys(b.act||{}).filter(id=>b.act[id]&&ids.includes(id)).map(id=>[id,true]));
   const heroStk=new Set((HEROES[b.hero]?HEROES[b.hero].ab:[]).flatMap(ab=>(ab.sk||[]).map(e=>e.id)));
   b.stk=Object.fromEntries(Object.entries(b.stk||{}).filter(([id])=>STK[id]&&(ITEMS[id]?ids.includes(id):heroStk.has(id))).map(([id,n])=>[id,clampStk(id,n)]).filter(([,n])=>n>0));
+  const abs=HEROES[b.hero]?HEROES[b.hero].ab:[];
+  b.imb=Object.fromEntries(Object.entries(b.imb||{}).filter(([id,ai])=>ITEMS[id]&&ITEMS[id].imb&&ids.includes(id)&&abs[ai]&&!(ITEMS[id].imb===2&&abs[ai].ult)));
   b.pb=Object.fromEntries(D.pb.map(x=>[x.k,[0,1,2].map(i=>Math.max(0,Math.min(99,Math.round(+((b.pb||{})[x.k]||[])[i]||0))))]).filter(([,c])=>c.some(Boolean)));
   return b;
 }
@@ -506,7 +514,7 @@ function compute(h,lvl,held,act,ctx={}){
   const add=(t,v,s)=>{ if(!v) return; (T[t]=T[t]||[]).push(v); (src[t]=src[t]||[]).push([s,v]); };
   const spentBy={W:0,V:0,S:0};
   held.forEach(id=>{const it=ITEMS[id]; spentBy[it.s]+=it.c;
-    it.x.forEach(sec=>sec.p.forEach(p=>{ if(!p.t||p.v==null||p.stk) return;
+    it.x.forEach(sec=>sec.p.forEach(p=>{ if(!p.t||p.v==null||p.stk||p.im) return; // imbue-only props apply to one ability, see imbueR
       const on= sec.ty==='Innate' ? (!p.c || act[id]) : !!act[id];
       if(on) add(p.t,p.v,it.n+(sec.ty!=='Innate'||p.c?' (active)':''));
     }));
@@ -611,6 +619,19 @@ function skillState(h,b,lvl,sandbox){
   });
   return {lev,uU,uP,L,steps};
 }
+// Online items imbued into ability ai: [{id, props}] where props apply only to that ability.
+const imbuesOf=(b,held,ai)=>held.filter(id=>b.imb[id]===ai).map(id=>({id,props:ITEMS[id].x.flatMap(s=>s.p.filter(p=>p.im&&p.t&&p.v))}));
+function imbueR(R,imbs){
+  const props=imbs.flatMap(x=>x.props); if(!props.length) return R;
+  const r=Object.assign({},R); const spPct=(R.T.TECH_POWER_PERCENT||[]).reduce((a,v)=>a+v,0);
+  props.forEach(p=>{
+    if(p.t==='TECH_POWER') r.sp+=p.v*(1+spPct/100);
+    else if(p.t==='COOLDOWN_REDUCTION_PERCENTAGE') r.cdr=100-(100-r.cdr)*(1-p.v/100);
+    else if(p.t==='BONUS_ABILITY_DURATION_PERCENTAGE') r.dur+=p.v;
+    else if(p.t==='TECH_RANGE_PERCENT'||p.t==='TECH_RADIUS_PERCENT') r.rng+=p.v;
+  });
+  return r;
+}
 function abilityVals(ab,lv,R){
   const out=[]; if(lv<1) lv=1;
   const ups=ab.u.slice(0,lv-1);
@@ -689,7 +710,7 @@ function renderShop(X){
   $('#shop').innerHTML=html||'<p class="empty">No items match that search.</p>';
 }
 const IC={up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg>',dn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>',x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
-const hasAct=it=>it.x.some(s=>s.p.some(p=>p.t&&!p.stk&&(s.ty!=='Innate'||p.c)));
+const hasAct=it=>it.x.some(s=>s.p.some(p=>p.t&&!p.stk&&!p.im&&(s.ty!=='Innate'||p.c)));
 /* ---------- stacks ---------- */
 const unitStr=u=>u&&!/^[a-z]/i.test(u)?u:u?' '+u:'';
 // ps: [{l,u,v,t,pow}] with v per stack
@@ -701,6 +722,11 @@ function stackCtl(id,label,n,max,name){
   return `<span class="stk"><button class="iconbtn" data-stk="${esc(id)},-1" aria-label="Fewer ${esc(label.toLowerCase())}" ${n<=0?'disabled':''}>−</button><input type="number" inputmode="numeric" class="num" min="0" ${max!=null?`max="${max}"`:''} value="${n}" data-stkin="${esc(id)}" aria-label="${esc(name)}: ${esc(label.toLowerCase())}"><button class="iconbtn" data-stk="${esc(id)},1" aria-label="More ${esc(label.toLowerCase())}" ${max!=null&&n>=max?'disabled':''}>+</button>
     <span class="muted">${max!=null?`max ${max}`:'no cap'}</span></span>`;
 }
+function imbueSel(b,h,id){
+  const it=ITEMS[id]; const cur=b.imb[id];
+  return `<select class="imbsel" data-imb="${id}" aria-label="Ability to imbue with ${esc(it.n)}"><option value="">Imbue: none</option>${h.ab.map((ab,ai)=>it.imb===2&&ab.ult?'':`<option value="${ai}" ${cur===ai?'selected':''}>Imbue: ${esc(ab.n)}</option>`).join('')}</select>`;
+}
+function setImbue(id,v){ const b=B(); if(v===''||v==null) delete b.imb[id]; else b.imb[id]=+v; touch(); renderAll(); if($('#sheet').classList.contains('open')&&$('#sheet [data-imb]')) openItem(id); }
 function renderStacks(X){
   const {b,h,sk,R}=X; let html='';
   const items=allItems(b).filter(id=>ITEMS[id].sk);
@@ -746,6 +772,7 @@ function renderBuild(X){
       html+=`<div class="brow c${it.s} ${r.on?'':'off'}">
         ${itemIcon(it)}<div class="bi" data-item="${it.id}" role="button" tabindex="0"><div class="bn">${esc(it.n)}</div><div class="bs num">${fmt(it.c)} souls</div></div>
         ${hasAct(it)?`<button class="actt" data-act="${it.id}" aria-pressed="${!!b.act[it.id]}" title="Count active and conditional effects in stats">${b.act[it.id]?'Active on':'Active off'}</button>`:''}
+        ${it.imb?`<span class="imbw">${imbueSel(b,h,it.id)}</span>`:''}
         ${st}
         <button class="iconbtn" data-mv="${pi},${r.ii},-1" aria-label="Move up">${IC.up}</button>
         <button class="iconbtn" data-mv="${pi},${r.ii},1" aria-label="Move down">${IC.dn}</button>
@@ -765,11 +792,13 @@ function renderAbil(X){
     :'<span class="empty">Use + on an ability to add unlocks and upgrades to your skill order. They switch on as your souls reach each level.</span>'}</div>`;
   html+=`<div class="abgrid">`+h.ab.map((ab,ai)=>{
     const lv=sk.lev[ai]; const planned=b.skill.filter(x=>x===ai).length;
-    const vals=abilityVals(ab,lv,R);
+    const imbs=imbuesOf(b,X.o.held,ai), offImb=allItems(b).filter(id=>b.imb[id]===ai&&!b.on[id]);
+    const vals=abilityVals(ab,lv,imbueR(R,imbs));
     const pips=[0,1,2,3].map(i=>`<span class="pip ${i===0?'u':''} ${lv>i?'on':''}"></span>`).join('');
     return `<div class="ab"><div class="abh">${abIcon(ab,ai)}<div><div class="abn">${esc(ab.n)}</div><div class="abk">${ab.ult?'Ultimate':'Ability '+(ai+1)}${lv===0?', locked':lv===1?', unlocked':', upgrade '+(lv-1)}</div><div class="pips">${pips}</div></div>
       <div class="abctl"><button data-sk="${ai},-1" ${planned?'':'disabled'} aria-label="Remove last ${esc(ab.n)} step">−</button><button data-sk="${ai},1" ${planned>=4?'disabled':''} aria-label="Add ${esc(ab.n)} step">+</button></div></div>
       <div class="abd">${esc(ab.d)}</div>
+      ${imbs.length||offImb.length?`<div class="imbs">${imbs.map(x=>`<button class="chip c${ITEMS[x.id].s}" data-item="${x.id}">${itemIcon(ITEMS[x.id])}${esc(ITEMS[x.id].n)}${x.props.length?`<small>${x.props.map(p=>`${sgn(p.v,2)}${esc(p.u)} ${esc(p.l.replace(/^Imbued Ability /,''))}`).join(', ')}</small>`:''}</button>`).join('')}${offImb.map(id=>`<button class="chip off" data-item="${id}" title="Offline, not counted">${itemIcon(ITEMS[id])}${esc(ITEMS[id].n)}<small>offline</small></button>`).join('')}</div>`:''}
       <div class="props">${vals.map(v=>`<span>${esc(v.l)}</span><span class="pv num ${v.sp?'sp':''}">${v.note?`<small>${esc(v.note)}</small>`:''}${fmt(v.v,Math.abs(v.v)<10&&v.v%1?2:1)}${/^[a-z]{2}/i.test(v.u)?' ':''}${esc(v.u)}</span>`).join('')}</div>
       ${lv?(ab.sk||[]).map(e=>{const n=abStackN(ab,lv,e,b.stk[e.id]); return n?`<div class="abd" style="margin:6px 0 0">With ${n} ${esc(e.l.toLowerCase())}: <span style="color:var(--text)">${esc(perSum(e.p.map(p=>({...p,v:abStackPer(ab,lv,p,R.sp,R.boons)})),n))}</span></div>`:'';}).join(''):''}
       <div class="ups">${ab.u.map((u,i)=>`<div class="up ${lv>i+1?'on':''}"><b>T${i+1}</b><span>${esc(u.d||autoUp(u))}<span class="muted"> (${UPCOST[i]} pt${UPCOST[i]>1?'s':''})</span></span></div>`).join('')}</div></div>`;
@@ -829,7 +858,7 @@ function openItem(id){
   const diffs=STATS.map(([g,k,l,d,u,,dir])=>{const dv=(Bz[k]-A[k]); return Math.abs(dv)>1e-6?{g,l,d,u,dv,good:(dir===-1?-dv:dv)>0,v:Bz[k]}:null}).filter(Boolean);
   const secs=it.x.map(s=>{
     const nm=s.ty==='Innate'?'Passive stats':s.ty==='Active'?'Active':s.ty==='Passive'?'Passive effect':s.ty;
-    const rows=s.p.filter(p=>p.v!=null&&p.v!==0).map(p=>`<span>${esc(p.l)}${p.stk?'<span class="cond">per stack</span>':(p.c||s.ty!=='Innate')&&p.t?'<span class="cond">conditional</span>':''}</span><span class="pv num">${p.v>0&&s.ty==='Innate'?'+':''}${fmt(p.v,2)}${esc(p.u)}</span>`).join('');
+    const rows=s.p.filter(p=>p.v!=null&&p.v!==0).map(p=>`<span>${esc(p.l)}${p.im?'<span class="cond">imbued ability</span>':p.stk?'<span class="cond">per stack</span>':(p.c||s.ty!=='Innate')&&p.t?'<span class="cond">conditional</span>':''}</span><span class="pv num">${p.v>0&&s.ty==='Innate'?'+':''}${fmt(p.v,2)}${esc(p.u)}</span>`).join('');
     return `<div class="sec"><h4>${nm}</h4>${(s.tx||[]).map(t=>`<p>${esc(t)}</p>`).join('')}${rows?`<div class="props">${rows}</div>`:''}</div>`;
   }).join('');
   const chipsFor=ids=>ids.map(c=>{const x=ITEMS[c]; return x?`<button class="chip c${x.s}" data-item="${c}">${itemIcon(x)}${esc(x.n)}</button>`:''}).join('');
@@ -843,6 +872,8 @@ function openItem(id){
       ${it.sk?(n=>`<div class="sec"><h4>Stacks</h4><div class="props">${stackPer(it)}</div>
         ${inB?`<div class="cf" style="margin-top:8px">${stackCtl(id,it.sk.l,n,it.sk.max,it.n)}<span class="muted">${esc(it.sk.l)}</span></div>${n?`<p class="num" style="margin:6px 0 0">${esc(stackSum(it,n))}${b.on[id]?'':'. Counts once the item is online'}</p>`:''}`
           :`<p class="muted" style="margin:6px 0 0">Add it to your build to set how many ${esc(it.sk.l.toLowerCase())} to count.</p>`}</div>`)(b.stk[id]||0):''}
+      ${it.imb?`<div class="sec"><h4>Imbue</h4><p class="muted" style="margin:0 0 6px">${it.imb===2?'Imbues one of your non-ultimate abilities.':'Imbues one of your abilities.'} Effects marked "imbued ability" apply to that ability only, and show on its card.</p>
+        ${inB?imbueSel(b,X.h,id):`<p class="muted" style="margin:0">Add it to your build to choose the ability.</p>`}</div>`:''}
       ${it.cp&&it.cp.length?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Built from</div><div class="chips">${chipsFor(it.cp)}</div></div>`:''}
       ${INTO[id]?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Upgrades into</div><div class="chips">${chipsFor(INTO[id])}</div></div>`:''}
       <div class="sec" style="--c:var(--brass)"><h4>${sign>0?`Adding this to ${esc(X.h.n)} at level ${X.lvl}`:`Removing this from your current loadout`}</h4>
@@ -952,7 +983,7 @@ function loadTL(mode,kind){
   b.phases=phases; b.on=on; b.notes=notes; if(skill) b.skill=skill; b.t=Date.now(); tidy(b);
   closeSheet(); renderAll(); toast(`Loaded ${allItems(b).length} items from Tracklock, ${onCount(b)} online`);
 }
-document.addEventListener('change',e=>{ if(e.target.id==='tlThr'){ openTL.thr=+e.target.value; openTL(); } if(e.target.dataset.stkin) setStacks(e.target.dataset.stkin,e.target.value);
+document.addEventListener('change',e=>{ if(e.target.id==='tlThr'){ openTL.thr=+e.target.value; openTL(); } if(e.target.dataset.stkin) setStacks(e.target.dataset.stkin,e.target.value); if(e.target.dataset.imb) setImbue(e.target.dataset.imb,e.target.value);
   if(e.target.dataset.pbin){ const [k,i]=e.target.dataset.pbin.split(','); const b=B(); const c=(b.pb[k]||[0,0,0]).slice(); c[+i]=Math.max(0,Math.min(99,Math.round(+e.target.value||0))); b.pb[k]=c; touch(); renderAll(); }
 });
 
@@ -978,12 +1009,12 @@ function openLib(){
   </div></div>`);
   document.querySelectorAll('#sheet .lrow .ic').forEach((el,i)=>el.style.background=heroCol(HEROES[list[i].hero]));
 }
-function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),k:b.stk,pb:b.pb,on:Object.keys(b.on).filter(k=>b.on[k]),no:b.notes};
+function encode(b){const o={v:1,n:b.name,h:b.hero,p:b.phases.map(p=>[p.n,p.items]),s:b.skill,a:Object.keys(b.act).filter(k=>b.act[k]),k:b.stk,pb:b.pb,i:b.imb,on:Object.keys(b.on).filter(k=>b.on[k]),no:b.notes};
   return 'DLB1:'+btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
 function decode(code){const s=code.trim().replace(/^DLB1:/,''); const o=JSON.parse(decodeURIComponent(escape(atob(s))));
   if(!HEROES[o.h]) throw new Error('Unknown hero');
   const b=blank(o.h); b.name=String(o.n||b.name).slice(0,60); b.phases=(o.p||[]).map(([n,it])=>({n:String(n).slice(0,40),items:(it||[]).filter(x=>ITEMS[x])})); if(!b.phases.length)b.phases=blank(o.h).phases;
-  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true); if(o.k&&typeof o.k==='object') b.stk=o.k; if(o.pb&&typeof o.pb==='object') b.pb=o.pb;
+  b.skill=(o.s||[]).filter(x=>x>=0&&x<4); (o.a||[]).forEach(k=>b.act[k]=true); if(o.k&&typeof o.k==='object') b.stk=o.k; if(o.pb&&typeof o.pb==='object') b.pb=o.pb; if(o.i&&typeof o.i==='object') b.imb=o.i;
   if(Array.isArray(o.on)) o.on.forEach(k=>b.on[k]=true); else delete b.on; // older codes: tidy switches the first 12 online
   b.notes=String(o.no||''); return tidy(b);}
 function openShare(){
@@ -1007,7 +1038,7 @@ function addItem(id,pi){
   touch(); renderAll();
   toast(r.err?`Added ${it.n} offline. ${r.err}`:r.comps.length?`Added ${it.n}. ${upMsg(r,id)}`:`Added ${it.n}`);
 }
-function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; delete b.on[id]; delete b.stk[id]; touch(); renderAll();}
+function removeItem(id){const b=B(); b.phases.forEach(p=>{const k=p.items.indexOf(id); if(k>=0)p.items.splice(k,1);}); delete b.act[id]; delete b.on[id]; delete b.stk[id]; delete b.imb[id]; touch(); renderAll();}
 function setStacks(id,n){
   const b=B(); n=clampStk(id,n); if(n) b.stk[id]=n; else delete b.stk[id];
   touch(); renderAll();

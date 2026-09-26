@@ -239,6 +239,7 @@ def extract():
         d={'k':p,'l':plabel(owner,p),'v':v,'u':post}
         if pp.get('m_eProvidedPropertyType'): d['t']=pp['m_eProvidedPropertyType'].replace('MODIFIER_VALUE_','')
         if pp.get('m_eStatsUsageFlags') and 'Conditional' in pp['m_eStatsUsageFlags']: d['c']=1
+        if pp.get('m_eApplyFilter')=='EApplyFilter_OnlyIfImbued': d['im']=1   # applies only to the imbued ability
         sf=pp.get('m_subclassScaleFunction') or {}
         if sf.get('m_eSpecificStatScaleType') and sf.get('m_flStatScale'): d['sc']=[sf['m_eSpecificStatScaleType'],sf['m_flStatScale']]
         elif sf.get('m_eSpecificStatScaleType'): d['sc']=[sf['m_eSpecificStatScaleType'],0]
@@ -273,6 +274,8 @@ def extract():
         comp=r.get('m_vecComponentItems') or []
         if comp: it['cp']=[c for c in comp]
         if r.get('m_vecDisabledOnHeroes'): it['dh']=r['m_vecDisabledOnHeroes']
+        tg=r.get('m_TargetAbilityEffectsToApply') or ''
+        if 'IMBUE' in tg: it['imb']=2 if 'NON_ULT' in tg else 1   # imbues one ability (2: not the ultimate)
         secs=[]
         for s in r.get('m_vecTooltipSectionInfo',[]) or []:
             st=s.get('m_eAbilitySectionType','').replace('EArea_','')
