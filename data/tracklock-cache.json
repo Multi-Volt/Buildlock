@@ -3,19 +3,19 @@
   "hero": "hero_atlas",
   "name": "Abrams",
   "slug": "abrams",
-  "fetchedAt": 1790860592867,
+  "fetchedAt": 1790894515689,
   "pro": {
-   "wr": 57,
-   "g": 142,
+   "wr": 56,
+   "g": 141,
    "p": {
     "Early": [
      [
       "upgrade_close_range",
-      85
+      84
      ],
      [
       "upgrade_melee_charge",
-      84
+      82
      ],
      [
       "upgrade_non_player_bonus",
@@ -23,49 +23,49 @@
      ],
      [
       "upgrade_weapon_backstabber",
-      71
+      70
      ],
      [
       "upgrade_endurance",
-      65
+      66
      ],
      [
       "upgrade_lifestrike_gauntlets",
-      58
+      56
      ],
      [
       "upgrade_health",
-      20
+      21
      ],
      [
       "upgrade_acolytes_glove",
-      18
+      20
      ]
     ],
     "Mid": [
      [
       "upgrade_bullet_resist_shredder",
-      81
+      79
      ],
      [
       "upgrade_bullet_armor_reduction_aura",
-      81
+      79
      ],
      [
       "upgrade_warp_stone",
-      77
+      74
      ],
      [
       "upgrade_reduce_debuff_duration",
-      44
-     ],
-     [
-      "upgrade_restorative_locket",
-      30
+      41
      ],
      [
       "upgrade_healing_booster",
-      30
+      33
+     ],
+     [
+      "upgrade_restorative_locket",
+      32
      ],
      [
       "upgrade_melee_rebuttal",
@@ -73,7 +73,7 @@
      ],
      [
       "upgrade_spirit_bubble",
-      20
+      19
      ]
     ],
     "Late": [
@@ -83,15 +83,15 @@
      ],
      [
       "upgrade_phantom_strike",
-      58
+      57
      ],
      [
       "upgrade_tech_purge",
-      54
+      55
      ],
      [
       "upgrade_arcane_extension",
-      33
+      35
      ],
      [
       "upgrade_crushing_fists",
@@ -99,31 +99,31 @@
      ],
      [
       "upgrade_berserker",
-      25
+      23
      ],
      [
       "upgrade_weighted_shots",
-      17
+      16
      ],
      [
       "upgrade_close_quarter_combat",
-      15
+      16
      ]
     ]
    },
    "unknown": []
   },
   "build": {
-   "wr": 61,
-   "matches": 587,
+   "wr": 59,
+   "matches": 613,
    "core": [
     "upgrade_endurance",
-    "upgrade_close_range",
     "upgrade_non_player_bonus",
-    "upgrade_lifestrike_gauntlets",
+    "upgrade_close_range",
     "upgrade_weapon_backstabber",
     "upgrade_melee_charge",
     "upgrade_bullet_resist_shredder",
+    "upgrade_restorative_locket",
     "upgrade_warp_stone",
     "upgrade_bullet_armor_reduction_aura",
     "upgrade_imbued_duration_extender",
@@ -131,47 +131,49 @@
     "upgrade_berserker"
    ],
    "early": [
-    "upgrade_healing_booster",
-    "upgrade_arcane_extension",
+    "upgrade_lifestrike_gauntlets",
     "upgrade_medic_bullets",
-    "upgrade_containment",
+    "upgrade_arcane_extension",
+    "upgrade_healing_booster",
     "upgrade_regenerating_bullet_shield",
-    "upgrade_magic_shield"
+    "upgrade_containment"
    ],
    "late": [
-    "upgrade_boxing_glove",
     "upgrade_crushing_fists",
+    "upgrade_boxing_glove",
     "upgrade_close_quarter_combat",
-    "upgrade_weighted_shots",
-    "upgrade_spirit_snatch"
+    "upgrade_spirit_snatch",
+    "upgrade_weighted_shots"
    ],
    "defensive": [
-    "upgrade_spirit_bubble",
+    "upgrade_reduce_debuff_duration",
     "upgrade_tech_purge",
     "upgrade_debuff_reducer",
     "upgrade_health",
-    "upgrade_reduce_debuff_duration",
     "upgrade_deflecting_armor",
-    "upgrade_colossus"
+    "upgrade_colossus",
+    "upgrade_counterspell"
    ],
    "counters": [
-    "upgrade_debuff_reducer",
     "upgrade_reduce_debuff_duration",
-    "upgrade_unstoppable",
-    "upgrade_spellbreaker",
+    "upgrade_debuff_reducer",
     "upgrade_tech_purge",
+    "upgrade_absorbing_armor",
+    "upgrade_spellbreaker",
+    "upgrade_unstoppable",
     "upgrade_deflecting_armor",
     "upgrade_counterspell",
-    "upgrade_healbane"
+    "upgrade_healbane",
+    "upgrade_juggernaut"
    ],
    "actives": [
-    "upgrade_containment",
     "upgrade_reduce_debuff_duration",
+    "upgrade_containment",
     "upgrade_colossus",
-    "upgrade_restorative_locket",
+    "upgrade_cloaking_device_active",
     "upgrade_grit",
     "upgrade_unstoppable",
-    "upgrade_cloaking_device_active"
+    "upgrade_discord"
    ],
    "unlock": [
     2,
@@ -186,10 +188,10 @@
   "hero": "hero_fencer",
   "name": "Apollo",
   "slug": "apollo",
-  "fetchedAt": 1790860594986,
+  "fetchedAt": 1790894520829,
   "pro": {
-   "wr": 56.7,
-   "g": 164,
+   "wr": 54.7,
+   "g": 161,
    "p": {
     "Early": [
      [
@@ -205,34 +207,34 @@
       96
      ],
      [
-      "upgrade_endurance",
-      90
+      "upgrade_soaring_spirit",
+      91
      ],
      [
-      "upgrade_soaring_spirit",
-      90
+      "upgrade_endurance",
+      89
      ],
      [
       "upgrade_acolytes_glove",
-      75
+      74
      ],
      [
       "upgrade_containment",
-      51
+      50
      ],
      [
       "upgrade_cold_front",
-      30
+      28
      ]
     ],
     "Mid": [
      [
       "upgrade_healing_booster",
-      95
+      94
      ],
      [
       "upgrade_spirit_snatch",
-      79
+      78
      ],
      [
       "upgrade_healbane",
@@ -244,15 +246,15 @@
      ],
      [
       "upgrade_reduce_debuff_duration",
-      57
+      55
      ],
      [
       "upgrade_melee_charge",
-      34
+      37
      ],
      [
       "upgrade_improved_stamina",
-      27
+      29
      ],
      [
       "upgrade_tech_damage_pulse",
@@ -266,31 +268,31 @@
      ],
      [
       "upgrade_magic_shock",
-      87
+      85
      ],
      [
       "upgrade_cooldown_reduction",
-      39
-     ],
-     [
-      "upgrade_tech_range",
-      31
+      36
      ],
      [
       "upgrade_spirit_burn",
-      30
+      32
+     ],
+     [
+      "upgrade_tech_range",
+      29
      ],
      [
       "upgrade_superior_stamina",
-      24
+      25
      ],
      [
       "upgrade_magic_tempo",
-      23
+      22
      ],
      [
       "upgrade_self_bubble",
-      23
+      22
      ]
     ]
    },
@@ -367,10 +369,10 @@
   "hero": "hero_bebop",
   "name": "Bebop",
   "slug": "bebop",
-  "fetchedAt": 1790860600931,
+  "fetchedAt": 1790894522944,
   "pro": {
-   "wr": 63.1,
-   "g": 206,
+   "wr": 63.5,
+   "g": 211,
    "p": {
     "Early": [
      [
@@ -383,15 +385,11 @@
      ],
      [
       "upgrade_endurance",
-      68
+      69
      ],
      [
       "upgrade_weapon_backstabber",
       34
-     ],
-     [
-      "upgrade_rapid_rounds",
-      29
      ],
      [
       "upgrade_magic_burst",
@@ -404,20 +402,24 @@
      [
       "upgrade_trophy_collector",
       13
+     ],
+     [
+      "upgrade_lifestrike_gauntlets",
+      4
      ]
     ],
     "Mid": [
      [
       "upgrade_headhunter",
-      95
-     ],
-     [
-      "upgrade_veil_walker",
-      86
+      94
      ],
      [
       "upgrade_containment",
       85
+     ],
+     [
+      "upgrade_veil_walker",
+      84
      ],
      [
       "upgrade_spirit_snatch",
@@ -425,7 +427,7 @@
      ],
      [
       "upgrade_fleetfoot_boots",
-      71
+      73
      ],
      [
       "upgrade_sprint_booster",
@@ -443,34 +445,34 @@
     "Late": [
      [
       "upgrade_siphon_bullets",
-      46
-     ],
-     [
-      "upgrade_headshot_booster2",
-      31
+      45
      ],
      [
       "upgrade_tech_purge",
-      31
+      30
      ],
      [
       "upgrade_bullet_armor_reduction_aura",
       30
      ],
      [
-      "upgrade_reduce_debuff_duration",
-      24
+      "upgrade_headshot_booster2",
+      29
      ],
      [
-      "upgrade_glitch",
-      18
+      "upgrade_reduce_debuff_duration",
+      24
      ],
      [
       "upgrade_burst_fire",
       17
      ],
      [
-      "upgrade_counterspell",
+      "upgrade_glitch",
+      17
+     ],
+     [
+      "upgrade_divine_barrier",
       17
      ]
     ]
@@ -478,69 +480,66 @@
    "unknown": []
   },
   "build": {
-   "wr": 57,
-   "matches": 399,
+   "wr": 55,
+   "matches": 315,
    "core": [
-    "upgrade_medic_bullets",
     "upgrade_headshot_booster",
+    "upgrade_magic_burst",
     "upgrade_acolytes_glove",
     "upgrade_headhunter",
-    "upgrade_sprint_booster",
     "upgrade_rapid_rounds",
     "upgrade_containment",
-    "upgrade_veil_walker",
     "upgrade_spirit_snatch",
     "upgrade_cardio_calibrator",
     "upgrade_fleetfoot_boots",
-    "upgrade_bullet_armor_reduction_aura",
     "upgrade_burst_fire",
-    "upgrade_glitch"
+    "upgrade_berserker",
+    "upgrade_surging_power"
    ],
    "early": [
+    "upgrade_sprint_booster",
     "upgrade_endurance",
-    "upgrade_healing_booster",
+    "upgrade_medic_bullets",
     "upgrade_weapon_backstabber",
+    "upgrade_healing_booster",
     "upgrade_trophy_collector",
-    "upgrade_magic_burst",
-    "upgrade_bullet_resist_shredder",
-    "upgrade_headshot_booster2"
+    "upgrade_headshot_booster2",
+    "upgrade_bullet_resist_shredder"
    ],
    "late": [
+    "upgrade_veil_walker",
     "upgrade_siphon_bullets",
-    "upgrade_berserker",
+    "upgrade_glitch",
     "upgrade_banshee_slugs",
-    "upgrade_proc_silence",
-    "upgrade_weighted_shots"
+    "upgrade_bullet_armor_reduction_aura",
+    "upgrade_chain_lightning"
    ],
    "defensive": [
-    "upgrade_tech_purge",
     "upgrade_health",
+    "upgrade_chonky",
+    "upgrade_tech_purge",
     "upgrade_counterspell",
-    "upgrade_reduce_debuff_duration",
-    "upgrade_deflecting_armor"
+    "upgrade_reduce_debuff_duration"
    ],
    "counters": [
-    "upgrade_tech_purge",
-    "upgrade_absorbing_armor",
-    "upgrade_bullet_resist_shredder",
-    "upgrade_magic_shock",
     "upgrade_counterspell",
     "upgrade_proc_silence",
-    "upgrade_reduce_debuff_duration",
-    "upgrade_debuff_reducer",
     "upgrade_deflecting_armor",
     "upgrade_metal_skin",
+    "upgrade_tech_purge",
+    "upgrade_bullet_resist_shredder",
+    "upgrade_glitch",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_juggernaut",
     "upgrade_divine_barrier",
-    "upgrade_healbane",
     "upgrade_spellbreaker"
    ],
    "actives": [
+    "upgrade_glitch",
     "upgrade_reduce_debuff_duration",
-    "upgrade_guardian_ward",
-    "upgrade_divine_barrier",
-    "upgrade_grit",
+    "upgrade_capacitor",
     "upgrade_metal_skin",
-    "upgrade_target_stun",
+    "upgrade_divine_barrier",
     "upgrade_cloaking_device_active"
    ],
    "unlock": [
@@ -556,7 +555,7 @@
   "hero": "hero_punkgoat",
   "name": "Billy",
   "slug": "billy",
-  "fetchedAt": 1790860605465,
+  "fetchedAt": 1790894525581,
   "pro": {
    "wr": 68.8,
    "g": 93,
@@ -667,8 +666,8 @@
    "unknown": []
   },
   "build": {
-   "wr": 57,
-   "matches": 371,
+   "wr": 56,
+   "matches": 388,
    "core": [
     "upgrade_non_player_bonus",
     "upgrade_lifestrike_gauntlets",
@@ -681,57 +680,56 @@
     "upgrade_bullet_resist_shredder",
     "upgrade_containment",
     "upgrade_spirit_snatch",
-    "upgrade_extra_charge",
+    "upgrade_melee_charge",
+    "upgrade_magic_reach",
     "upgrade_rapid_recharge",
+    "upgrade_tech_range",
     "upgrade_crushing_fists"
    ],
    "early": [
-    "upgrade_melee_charge",
     "upgrade_regenerating_bullet_shield",
-    "upgrade_magic_reach",
-    "upgrade_endurance",
+    "upgrade_extra_charge",
     "upgrade_magic_shield",
     "upgrade_headshot_booster2",
-    "upgrade_fleetfoot_boots"
+    "upgrade_fleetfoot_boots",
+    "upgrade_endurance",
+    "upgrade_cardio_calibrator"
    ],
    "late": [
-    "upgrade_tech_range",
     "upgrade_close_quarter_combat",
     "upgrade_discord",
-    "upgrade_berserker"
+    "upgrade_berserker",
+    "upgrade_weighted_shots"
    ],
    "defensive": [
     "upgrade_spirit_bubble",
     "upgrade_tech_purge",
     "upgrade_health",
+    "upgrade_colossus",
     "upgrade_reduce_debuff_duration",
     "upgrade_counterspell",
-    "upgrade_colossus",
     "upgrade_deflecting_armor"
    ],
    "counters": [
-    "upgrade_deflecting_armor",
-    "upgrade_metal_skin",
-    "upgrade_improved_bullet_armor",
     "upgrade_reduce_debuff_duration",
     "upgrade_debuff_reducer",
+    "upgrade_deflecting_armor",
+    "upgrade_metal_skin",
     "upgrade_tech_purge",
     "upgrade_counterspell",
     "upgrade_unstoppable",
-    "upgrade_healbane",
-    "upgrade_magic_shock",
-    "upgrade_divine_barrier"
+    "upgrade_slowing_bullets",
+    "upgrade_juggernaut",
+    "upgrade_magic_shock"
    ],
    "actives": [
     "upgrade_fleetfoot_boots",
+    "upgrade_colossus",
     "upgrade_discord",
     "upgrade_reduce_debuff_duration",
-    "upgrade_colossus",
-    "upgrade_metal_skin",
     "upgrade_unstoppable",
-    "upgrade_phantom_strike",
-    "upgrade_divine_barrier",
-    "upgrade_guardian_ward"
+    "upgrade_metal_skin",
+    "upgrade_phantom_strike"
    ],
    "unlock": [
     2,
@@ -746,7 +744,7 @@
   "hero": "hero_nano",
   "name": "Calico",
   "slug": "calico",
-  "fetchedAt": 1790860609973,
+  "fetchedAt": 1790894529328,
   "pro": {
    "wr": 46.9,
    "g": 179,
@@ -924,10 +922,10 @@
   "hero": "hero_unicorn",
   "name": "Celeste",
   "slug": "celeste",
-  "fetchedAt": 1790860611893,
+  "fetchedAt": 1790894531565,
   "pro": {
    "wr": 59.7,
-   "g": 154,
+   "g": 149,
    "p": {
     "Early": [
      [
@@ -944,11 +942,11 @@
      ],
      [
       "upgrade_magic_reach",
-      95
+      97
      ],
      [
       "upgrade_mystic_regeneration",
-      95
+      96
      ],
      [
       "upgrade_magic_burst",
@@ -956,7 +954,7 @@
      ],
      [
       "upgrade_goose_egg",
-      20
+      21
      ],
      [
       "upgrade_cold_front",
@@ -970,15 +968,15 @@
      ],
      [
       "upgrade_tech_range",
-      94
+      95
      ],
      [
       "upgrade_tech_damage_pulse",
-      88
+      89
      ],
      [
       "upgrade_restorative_locket",
-      80
+      79
      ],
      [
       "upgrade_spirit_bubble",
@@ -986,15 +984,15 @@
      ],
      [
       "upgrade_grit",
-      59
+      60
      ],
      [
       "upgrade_suppressor",
-      42
+      44
      ],
      [
       "upgrade_healbane",
-      25
+      26
      ]
     ],
     "Late": [
@@ -1008,7 +1006,7 @@
      ],
      [
       "upgrade_pristine_emblem",
-      54
+      53
      ],
      [
       "upgrade_magic_vulnerability",
@@ -1016,11 +1014,11 @@
      ],
      [
       "upgrade_escalating_exposure",
-      42
+      41
      ],
      [
       "upgrade_counterspell",
-      27
+      26
      ],
      [
       "upgrade_deflecting_armor",
@@ -1028,7 +1026,7 @@
      ],
      [
       "upgrade_reduce_debuff_duration",
-      23
+      22
      ]
     ]
    },
@@ -1110,10 +1108,10 @@
   "hero": "hero_drifter",
   "name": "Drifter",
   "slug": "drifter",
-  "fetchedAt": 1790860615001,
+  "fetchedAt": 1790894535679,
   "pro": {
-   "wr": 64.9,
-   "g": 154,
+   "wr": 66.9,
+   "g": 151,
    "p": {
     "Early": [
      [
@@ -1130,23 +1128,23 @@
      ],
      [
       "upgrade_magic_burst",
-      78
+      79
      ],
      [
       "upgrade_trophy_collector",
-      45
+      41
      ],
      [
       "upgrade_cold_front",
-      40
+      41
      ],
      [
       "upgrade_withering_whip",
-      18
+      19
      ],
      [
-      "upgrade_melee_rebuttal",
-      10
+      "upgrade_close_range",
+      5
      ]
     ],
     "Mid": [
@@ -1156,31 +1154,31 @@
      ],
      [
       "upgrade_veil_walker",
-      86
+      84
      ],
      [
       "upgrade_sprint_booster",
-      64
+      60
      ],
      [
       "upgrade_bullet_armor_reduction_aura",
-      50
+      51
      ],
      [
       "upgrade_healbane",
       44
      ],
      [
-      "upgrade_containment",
-      29
+      "upgrade_melee_charge",
+      26
      ],
      [
-      "upgrade_melee_charge",
-      29
+      "upgrade_containment",
+      26
      ],
      [
       "upgrade_health",
-      19
+      23
      ]
     ],
     "Late": [
@@ -1190,19 +1188,19 @@
      ],
      [
       "upgrade_imbued_duration_extender",
-      72
+      73
      ],
      [
       "upgrade_spirit_burn",
-      47
+      46
      ],
      [
       "upgrade_arcane_extension",
-      43
+      45
      ],
      [
       "upgrade_warp_stone",
-      38
+      36
      ],
      [
       "upgrade_arctic_blast",
@@ -1210,11 +1208,11 @@
      ],
      [
       "upgrade_counterspell",
-      23
+      24
      ],
      [
       "upgrade_glitch",
-      20
+      19
      ]
     ]
    },
@@ -1302,10 +1300,10 @@
   "hero": "hero_dynamo",
   "name": "Dynamo",
   "slug": "dynamo",
-  "fetchedAt": 1790860618978,
+  "fetchedAt": 1790894537962,
   "pro": {
-   "wr": 70.4,
-   "g": 98,
+   "wr": 71.6,
+   "g": 102,
    "p": {
     "Early": [
      [
@@ -1314,19 +1312,15 @@
      ],
      [
       "upgrade_endurance",
-      59
+      55
      ],
      [
       "upgrade_headshot_booster",
-      44
+      50
      ],
      [
       "upgrade_grit",
-      43
-     ],
-     [
-      "upgrade_magic_shield",
-      39
+      41
      ],
      [
       "upgrade_non_player_bonus",
@@ -1338,33 +1332,37 @@
      ],
      [
       "upgrade_blitz_bullets",
-      30
+      28
+     ],
+     [
+      "upgrade_fleetfoot_boots",
+      25
      ]
     ],
     "Mid": [
      [
       "upgrade_rechargingbullets",
-      59
-     ],
-     [
-      "upgrade_bullet_resist_shredder",
-      57
+      60
      ],
      [
       "upgrade_magic_reach",
-      57
+      58
+     ],
+     [
+      "upgrade_bullet_resist_shredder",
+      54
+     ],
+     [
+      "upgrade_sprint_booster",
+      53
      ],
      [
       "upgrade_arcane_surge",
       50
      ],
      [
-      "upgrade_sprint_booster",
-      48
-     ],
-     [
       "upgrade_rapid_recharge",
-      41
+      49
      ],
      [
       "upgrade_cardio_calibrator",
@@ -1372,7 +1370,7 @@
      ],
      [
       "upgrade_spirit_bubble",
-      37
+      35
      ]
     ],
     "Late": [
@@ -1382,31 +1380,31 @@
      ],
      [
       "upgrade_healing_booster",
-      53
-     ],
-     [
-      "upgrade_magic_tempo",
-      49
+      50
      ],
      [
       "upgrade_ability_refresher",
-      49
+      50
+     ],
+     [
+      "upgrade_magic_tempo",
+      47
      ],
      [
       "upgrade_unstoppable",
-      45
+      41
      ],
      [
-      "upgrade_veil_walker",
-      44
-     ],
-     [
-      "upgrade_debuff_reducer",
+      "upgrade_tech_purge",
       40
      ],
      [
-      "upgrade_ethereal_bullets",
+      "upgrade_veil_walker",
       39
+     ],
+     [
+      "upgrade_ethereal_bullets",
+      38
      ]
     ]
    },
@@ -1483,10 +1481,10 @@
   "hero": "hero_necro",
   "name": "Graves",
   "slug": "graves",
-  "fetchedAt": 1790860626022,
+  "fetchedAt": 1790894542656,
   "pro": {
-   "wr": 75.7,
-   "g": 37,
+   "wr": 77.8,
+   "g": 36,
    "p": {
     "Early": [
      [
@@ -1495,91 +1493,91 @@
      ],
      [
       "upgrade_arcane_surge",
-      81
+      83
      ],
      [
       "upgrade_dps_aura",
-      76
+      75
      ],
      [
       "upgrade_improved_stamina",
-      65
+      64
      ],
      [
       "upgrade_melee_rebuttal",
-      59
+      61
      ],
      [
       "upgrade_grit",
-      43
+      44
      ],
      [
       "upgrade_withering_whip",
-      38
+      39
      ],
      [
       "upgrade_goose_egg",
-      30
+      28
      ]
     ],
     "Mid": [
      [
       "upgrade_imbued_duration_extender",
-      84
+      86
      ],
      [
       "upgrade_split_shot",
-      62
+      64
      ],
      [
       "upgrade_arcane_extension",
-      57
+      58
      ],
      [
       "upgrade_veil_walker",
-      54
+      56
      ],
      [
       "upgrade_spirit_bubble",
-      38
+      39
      ],
      [
       "upgrade_weapon_shielding",
-      38
+      39
      ],
      [
       "upgrade_soaring_spirit",
-      32
+      31
      ],
      [
       "upgrade_superior_stamina",
-      24
+      22
      ]
     ],
     "Late": [
      [
       "upgrade_toxic_bullets",
-      68
+      67
      ],
      [
       "upgrade_cooldown_reduction",
-      41
+      42
      ],
      [
       "upgrade_magic_tempo",
-      30
+      31
      ],
      [
       "upgrade_greater_withering_whip",
-      30
+      31
      ],
      [
       "upgrade_inhibitor",
-      30
+      31
      ],
      [
       "upgrade_ability_power_shard",
-      27
+      25
      ],
      [
       "upgrade_counterspell",
@@ -1666,77 +1664,77 @@
   "hero": "hero_orion",
   "name": "Grey Talon",
   "slug": "grey-talon",
-  "fetchedAt": 1790860630310,
+  "fetchedAt": 1790894545250,
   "pro": {
-   "wr": 59.7,
-   "g": 129,
+   "wr": 58.6,
+   "g": 140,
    "p": {
     "Early": [
      [
       "upgrade_magic_burst",
-      95
+      96
      ],
      [
       "upgrade_extra_charge",
-      92
+      93
      ],
      [
       "upgrade_high_velocity_mag",
-      91
-     ],
-     [
-      "upgrade_improved_spirit",
-      81
+      92
      ],
      [
       "upgrade_soaring_spirit",
-      81
+      82
+     ],
+     [
+      "upgrade_improved_spirit",
+      80
      ],
      [
       "upgrade_pristine_emblem",
-      78
-     ],
-     [
-      "upgrade_magic_tempo",
-      57
+      75
      ],
      [
       "upgrade_sharpshooter",
+      47
+     ],
+     [
+      "upgrade_long_range",
       46
      ]
     ],
     "Mid": [
      [
       "upgrade_magic_shock",
-      90
+      91
      ],
      [
       "upgrade_superior_stamina",
-      85
+      86
      ],
      [
       "upgrade_improved_stamina",
-      78
+      79
      ],
      [
       "upgrade_rechargingbullets",
-      68
+      70
+     ],
+     [
+      "upgrade_magic_tempo",
+      57
      ],
      [
       "upgrade_crackshot",
       51
      ],
      [
-      "upgrade_magic_shield",
-      34
-     ],
-     [
       "upgrade_health",
-      17
+      16
      ],
      [
       "upgrade_divine_barrier",
-      12
+      14
      ]
     ],
     "Late": [
@@ -1746,83 +1744,90 @@
      ],
      [
       "upgrade_boundless_spirit",
-      62
+      64
      ],
      [
       "upgrade_cooldown_reduction",
-      50
-     ],
-     [
-      "upgrade_counterspell",
-      47
+      51
      ],
      [
       "upgrade_spirit_burn",
       47
      ],
      [
+      "upgrade_counterspell",
+      45
+     ],
+     [
       "upgrade_vex_barrier",
-      30
+      29
      ],
      [
       "upgrade_mystic_reverb",
-      22
+      23
      ],
      [
       "upgrade_tech_overflow",
-      12
+      11
      ]
     ]
    },
    "unknown": []
   },
   "build": {
-   "wr": 54,
-   "matches": 203,
+   "wr": 51,
+   "matches": 187,
    "core": [
     "upgrade_magic_burst",
-    "upgrade_high_velocity_mag",
-    "upgrade_pristine_emblem",
     "upgrade_extra_charge",
+    "upgrade_trophy_collector",
     "upgrade_improved_spirit",
-    "upgrade_magic_tempo",
-    "upgrade_soaring_spirit",
+    "upgrade_containment",
     "upgrade_crackshot",
     "upgrade_improved_stamina",
     "upgrade_rechargingbullets",
+    "upgrade_rapid_recharge",
     "upgrade_superior_stamina",
     "upgrade_magic_shock",
-    "upgrade_cooldown_reduction",
-    "upgrade_boundless_spirit"
+    "upgrade_boundless_spirit",
+    "upgrade_spirit_burn",
+    "upgrade_mystic_reverb"
    ],
    "early": [
+    "upgrade_soaring_spirit",
+    "upgrade_magic_tempo",
     "upgrade_magic_shield",
+    "upgrade_pristine_emblem",
+    "upgrade_high_velocity_mag",
     "upgrade_long_range",
     "upgrade_blitz_bullets",
-    "upgrade_rapid_rounds",
-    "upgrade_regenerating_bullet_shield",
-    "upgrade_medic_bullets",
-    "upgrade_endurance"
+    "upgrade_rapid_rounds"
    ],
    "late": [
-    "upgrade_rapid_recharge",
-    "upgrade_spirit_burn",
-    "upgrade_mystic_reverb",
+    "upgrade_cooldown_reduction",
     "upgrade_sharpshooter",
-    "upgrade_magic_storm"
+    "upgrade_magic_storm",
+    "upgrade_transcendent_cooldown"
    ],
    "defensive": [
     "upgrade_counterspell",
     "upgrade_vex_barrier",
-    "upgrade_reduce_debuff_duration"
+    "upgrade_spirit_bubble"
    ],
    "counters": [
     "upgrade_counterspell",
-    "upgrade_reduce_debuff_duration",
     "upgrade_healbane"
    ],
    "actives": [
-    "upgrade_reduce_debuff_duration"
+    "upgrade_superior_stamina",
+    "upgrade_containment",
+    "upgrade_boundless_spirit",
+    "upgrade_crackshot",
+    "upgrade_spirit_burn",
+    "upgrade_rapid_recharge",
+    "upgrade_mystic_reverb",
+    "upgrade_rechargingbullets",
+    "upgrade_magic_shock"
    ],
    "unlock": [
     0,
@@ -1837,10 +1842,10 @@
   "hero": "hero_haze",
   "name": "Haze",
   "slug": "haze",
-  "fetchedAt": 1790860634142,
+  "fetchedAt": 1790894548584,
   "pro": {
-   "wr": 63.6,
-   "g": 247,
+   "wr": 63.3,
+   "g": 270,
    "p": {
     "Early": [
      [
@@ -1849,15 +1854,15 @@
      ],
      [
       "upgrade_rapid_rounds",
-      88
+      89
      ],
      [
       "upgrade_improved_spirit",
-      87
+      88
      ],
      [
       "upgrade_active_reload",
-      63
+      64
      ],
      [
       "upgrade_health",
@@ -1865,29 +1870,29 @@
      ],
      [
       "upgrade_sprint_booster",
-      50
+      49
      ],
      [
       "upgrade_headshot_booster2",
-      43
+      42
      ],
      [
       "upgrade_veil_walker",
-      42
+      41
      ]
     ],
     "Mid": [
      [
-      "upgrade_magic_storm",
-      70
+      "upgrade_burst_fire",
+      69
      ],
      [
-      "upgrade_burst_fire",
+      "upgrade_magic_storm",
       67
      ],
      [
       "upgrade_bullet_resist_shredder",
-      57
+      56
      ],
      [
       "upgrade_cardio_calibrator",
@@ -1895,53 +1900,53 @@
      ],
      [
       "upgrade_rechargingbullets",
-      43
+      44
      ],
      [
       "upgrade_fleetfoot_boots",
-      40
+      43
      ],
      [
       "upgrade_chonky",
-      36
+      35
      ],
      [
-      "upgrade_chain_lightning",
-      34
+      "upgrade_containment",
+      32
      ]
     ],
     "Late": [
      [
       "upgrade_ricochet",
-      45
+      44
      ],
      [
       "upgrade_capacitor",
-      36
+      35
      ],
      [
       "upgrade_siphon_bullets",
-      28
+      31
      ],
      [
       "upgrade_tech_purge",
-      26
+      23
      ],
      [
       "upgrade_tech_overflow",
-      24
-     ],
-     [
-      "upgrade_ethereal_bullets",
-      21
-     ],
-     [
-      "upgrade_health_stealing_magic",
-      18
+      22
      ],
      [
       "upgrade_critshot",
-      18
+      20
+     ],
+     [
+      "upgrade_ethereal_bullets",
+      19
+     ],
+     [
+      "upgrade_health_stealing_magic",
+      17
      ]
     ]
    },
@@ -2022,7 +2027,7 @@
   "hero": "hero_astro",
   "name": "Holliday",
   "slug": "holliday",
-  "fetchedAt": 1790860636389,
+  "fetchedAt": 1790894550966,
   "pro": {
    "wr": 54.5,
    "g": 121,
@@ -2202,10 +2207,10 @@
   "hero": "hero_inferno",
   "name": "Infernus",
   "slug": "infernus",
-  "fetchedAt": 1790860639303,
+  "fetchedAt": 1790894553448,
   "pro": {
-   "wr": 63,
-   "g": 184,
+   "wr": 63.1,
+   "g": 187,
    "p": {
     "Early": [
      [
@@ -2218,71 +2223,71 @@
      ],
      [
       "upgrade_healbane",
-      92
+      90
      ],
      [
       "upgrade_magic_vulnerability",
-      91
+      89
      ],
      [
       "upgrade_rapid_rounds",
-      79
+      82
      ],
      [
       "upgrade_grit",
-      59
+      57
+     ],
+     [
+      "upgrade_clip_size",
+      50
      ],
      [
       "upgrade_quick_silver",
-      49
-     ],
-     [
-      "upgrade_endurance",
-      29
+      47
      ]
     ],
     "Mid": [
      [
-      "upgrade_toxic_bullets",
-      90
+      "upgrade_blitz_bullets",
+      91
      ],
      [
-      "upgrade_blitz_bullets",
+      "upgrade_toxic_bullets",
       89
      ],
      [
       "upgrade_health_stealing_magic",
-      64
+      65
      ],
      [
       "upgrade_titan_round",
-      52
+      53
      ],
      [
       "upgrade_reduce_debuff_duration",
       51
      ],
      [
-      "upgrade_clip_size",
-      48
-     ],
-     [
       "upgrade_arcane_extension",
       47
+     ],
+     [
+      "upgrade_spirit_bubble",
+      42
      ]
     ],
     "Late": [
      [
       "upgrade_imbued_duration_extender",
-      72
+      73
      ],
      [
       "upgrade_escalating_exposure",
-      68
+      67
      ],
      [
       "upgrade_tech_overflow",
-      52
+      53
      ],
      [
       "upgrade_spellslinger_headshots",
@@ -2290,19 +2295,19 @@
      ],
      [
       "upgrade_counterspell",
-      29
-     ],
-     [
-      "upgrade_warp_stone",
-      20
+      31
      ],
      [
       "upgrade_boundless_spirit",
-      20
+      21
+     ],
+     [
+      "upgrade_warp_stone",
+      18
      ],
      [
       "upgrade_ricochet",
-      15
+      16
      ]
     ]
    },
@@ -2381,31 +2386,31 @@
   "hero": "hero_tengu",
   "name": "Ivy",
   "slug": "ivy",
-  "fetchedAt": 1790860643126,
+  "fetchedAt": 1790894556388,
   "pro": {
-   "wr": 55.9,
-   "g": 111,
+   "wr": 59.6,
+   "g": 114,
    "p": {
     "Early": [
      [
       "upgrade_clip_size",
-      94
-     ],
-     [
-      "upgrade_titan_round",
-      94
-     ],
-     [
-      "upgrade_chain_lightning",
       93
      ],
      [
+      "upgrade_titan_round",
+      91
+     ],
+     [
+      "upgrade_chain_lightning",
+      91
+     ],
+     [
       "upgrade_non_player_bonus",
-      85
+      82
      ],
      [
       "upgrade_endurance",
-      59
+      57
      ],
      [
       "upgrade_health",
@@ -2413,17 +2418,17 @@
      ],
      [
       "upgrade_headshot_booster",
-      24
+      28
      ],
      [
-      "upgrade_goose_egg",
-      11
+      "upgrade_grit",
+      18
      ]
     ],
     "Mid": [
      [
       "upgrade_capacitor",
-      86
+      85
      ],
      [
       "upgrade_bullet_resist_shredder",
@@ -2431,7 +2436,7 @@
      ],
      [
       "upgrade_healing_booster",
-      69
+      68
      ],
      [
       "upgrade_active_reload",
@@ -2439,7 +2444,7 @@
      ],
      [
       "upgrade_magic_reach",
-      41
+      39
      ],
      [
       "upgrade_fleetfoot_boots",
@@ -2451,40 +2456,40 @@
      ],
      [
       "upgrade_superior_stamina",
-      35
+      33
      ]
     ],
     "Late": [
      [
       "upgrade_tech_range",
-      41
+      42
      ],
      [
       "upgrade_healbuff",
-      40
+      39
      ],
      [
       "upgrade_inhibitor",
-      28
-     ],
-     [
-      "upgrade_tech_purge",
-      25
-     ],
-     [
-      "upgrade_cooldown_reduction",
-      24
-     ],
-     [
-      "upgrade_soaring_spirit",
-      23
+      26
      ],
      [
       "upgrade_siphon_bullets",
-      23
+      24
      ],
      [
-      "upgrade_banshee_slugs",
+      "upgrade_tech_purge",
+      22
+     ],
+     [
+      "upgrade_soaring_spirit",
+      22
+     ],
+     [
+      "upgrade_divine_barrier",
+      22
+     ],
+     [
+      "upgrade_cooldown_reduction",
       22
      ]
     ]
@@ -2559,43 +2564,43 @@
   "hero": "hero_kelvin",
   "name": "Kelvin",
   "slug": "kelvin",
-  "fetchedAt": 1790860646049,
+  "fetchedAt": 1790894559970,
   "pro": {
-   "wr": 61.3,
-   "g": 31,
+   "wr": 61.8,
+   "g": 34,
    "p": {
     "Early": [
      [
       "upgrade_endurance",
-      90
+      91
      ],
      [
       "upgrade_improved_spirit",
-      90
+      91
      ],
      [
       "upgrade_soaring_spirit",
-      81
+      82
      ],
      [
       "upgrade_high_velocity_mag",
-      74
-     ],
-     [
-      "upgrade_extra_charge",
-      68
+      76
      ],
      [
       "upgrade_pristine_emblem",
+      68
+     ],
+     [
+      "upgrade_extra_charge",
       65
      ],
      [
-      "upgrade_sprint_booster",
-      39
+      "upgrade_grit",
+      24
      ],
      [
       "upgrade_trophy_collector",
-      23
+      21
      ]
     ],
     "Mid": [
@@ -2605,65 +2610,65 @@
      ],
      [
       "upgrade_healbane",
-      71
-     ],
-     [
-      "upgrade_magic_reach",
       65
      ],
      [
+      "upgrade_magic_reach",
+      62
+     ],
+     [
       "upgrade_rapid_recharge",
-      55
+      50
      ],
      [
       "upgrade_magic_tempo",
-      45
+      47
      ],
      [
-      "upgrade_magic_shield",
-      35
+      "upgrade_sprint_booster",
+      44
      ],
      [
       "upgrade_cardio_calibrator",
-      32
+      38
      ],
      [
-      "upgrade_magic_vulnerability",
-      29
+      "upgrade_magic_shield",
+      32
      ]
     ],
     "Late": [
      [
       "upgrade_cooldown_reduction",
-      61
+      62
      ],
      [
       "upgrade_tech_range",
-      58
+      53
      ],
      [
       "upgrade_boundless_spirit",
-      45
+      41
      ],
      [
       "upgrade_imbued_duration_extender",
-      45
+      41
      ],
      [
       "upgrade_arcane_extension",
-      39
+      38
+     ],
+     [
+      "upgrade_divine_barrier",
+      26
      ],
      [
       "upgrade_magic_shock",
-      29
+      26
      ],
      [
       "upgrade_escalating_exposure",
-      23
-     ],
-     [
-      "upgrade_warp_stone",
-      23
+      21
      ]
     ]
    },
@@ -2747,7 +2752,7 @@
   "hero": "hero_ghost",
   "name": "Lady Geist",
   "slug": "lady-geist",
-  "fetchedAt": 1790860649127,
+  "fetchedAt": 1790894563062,
   "pro": {
    "wr": 55.8,
    "g": 138,
@@ -2927,7 +2932,7 @@
   "hero": "hero_lash",
   "name": "Lash",
   "slug": "lash",
-  "fetchedAt": 1790860652123,
+  "fetchedAt": 1790894565876,
   "pro": {
    "wr": 55.9,
    "g": 204,
@@ -3112,10 +3117,10 @@
   "hero": "hero_forge",
   "name": "McGinnis",
   "slug": "mcginnis",
-  "fetchedAt": 1790860655048,
+  "fetchedAt": 1790894568383,
   "pro": {
-   "wr": 68.6,
-   "g": 35,
+   "wr": 68.4,
+   "g": 38,
    "p": {
     "Early": [
      [
@@ -3123,20 +3128,20 @@
       97
      ],
      [
-      "upgrade_non_player_bonus",
-      97
-     ],
-     [
       "upgrade_intensifying_clip",
       97
      ],
      [
+      "upgrade_non_player_bonus",
+      97
+     ],
+     [
       "upgrade_blitz_bullets",
-      94
+      95
      ],
      [
       "upgrade_rapid_rounds",
-      83
+      79
      ],
      [
       "upgrade_regenerating_bullet_shield",
@@ -3144,11 +3149,11 @@
      ],
      [
       "upgrade_goose_egg",
-      20
+      18
      ],
      [
       "upgrade_endurance",
-      17
+      18
      ]
     ],
     "Mid": [
@@ -3158,31 +3163,31 @@
      ],
      [
       "upgrade_ethereal_bullets",
-      94
+      95
      ],
      [
       "upgrade_fleetfoot_boots",
       89
      ],
      [
-      "upgrade_vampire",
+      "upgrade_cardio_calibrator",
       66
      ],
      [
-      "upgrade_cardio_calibrator",
-      63
+      "upgrade_vampire",
+      61
      ],
      [
       "upgrade_sprint_booster",
-      46
-     ],
-     [
-      "upgrade_reduce_debuff_duration",
-      34
+      47
      ],
      [
       "upgrade_grit",
-      31
+      32
+     ],
+     [
+      "upgrade_reduce_debuff_duration",
+      32
      ]
     ],
     "Late": [
@@ -3192,31 +3197,31 @@
      ],
      [
       "upgrade_tech_purge",
-      51
+      50
      ],
      [
       "upgrade_tech_overflow",
-      43
+      45
      ],
      [
       "upgrade_berserker",
-      40
-     ],
-     [
-      "upgrade_surging_power",
-      34
+      45
      ],
      [
       "upgrade_health_stealing_magic",
-      31
+      34
      ],
      [
-      "upgrade_blood_tribute",
-      26
+      "upgrade_surging_power",
+      32
      ],
      [
       "upgrade_debuff_reducer",
-      23
+      24
+     ],
+     [
+      "upgrade_siphon_bullets",
+      24
      ]
     ]
    },
@@ -3292,10 +3297,10 @@
   "hero": "hero_vampirebat",
   "name": "Mina",
   "slug": "mina",
-  "fetchedAt": 1790860658091,
+  "fetchedAt": 1790894571334,
   "pro": {
-   "wr": 58.7,
-   "g": 179,
+   "wr": 59,
+   "g": 178,
    "p": {
     "Early": [
      [
@@ -3312,49 +3317,45 @@
      ],
      [
       "upgrade_soaring_spirit",
-      99
+      98
+     ],
+     [
+      "upgrade_improved_stamina",
+      93
      ],
      [
       "upgrade_magic_reach",
-      85
+      87
      ],
      [
       "upgrade_health",
-      61
+      60
      ],
      [
       "upgrade_grit",
-      56
-     ],
-     [
-      "upgrade_spirit_sap",
-      48
+      55
      ]
     ],
     "Mid": [
-     [
-      "upgrade_magic_shock",
-      98
-     ],
      [
       "upgrade_superior_stamina",
       98
      ],
      [
-      "upgrade_reduce_debuff_duration",
-      95
+      "upgrade_magic_shock",
+      98
      ],
      [
-      "upgrade_improved_stamina",
-      92
+      "upgrade_reduce_debuff_duration",
+      94
      ],
      [
       "upgrade_vex_barrier",
-      51
+      49
      ],
      [
       "upgrade_blitz_bullets",
-      30
+      31
      ],
      [
       "upgrade_spirit_bubble",
@@ -3362,21 +3363,25 @@
      ],
      [
       "upgrade_rapid_rounds",
-      18
+      19
+     ],
+     [
+      "upgrade_weapon_shielding",
+      15
      ]
     ],
     "Late": [
      [
       "upgrade_boundless_spirit",
-      92
+      93
      ],
      [
       "upgrade_spirit_burn",
-      74
+      73
      ],
      [
       "upgrade_cooldown_reduction",
-      46
+      44
      ],
      [
       "upgrade_spellslinger_headshots",
@@ -3384,15 +3389,15 @@
      ],
      [
       "upgrade_tech_range",
-      40
+      39
      ],
      [
       "upgrade_self_bubble",
-      23
+      24
      ],
      [
       "upgrade_magic_tempo",
-      20
+      19
      ]
     ]
    },
@@ -3401,36 +3406,35 @@
    ]
   },
   "build": {
-   "wr": 56,
-   "matches": 689,
+   "wr": 54,
+   "matches": 472,
    "core": [
     "upgrade_improved_spirit",
     "upgrade_magic_burst",
     "upgrade_quick_silver",
     "upgrade_spirit_sap",
+    "upgrade_improved_stamina",
     "upgrade_magic_reach",
     "upgrade_soaring_spirit",
-    "upgrade_improved_stamina",
     "upgrade_superior_stamina",
     "upgrade_magic_shock",
     "upgrade_boundless_spirit",
-    "upgrade_magic_tempo",
-    "upgrade_spirit_burn",
     "upgrade_cooldown_reduction",
+    "upgrade_spirit_burn",
     "upgrade_tech_range"
    ],
    "early": [
-    "upgrade_blitz_bullets",
     "upgrade_grit",
-    "upgrade_rapid_rounds",
-    "upgrade_crackshot"
+    "upgrade_blitz_bullets",
+    "upgrade_magic_tempo",
+    "upgrade_crackshot",
+    "upgrade_rapid_rounds"
    ],
    "late": [
     "upgrade_spellslinger_headshots",
     "upgrade_toxic_bullets",
     "upgrade_self_bubble",
-    "upgrade_focus_lens",
-    "upgrade_auto_cleanse"
+    "upgrade_focus_lens"
    ],
    "defensive": [
     "upgrade_health",
@@ -3450,7 +3454,8 @@
     "upgrade_reduce_debuff_duration",
     "upgrade_grit",
     "upgrade_self_bubble",
-    "upgrade_focus_lens"
+    "upgrade_focus_lens",
+    "upgrade_restorative_locket"
    ],
    "unlock": [
     2,
@@ -3465,10 +3470,10 @@
   "hero": "hero_mirage",
   "name": "Mirage",
   "slug": "mirage",
-  "fetchedAt": 1790860661945,
+  "fetchedAt": 1790894574360,
   "pro": {
-   "wr": 57.8,
-   "g": 166,
+   "wr": 57.4,
+   "g": 162,
    "p": {
     "Early": [
      [
@@ -3485,23 +3490,23 @@
      ],
      [
       "upgrade_magic_tempo",
-      61
+      60
      ],
      [
       "upgrade_suppressor",
-      46
+      47
      ],
      [
       "upgrade_headshot_booster",
-      42
+      43
      ],
      [
       "upgrade_headhunter",
-      42
+      41
      ],
      [
       "upgrade_spirit_sap",
-      40
+      41
      ]
     ],
     "Mid": [
@@ -3515,15 +3520,15 @@
      ],
      [
       "upgrade_magic_vulnerability",
-      80
+      79
      ],
      [
       "upgrade_titan_round",
-      54
+      55
      ],
      [
       "upgrade_soaring_spirit",
-      53
+      54
      ],
      [
       "upgrade_kinetic_sash",
@@ -3531,11 +3536,11 @@
      ],
      [
       "upgrade_clip_size",
-      34
+      35
      ],
      [
       "upgrade_improved_stamina",
-      28
+      27
      ]
     ],
     "Late": [
@@ -3545,7 +3550,7 @@
      ],
      [
       "upgrade_escalating_exposure",
-      61
+      60
      ],
      [
       "upgrade_cooldown_reduction",
@@ -3564,11 +3569,11 @@
       25
      ],
      [
-      "upgrade_spellslinger_headshots",
-      23
+      "upgrade_health_stealing_magic",
+      22
      ],
      [
-      "upgrade_health_stealing_magic",
+      "upgrade_spellslinger_headshots",
       22
      ]
     ]
@@ -3577,15 +3582,14 @@
   },
   "build": {
    "wr": 50,
-   "matches": 326,
+   "matches": 296,
    "core": [
     "upgrade_mystic_regeneration",
     "upgrade_non_player_bonus",
-    "upgrade_headshot_booster",
     "upgrade_suppressor",
     "upgrade_healbane",
-    "upgrade_magic_tempo",
     "upgrade_clip_size",
+    "upgrade_magic_tempo",
     "upgrade_magic_vulnerability",
     "upgrade_titan_round",
     "upgrade_toxic_bullets",
@@ -3594,44 +3598,43 @@
     "upgrade_escalating_exposure"
    ],
    "early": [
-    "upgrade_kinetic_sash",
+    "upgrade_headshot_booster",
     "upgrade_improved_spirit",
+    "upgrade_kinetic_sash",
     "upgrade_soaring_spirit",
-    "upgrade_rechargingbullets",
     "upgrade_health_stealing_magic",
-    "upgrade_spirit_sap",
-    "upgrade_quick_silver",
-    "upgrade_crackshot"
+    "upgrade_crackshot",
+    "upgrade_rechargingbullets",
+    "upgrade_quick_silver"
    ],
    "late": [
     "upgrade_headhunter",
-    "upgrade_inhibitor",
     "upgrade_tech_overflow",
     "upgrade_proc_silence",
-    "upgrade_spellslinger_headshots",
-    "upgrade_non_player_bonus_sacrifice"
+    "upgrade_inhibitor",
+    "upgrade_siphon_bullets",
+    "upgrade_greater_withering_whip"
    ],
    "defensive": [
     "upgrade_reduce_debuff_duration",
-    "upgrade_tech_purge",
-    "upgrade_counterspell"
+    "upgrade_counterspell",
+    "upgrade_tech_purge"
    ],
    "counters": [
-    "upgrade_spirit_sap",
-    "upgrade_tech_purge",
     "upgrade_proc_silence",
     "upgrade_counterspell",
-    "upgrade_withering_whip",
+    "upgrade_tech_purge",
+    "upgrade_spirit_sap",
     "upgrade_greater_withering_whip",
+    "upgrade_withering_whip",
     "upgrade_reduce_debuff_duration",
     "upgrade_inhibitor"
    ],
    "actives": [
     "upgrade_reduce_debuff_duration",
+    "upgrade_greater_withering_whip",
     "upgrade_spirit_sap",
-    "upgrade_non_player_bonus_sacrifice",
-    "upgrade_withering_whip",
-    "upgrade_greater_withering_whip"
+    "upgrade_withering_whip"
    ],
    "unlock": [
     0,
@@ -3646,7 +3649,7 @@
   "hero": "hero_krill",
   "name": "Mo & Krill",
   "slug": "mo-and-krill",
-  "fetchedAt": 1790860664089,
+  "fetchedAt": 1790894577495,
   "pro": {
    "wr": 64.9,
    "g": 131,
@@ -3832,10 +3835,10 @@
   "hero": "hero_bookworm",
   "name": "Paige",
   "slug": "paige",
-  "fetchedAt": 1790860667052,
+  "fetchedAt": 1790894580532,
   "pro": {
-   "wr": 75.4,
-   "g": 57,
+   "wr": 74.6,
+   "g": 59,
    "p": {
     "Early": [
      [
@@ -3843,20 +3846,20 @@
       98
      ],
      [
+      "upgrade_pristine_emblem",
+      86
+     ],
+     [
       "upgrade_grit",
       86
      ],
      [
-      "upgrade_pristine_emblem",
-      84
-     ],
-     [
       "upgrade_guardian_ward",
-      84
+      85
      ],
      [
       "upgrade_containment",
-      65
+      66
      ],
      [
       "upgrade_spirit_bubble",
@@ -3864,11 +3867,11 @@
      ],
      [
       "upgrade_trophy_collector",
-      44
+      41
      ],
      [
-      "upgrade_sprint_booster",
-      30
+      "upgrade_close_range",
+      27
      ]
     ],
     "Mid": [
@@ -3878,65 +3881,65 @@
      ],
      [
       "upgrade_divine_barrier",
-      72
+      73
      ],
      [
       "upgrade_extra_charge",
       58
      ],
      [
+      "upgrade_thermal_detonator",
+      56
+     ],
+     [
       "upgrade_arcane_extension",
-      46
+      47
      ],
      [
       "upgrade_target_stun",
-      35
+      34
      ],
      [
       "upgrade_arcane_surge",
       32
      ],
      [
-      "upgrade_improved_stamina",
-      18
-     ],
-     [
       "upgrade_weapon_shielding",
-      18
+      20
      ]
     ],
     "Late": [
      [
       "upgrade_tech_range",
-      65
-     ],
-     [
-      "upgrade_thermal_detonator",
-      54
+      66
      ],
      [
       "upgrade_imbued_duration_extender",
-      54
+      56
      ],
      [
       "upgrade_aoe_root",
-      53
-     ],
-     [
-      "upgrade_rapid_recharge",
-      40
+      54
      ],
      [
       "upgrade_cooldown_reduction",
-      35
+      37
+     ],
+     [
+      "upgrade_rapid_recharge",
+      37
      ],
      [
       "upgrade_magic_tempo",
-      23
+      25
      ],
      [
       "upgrade_soaring_spirit",
-      21
+      24
+     ],
+     [
+      "upgrade_boundless_spirit",
+      20
      ]
     ]
    },
@@ -4017,10 +4020,10 @@
   "hero": "hero_chrono",
   "name": "Paradox",
   "slug": "paradox",
-  "fetchedAt": 1790860670114,
+  "fetchedAt": 1790894583498,
   "pro": {
-   "wr": 58.2,
-   "g": 225,
+   "wr": 58.9,
+   "g": 224,
    "p": {
     "Early": [
      [
@@ -4029,7 +4032,7 @@
      ],
      [
       "upgrade_high_velocity_mag",
-      81
+      80
      ],
      [
       "upgrade_medic_bullets",
@@ -4037,23 +4040,23 @@
      ],
      [
       "upgrade_headshot_booster",
-      71
+      70
      ],
      [
       "upgrade_headhunter",
-      60
+      58
      ],
      [
       "upgrade_non_player_bonus",
-      40
+      39
      ],
      [
       "upgrade_non_player_bonus_sacrifice",
-      26
+      25
      ],
      [
       "upgrade_pristine_emblem",
-      24
+      23
      ]
     ],
     "Mid": [
@@ -4075,11 +4078,11 @@
      ],
      [
       "upgrade_veil_walker",
-      65
+      63
      ],
      [
       "upgrade_sprint_booster",
-      41
+      39
      ],
      [
       "upgrade_improved_stamina",
@@ -4101,27 +4104,27 @@
      ],
      [
       "upgrade_headshot_booster2",
-      36
+      35
      ],
      [
       "upgrade_magic_tempo",
-      36
+      35
      ],
      [
       "upgrade_crackshot",
-      33
+      32
      ],
      [
       "upgrade_spirit_burn",
-      29
-     ],
-     [
-      "upgrade_counterspell",
       28
      ],
      [
+      "upgrade_counterspell",
+      27
+     ],
+     [
       "upgrade_superior_stamina",
-      23
+      24
      ]
     ]
    },
@@ -4196,15 +4199,15 @@
   "hero": "hero_synth",
   "name": "Pocket",
   "slug": "pocket",
-  "fetchedAt": 1790860675343,
+  "fetchedAt": 1790894586389,
   "pro": {
-   "wr": 58.7,
-   "g": 150,
+   "wr": 59.5,
+   "g": 163,
    "p": {
     "Early": [
      [
       "upgrade_non_player_bonus_sacrifice",
-      97
+      98
      ],
      [
       "upgrade_magic_burst",
@@ -4212,7 +4215,7 @@
      ],
      [
       "upgrade_non_player_bonus",
-      95
+      96
      ],
      [
       "upgrade_blitz_bullets",
@@ -4220,25 +4223,25 @@
      ],
      [
       "upgrade_rapid_rounds",
-      67
+      65
      ],
      [
       "upgrade_endurance",
-      53
+      51
      ],
      [
       "upgrade_regenerating_bullet_shield",
-      49
+      50
      ],
      [
       "upgrade_cold_front",
-      38
+      41
      ]
     ],
     "Mid": [
      [
       "upgrade_magic_shock",
-      95
+      96
      ],
      [
       "upgrade_cooldown_reduction",
@@ -4246,61 +4249,61 @@
      ],
      [
       "upgrade_reduce_debuff_duration",
-      79
+      80
      ],
      [
       "upgrade_magic_reach",
-      79
+      74
      ],
      [
       "upgrade_magic_tempo",
-      59
+      57
      ],
      [
       "upgrade_arcane_extension",
-      53
+      52
      ],
      [
       "upgrade_magic_vulnerability",
-      19
+      21
      ],
      [
-      "upgrade_improved_stamina",
-      7
+      "upgrade_magic_shield",
+      15
      ]
     ],
     "Late": [
      [
       "upgrade_spirit_burn",
-      81
+      82
      ],
      [
       "upgrade_imbued_duration_extender",
-      76
+      78
      ],
      [
       "upgrade_rocket_booster",
-      73
+      75
      ],
      [
       "upgrade_tech_range",
-      58
-     ],
-     [
-      "upgrade_warp_stone",
       57
      ],
      [
+      "upgrade_warp_stone",
+      56
+     ],
+     [
       "upgrade_transcendent_cooldown",
-      48
+      49
      ],
      [
       "upgrade_self_bubble",
-      23
+      21
      ],
      [
       "upgrade_vex_barrier",
-      21
+      19
      ]
     ]
    },
@@ -4374,15 +4377,15 @@
   "hero": "hero_familiar",
   "name": "Rem",
   "slug": "rem",
-  "fetchedAt": 1790860677192,
+  "fetchedAt": 1790894589377,
   "pro": {
-   "wr": 75.4,
+   "wr": 70.8,
    "g": 65,
    "p": {
     "Early": [
      [
       "upgrade_extra_charge",
-      92
+      91
      ],
      [
       "upgrade_guardian_ward",
@@ -4390,33 +4393,33 @@
      ],
      [
       "upgrade_high_velocity_mag",
-      88
+      89
      ],
      [
       "upgrade_grit",
-      85
+      88
      ],
      [
       "upgrade_pristine_emblem",
-      80
+      82
      ],
      [
       "upgrade_improved_spirit",
-      48
+      46
      ],
      [
-      "upgrade_containment",
-      34
+      "upgrade_restorative_locket",
+      45
      ],
      [
-      "upgrade_magic_burst",
-      32
+      "upgrade_arcane_surge",
+      38
      ]
     ],
     "Mid": [
      [
       "upgrade_healing_booster",
-      72
+      71
      ],
      [
       "upgrade_soaring_spirit",
@@ -4427,24 +4430,24 @@
       55
      ],
      [
-      "upgrade_restorative_locket",
-      48
-     ],
-     [
       "upgrade_magic_reach",
-      45
-     ],
-     [
-      "upgrade_arcane_surge",
-      40
-     ],
-     [
-      "upgrade_rupture",
-      34
+      43
      ],
      [
       "upgrade_magic_shock",
       32
+     ],
+     [
+      "upgrade_improved_stamina",
+      29
+     ],
+     [
+      "upgrade_rupture",
+      29
+     ],
+     [
+      "upgrade_arcane_extension",
+      29
      ]
     ],
     "Late": [
@@ -4454,19 +4457,15 @@
      ],
      [
       "upgrade_imbued_duration_extender",
-      48
+      46
      ],
      [
       "upgrade_discord",
-      43
+      42
      ],
      [
       "upgrade_boundless_spirit",
       34
-     ],
-     [
-      "upgrade_arcane_extension",
-      32
      ],
      [
       "upgrade_mystic_reverb",
@@ -4474,80 +4473,87 @@
      ],
      [
       "upgrade_ability_power_shard",
-      26
+      25
      ],
      [
       "upgrade_spirit_burn",
       18
+     ],
+     [
+      "upgrade_cooldown_reduction",
+      17
      ]
     ]
    },
    "unknown": []
   },
   "build": {
-   "wr": 59,
-   "matches": 186,
+   "wr": 58,
+   "matches": 195,
    "core": [
     "upgrade_high_velocity_mag",
     "upgrade_pristine_emblem",
+    "upgrade_grit",
     "upgrade_extra_charge",
-    "upgrade_endurance",
-    "upgrade_restorative_locket",
-    "upgrade_guardian_ward",
+    "upgrade_trophy_collector",
+    "upgrade_improved_stamina",
     "upgrade_arcane_surge",
+    "upgrade_containment",
+    "upgrade_guardian_ward",
     "upgrade_healing_booster",
-    "upgrade_rupture",
+    "upgrade_soaring_spirit",
     "upgrade_divine_barrier",
     "upgrade_glitch",
-    "upgrade_imbued_duration_extender",
-    "upgrade_cooldown_reduction",
-    "upgrade_transcendent_cooldown"
+    "upgrade_ability_power_shard",
+    "upgrade_imbued_duration_extender"
    ],
    "early": [
-    "upgrade_trophy_collector",
-    "upgrade_grit",
-    "upgrade_soaring_spirit",
-    "upgrade_containment",
     "upgrade_improved_spirit",
+    "upgrade_endurance",
     "upgrade_magic_reach",
+    "upgrade_sprint_booster",
     "upgrade_magic_tempo",
-    "upgrade_arcane_extension"
+    "upgrade_restorative_locket",
+    "upgrade_arcane_extension",
+    "upgrade_health_stimpak"
    ],
    "late": [
-    "upgrade_ability_power_shard",
-    "upgrade_discord",
+    "upgrade_cooldown_reduction",
+    "upgrade_rupture",
     "upgrade_rapid_recharge",
-    "upgrade_health_nova",
+    "upgrade_discord",
+    "upgrade_transcendent_cooldown",
     "upgrade_target_stun",
     "upgrade_healbuff",
-    "upgrade_dps_aura",
-    "upgrade_tech_range"
+    "upgrade_health_nova"
    ],
    "defensive": [
-    "upgrade_vex_barrier",
     "upgrade_cheat_death",
+    "upgrade_vex_barrier",
     "upgrade_spirit_bubble"
    ],
    "counters": [
-    "upgrade_cheat_death",
-    "upgrade_healbane",
+    "upgrade_greater_withering_whip",
+    "upgrade_withering_whip",
     "upgrade_magic_shock",
-    "upgrade_targeted_silence",
-    "upgrade_greater_withering_whip"
+    "upgrade_healbane",
+    "upgrade_cheat_death",
+    "upgrade_targeted_silence"
    ],
    "actives": [
-    "upgrade_grit",
-    "upgrade_containment",
-    "upgrade_ability_power_shard",
-    "upgrade_discord",
-    "upgrade_health_nova",
-    "upgrade_target_stun",
-    "upgrade_dps_aura",
+    "upgrade_restorative_locket",
     "upgrade_health_stimpak",
+    "upgrade_rupture",
+    "upgrade_discord",
+    "upgrade_target_stun",
+    "upgrade_health_nova",
+    "upgrade_dps_aura",
     "upgrade_rescue_beam",
     "upgrade_targeted_silence",
+    "upgrade_cold_front",
     "upgrade_greater_withering_whip",
-    "upgrade_cold_front"
+    "upgrade_withering_whip",
+    "upgrade_goose_egg"
    ],
    "unlock": [
     1,
@@ -4562,61 +4568,61 @@
   "hero": "hero_gigawatt",
   "name": "Seven",
   "slug": "seven",
-  "fetchedAt": 1790860680196,
+  "fetchedAt": 1790894592387,
   "pro": {
-   "wr": 58.3,
-   "g": 24,
+   "wr": 53.6,
+   "g": 28,
    "p": {
     "Early": [
      [
       "upgrade_arcane_surge",
-      71
+      75
      ],
      [
       "upgrade_non_player_bonus",
-      50
-     ],
-     [
-      "upgrade_magic_shield",
-      50
+      54
      ],
      [
       "upgrade_suppressor",
-      50
+      54
+     ],
+     [
+      "upgrade_magic_shield",
+      54
      ],
      [
       "upgrade_non_player_bonus_sacrifice",
-      46
+      50
      ],
      [
       "upgrade_improved_stamina",
-      46
+      39
+     ],
+     [
+      "upgrade_improved_spirit",
+      32
      ],
      [
       "upgrade_clip_size",
-      29
-     ],
-     [
-      "upgrade_titan_round",
       29
      ]
     ],
     "Mid": [
      [
       "upgrade_magic_vulnerability",
-      96
+      93
      ],
      [
       "upgrade_escalating_exposure",
-      79
+      82
      ],
      [
       "upgrade_cardio_calibrator",
-      54
+      57
      ],
      [
       "upgrade_healbane",
-      46
+      50
      ],
      [
       "upgrade_fleetfoot_boots",
@@ -4624,40 +4630,36 @@
      ],
      [
       "upgrade_imbued_duration_extender",
-      46
+      43
      ],
      [
       "upgrade_sprint_booster",
-      38
+      39
      ],
      [
       "upgrade_reduce_debuff_duration",
-      33
+      36
      ]
     ],
     "Late": [
      [
       "upgrade_health_stealing_magic",
-      50
+      54
      ],
      [
       "upgrade_tech_overflow",
-      33
-     ],
-     [
-      "upgrade_toxic_bullets",
-      29
+      32
      ],
      [
       "upgrade_ethereal_bullets",
       29
      ],
      [
-      "upgrade_counterspell",
-      25
+      "upgrade_tech_purge",
+      29
      ],
      [
-      "upgrade_tech_purge",
+      "upgrade_spellslinger_headshots",
       25
      ],
      [
@@ -4665,8 +4667,12 @@
       25
      ],
      [
-      "upgrade_magic_reach",
+      "upgrade_deflecting_armor",
       21
+     ],
+     [
+      "upgrade_magic_reach",
+      18
      ]
     ]
    },
@@ -4741,10 +4747,10 @@
   "hero": "hero_shiv",
   "name": "Shiv",
   "slug": "shiv",
-  "fetchedAt": 1790860683301,
+  "fetchedAt": 1790894595344,
   "pro": {
    "wr": 54.8,
-   "g": 261,
+   "g": 270,
    "p": {
     "Early": [
      [
@@ -4757,61 +4763,61 @@
      ],
      [
       "upgrade_bullet_resist_shredder",
-      66
+      69
      ],
      [
       "upgrade_medic_bullets",
-      53
+      56
      ],
      [
       "upgrade_endurance",
-      48
+      45
      ],
      [
       "upgrade_close_range",
-      41
+      44
      ],
      [
       "upgrade_non_player_bonus",
-      39
+      38
      ],
      [
       "upgrade_extra_charge",
-      30
+      29
      ]
     ],
     "Mid": [
      [
       "upgrade_regenerating_bullet_shield",
-      70
+      72
      ],
      [
       "upgrade_reduce_debuff_duration",
-      68
+      67
      ],
      [
       "upgrade_healbane",
       44
      ],
      [
-      "upgrade_fleetfoot_boots",
-      37
-     ],
-     [
       "upgrade_bullet_armor_reduction_aura",
-      36
+      39
      ],
      [
-      "upgrade_ethereal_bullets",
-      36
-     ],
-     [
-      "upgrade_blitz_bullets",
-      34
+      "upgrade_fleetfoot_boots",
+      38
      ],
      [
       "upgrade_express_shot",
+      37
+     ],
+     [
+      "upgrade_ethereal_bullets",
       34
+     ],
+     [
+      "upgrade_blitz_bullets",
+      33
      ]
     ],
     "Late": [
@@ -4821,11 +4827,11 @@
      ],
      [
       "upgrade_berserker",
-      34
+      35
      ],
      [
       "upgrade_counterspell",
-      27
+      28
      ],
      [
       "upgrade_deflecting_armor",
@@ -4833,11 +4839,11 @@
      ],
      [
       "upgrade_tech_overflow",
-      24
+      23
      ],
      [
       "upgrade_health_stealing_magic",
-      23
+      22
      ],
      [
       "upgrade_debuff_reducer",
@@ -4845,7 +4851,7 @@
      ],
      [
       "upgrade_cooldown_reduction",
-      20
+      19
      ]
     ]
    },
@@ -4922,19 +4928,19 @@
   "hero": "hero_werewolf",
   "name": "Silver",
   "slug": "silver",
-  "fetchedAt": 1790860686734,
+  "fetchedAt": 1790894598359,
   "pro": {
-   "wr": 58.7,
-   "g": 252,
+   "wr": 57.8,
+   "g": 256,
    "p": {
     "Early": [
      [
       "upgrade_weapon_backstabber",
-      99
+      98
      ],
      [
       "upgrade_lifestrike_gauntlets",
-      97
+      96
      ],
      [
       "upgrade_medic_bullets",
@@ -4942,23 +4948,23 @@
      ],
      [
       "upgrade_grit",
-      65
+      68
      ],
      [
       "upgrade_cold_front",
-      56
+      55
      ],
      [
       "upgrade_close_range",
-      38
+      40
      ],
      [
       "upgrade_acolytes_glove",
-      22
+      24
      ],
      [
       "upgrade_endurance",
-      12
+      13
      ]
     ],
     "Mid": [
@@ -4968,30 +4974,30 @@
      ],
      [
       "upgrade_boxing_glove",
-      62
+      65
      ],
      [
       "upgrade_spirit_bubble",
-      52
-     ],
-     [
-      "upgrade_veil_walker",
-      43
-     ],
-     [
-      "upgrade_health",
-      38
+      51
      ],
      [
       "upgrade_magic_burst",
-      38
+      39
      ],
      [
-      "upgrade_weighted_shots",
+      "upgrade_health",
+      39
+     ],
+     [
+      "upgrade_veil_walker",
       36
      ],
      [
       "upgrade_containment",
+      33
+     ],
+     [
+      "upgrade_slowing_bullets",
       32
      ]
     ],
@@ -5002,31 +5008,31 @@
      ],
      [
       "upgrade_debuff_reducer",
-      60
+      62
      ],
      [
       "upgrade_berserker",
-      54
+      55
      ],
      [
       "upgrade_unstoppable",
       45
      ],
      [
+      "upgrade_weighted_shots",
+      39
+     ],
+     [
       "upgrade_diviners_kevlar",
-      31
+      30
      ],
      [
       "upgrade_tech_purge",
-      27
+      29
      ],
      [
       "upgrade_warp_stone",
-      25
-     ],
-     [
-      "upgrade_imbued_duration_extender",
-      23
+      27
      ]
     ]
    },
@@ -5114,10 +5120,10 @@
   "hero": "hero_magician",
   "name": "Sinclair",
   "slug": "sinclair",
-  "fetchedAt": 1790860689424,
+  "fetchedAt": 1790894601404,
   "pro": {
-   "wr": 67.7,
-   "g": 127,
+   "wr": 68.3,
+   "g": 123,
    "p": {
     "Early": [
      [
@@ -5130,27 +5136,27 @@
      ],
      [
       "upgrade_grit",
-      68
+      67
      ],
      [
       "upgrade_non_player_bonus",
-      62
+      64
      ],
      [
       "upgrade_non_player_bonus_sacrifice",
-      54
-     ],
-     [
-      "upgrade_long_range",
-      31
+      56
      ],
      [
       "upgrade_health",
+      32
+     ],
+     [
+      "upgrade_long_range",
       30
      ],
      [
-      "upgrade_sharpshooter",
-      29
+      "upgrade_endurance",
+      28
      ]
     ],
     "Mid": [
@@ -5160,7 +5166,7 @@
      ],
      [
       "upgrade_magic_reach",
-      80
+      83
      ],
      [
       "upgrade_arcane_extension",
@@ -5168,57 +5174,57 @@
      ],
      [
       "upgrade_containment",
-      53
-     ],
-     [
-      "upgrade_veil_walker",
       50
      ],
      [
+      "upgrade_veil_walker",
+      47
+     ],
+     [
       "upgrade_warp_stone",
-      49
+      47
      ],
      [
       "upgrade_spirit_bubble",
-      40
+      41
      ],
      [
       "upgrade_sprint_booster",
-      36
+      35
      ]
     ],
     "Late": [
      [
       "upgrade_imbued_duration_extender",
-      94
+      93
      ],
      [
       "upgrade_counterspell",
-      35
+      36
      ],
      [
       "upgrade_aoe_root",
       33
      ],
      [
-      "upgrade_ability_power_shard",
-      28
-     ],
-     [
       "upgrade_cooldown_reduction",
       27
      ],
      [
-      "upgrade_debuff_reducer",
-      22
+      "upgrade_ability_power_shard",
+      25
+     ],
+     [
+      "upgrade_thermal_detonator",
+      24
      ],
      [
       "upgrade_diviners_kevlar",
-      21
+      22
      ],
      [
-      "upgrade_unstoppable",
-      15
+      "upgrade_debuff_reducer",
+      21
      ]
     ]
    },
@@ -5306,27 +5312,27 @@
   "hero": "hero_doorman",
   "name": "The Doorman",
   "slug": "the-doorman",
-  "fetchedAt": 1790860692616,
+  "fetchedAt": 1790894604354,
   "pro": {
-   "wr": 57.1,
-   "g": 49,
+   "wr": 56.4,
+   "g": 55,
    "p": {
     "Early": [
      [
       "upgrade_extra_charge",
-      94
+      91
      ],
      [
       "upgrade_magic_burst",
-      90
+      89
      ],
      [
       "upgrade_high_velocity_mag",
-      86
+      87
      ],
      [
       "upgrade_pristine_emblem",
-      76
+      80
      ],
      [
       "upgrade_crackshot",
@@ -5334,158 +5340,160 @@
      ],
      [
       "upgrade_endurance",
-      43
+      40
      ],
      [
       "upgrade_blitz_bullets",
-      37
+      38
      ],
      [
-      "upgrade_medic_bullets",
-      35
+      "upgrade_grit",
+      33
      ]
     ],
     "Mid": [
      [
       "upgrade_magic_reach",
-      94
+      95
      ],
      [
       "upgrade_rapid_recharge",
-      92
+      91
      ],
      [
       "upgrade_veil_walker",
-      80
+      67
      ],
      [
       "upgrade_sprint_booster",
-      57
+      47
      ],
      [
       "upgrade_healbane",
-      45
+      42
      ],
      [
       "upgrade_containment",
-      45
+      38
+     ],
+     [
+      "upgrade_health",
+      20
      ],
      [
       "upgrade_spirit_bubble",
-      22
-     ],
-     [
-      "upgrade_target_stun",
-      18
+      20
      ]
     ],
     "Late": [
      [
       "upgrade_magic_shock",
-      92
+      91
      ],
      [
       "upgrade_soaring_spirit",
-      78
+      73
      ],
      [
       "upgrade_boundless_spirit",
-      59
+      60
      ],
      [
       "upgrade_improved_spirit",
-      57
-     ],
-     [
-      "upgrade_spirit_burn",
-      51
+      55
      ],
      [
       "upgrade_tech_range",
-      45
+      51
+     ],
+     [
+      "upgrade_spirit_burn",
+      47
      ],
      [
       "upgrade_cooldown_reduction",
-      41
+      40
      ],
      [
       "upgrade_warp_stone",
-      33
+      29
      ]
     ]
    },
    "unknown": []
   },
   "build": {
-   "wr": 49,
-   "matches": 129,
+   "wr": 56,
+   "matches": 72,
    "core": [
     "upgrade_high_velocity_mag",
+    "upgrade_endurance",
     "upgrade_pristine_emblem",
     "upgrade_extra_charge",
     "upgrade_magic_burst",
+    "upgrade_crackshot",
     "upgrade_magic_reach",
-    "upgrade_containment",
+    "upgrade_rechargingbullets",
+    "upgrade_guardian_ward",
     "upgrade_rapid_recharge",
-    "upgrade_aoe_root",
+    "upgrade_soaring_spirit",
     "upgrade_magic_shock",
+    "upgrade_boundless_spirit",
     "upgrade_tech_range",
-    "upgrade_cooldown_reduction",
-    "upgrade_cheat_death"
+    "upgrade_spirit_burn"
    ],
    "early": [
+    "upgrade_containment",
     "upgrade_trophy_collector",
-    "upgrade_magic_tempo",
-    "upgrade_sprint_booster",
-    "upgrade_soaring_spirit",
-    "upgrade_grit",
+    "upgrade_healbane",
+    "upgrade_magic_shield",
     "upgrade_improved_spirit",
-    "upgrade_guardian_ward",
-    "upgrade_healbane"
+    "upgrade_magic_tempo",
+    "upgrade_cardio_calibrator",
+    "upgrade_sprint_booster"
    ],
    "late": [
+    "upgrade_aoe_root",
+    "upgrade_mystic_reverb",
     "upgrade_veil_walker",
-    "upgrade_boundless_spirit",
-    "upgrade_transcendent_cooldown",
+    "upgrade_glitch",
+    "upgrade_cooldown_reduction",
     "upgrade_dps_aura",
-    "upgrade_spirit_burn",
-    "upgrade_target_stun",
-    "upgrade_divine_barrier",
-    "upgrade_glitch"
+    "upgrade_magic_storm"
    ],
    "defensive": [
-    "upgrade_health",
     "upgrade_chonky",
-    "upgrade_cheat_death"
+    "upgrade_counterspell",
+    "upgrade_health"
    ],
    "counters": [
     "upgrade_healbane",
-    "upgrade_divine_barrier",
     "upgrade_glitch",
-    "upgrade_weapon_shielding",
     "upgrade_counterspell",
-    "upgrade_debuff_reducer",
-    "upgrade_tech_purge"
+    "upgrade_tech_purge",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_cheat_death"
    ],
    "actives": [
-    "upgrade_grit",
-    "upgrade_guardian_ward",
-    "upgrade_dps_aura",
-    "upgrade_target_stun",
-    "upgrade_divine_barrier",
+    "upgrade_containment",
+    "upgrade_aoe_root",
     "upgrade_glitch",
-    "upgrade_cold_front",
+    "upgrade_dps_aura",
+    "upgrade_grit",
+    "upgrade_thermal_detonator",
+    "upgrade_non_player_bonus_sacrifice",
+    "upgrade_ability_power_shard",
+    "upgrade_target_stun",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_warp_stone",
     "upgrade_cloaking_device_active",
     "upgrade_health_stimpak",
-    "upgrade_arctic_blast",
-    "upgrade_thermal_detonator",
-    "upgrade_rescue_beam",
-    "upgrade_rupture"
+    "upgrade_cold_front"
    ],
    "unlock": [
     0,
-    1,
     2,
+    1,
     3
    ]
   },
@@ -5495,15 +5503,15 @@
   "hero": "hero_priest",
   "name": "Venator",
   "slug": "venator",
-  "fetchedAt": 1790860695182,
+  "fetchedAt": 1790894607344,
   "pro": {
-   "wr": 54.6,
-   "g": 262,
+   "wr": 54.5,
+   "g": 266,
    "p": {
     "Early": [
      [
       "upgrade_regenerating_bullet_shield",
-      87
+      86
      ],
      [
       "upgrade_non_player_bonus",
@@ -5511,7 +5519,7 @@
      ],
      [
       "upgrade_medic_bullets",
-      79
+      80
      ],
      [
       "upgrade_non_player_bonus_sacrifice",
@@ -5519,7 +5527,7 @@
      ],
      [
       "upgrade_headshot_booster2",
-      62
+      59
      ],
      [
       "upgrade_close_range",
@@ -5527,41 +5535,41 @@
      ],
      [
       "upgrade_clip_size",
-      45
+      47
      ],
      [
-      "upgrade_health",
-      42
+      "upgrade_titan_round",
+      44
      ]
     ],
     "Mid": [
      [
       "upgrade_berserker",
-      63
+      62
      ],
      [
       "upgrade_fleetfoot_boots",
-      57
+      58
      ],
      [
       "upgrade_extra_charge",
-      50
+      48
      ],
      [
       "upgrade_chonky",
-      40
-     ],
-     [
-      "upgrade_bulletshredimbue",
-      40
-     ],
-     [
-      "upgrade_vampire",
-      38
+      42
      ],
      [
       "upgrade_cardio_calibrator",
-      36
+      39
+     ],
+     [
+      "upgrade_bulletshredimbue",
+      39
+     ],
+     [
+      "upgrade_vampire",
+      35
      ],
      [
       "upgrade_reduce_debuff_duration",
@@ -5571,14 +5579,14 @@
     "Late": [
      [
       "upgrade_rapid_recharge",
-      58
-     ],
-     [
-      "upgrade_siphon_bullets",
-      45
+      56
      ],
      [
       "upgrade_tech_purge",
+      45
+     ],
+     [
+      "upgrade_siphon_bullets",
       44
      ],
      [
@@ -5587,15 +5595,15 @@
      ],
      [
       "upgrade_surging_power",
-      29
+      30
      ],
      [
       "upgrade_ricochet",
-      22
+      21
      ],
      [
       "upgrade_debuff_reducer",
-      17
+      16
      ],
      [
       "upgrade_unstoppable",
@@ -5676,111 +5684,111 @@
   "hero": "hero_frank",
   "name": "Victor",
   "slug": "victor",
-  "fetchedAt": 1790860698725,
+  "fetchedAt": 1790894610334,
   "pro": {
-   "wr": 57.9,
-   "g": 38,
+   "wr": 56.1,
+   "g": 41,
    "p": {
     "Early": [
      [
       "upgrade_endurance",
-      87
+      88
      ],
      [
       "upgrade_high_velocity_mag",
-      74
+      71
      ],
      [
       "upgrade_pristine_emblem",
-      74
+      71
      ],
      [
       "upgrade_improved_spirit",
-      66
+      68
      ],
      [
       "upgrade_titan_round",
-      66
-     ],
-     [
-      "upgrade_blitz_bullets",
       63
      ],
      [
+      "upgrade_blitz_bullets",
+      61
+     ],
+     [
       "upgrade_clip_size",
-      55
+      51
      ],
      [
       "upgrade_rapid_rounds",
-      50
+      46
      ]
     ],
     "Mid": [
      [
       "upgrade_cardio_calibrator",
-      97
+      98
      ],
      [
       "upgrade_healing_booster",
-      68
+      71
      ],
-     [
-      "upgrade_sprint_booster",
-      63
-     ],
-     [
-      "upgrade_quick_silver",
-      55
-     ],
-     [
-      "upgrade_ethereal_bullets",
-      55
-     ],
-     [
-      "upgrade_spirit_bubble",
-      45
-     ],
-     [
-      "upgrade_fleetfoot_boots",
-      34
-     ],
-     [
-      "upgrade_berserker",
-      32
-     ]
-    ],
-    "Late": [
      [
       "upgrade_health_stealing_magic",
       61
      ],
      [
-      "upgrade_tech_overflow",
-      45
+      "upgrade_sprint_booster",
+      59
      ],
      [
+      "upgrade_quick_silver",
+      54
+     ],
+     [
+      "upgrade_ethereal_bullets",
+      54
+     ],
+     [
+      "upgrade_spirit_bubble",
+      44
+     ],
+     [
+      "upgrade_fleetfoot_boots",
+      32
+     ]
+    ],
+    "Late": [
+     [
       "upgrade_tech_purge",
-      39
+      44
+     ],
+     [
+      "upgrade_tech_overflow",
+      41
      ],
      [
       "upgrade_infuser",
-      24
+      27
      ],
      [
       "upgrade_tech_range",
-      21
+      24
      ],
      [
       "upgrade_escalating_exposure",
-      21
+      24
      ],
      [
       "upgrade_siphon_bullets",
-      21
+      20
+     ],
+     [
+      "upgrade_self_bubble",
+      15
      ],
      [
       "upgrade_deflecting_armor",
-      13
+      12
      ]
     ]
    },
@@ -5855,10 +5863,10 @@
   "hero": "hero_hornet",
   "name": "Vindicta",
   "slug": "vindicta",
-  "fetchedAt": 1790860701826,
+  "fetchedAt": 1790894613377,
   "pro": {
-   "wr": 55,
-   "g": 151,
+   "wr": 55.9,
+   "g": 152,
    "p": {
     "Early": [
      [
@@ -5871,11 +5879,11 @@
      ],
      [
       "upgrade_rapid_recharge",
-      81
+      80
      ],
      [
       "upgrade_pristine_emblem",
-      72
+      71
      ],
      [
       "upgrade_improved_spirit",
@@ -5883,7 +5891,7 @@
      ],
      [
       "upgrade_soaring_spirit",
-      62
+      61
      ],
      [
       "upgrade_magic_burst",
@@ -5901,41 +5909,45 @@
      ],
      [
       "upgrade_long_range",
-      65
+      66
      ],
      [
       "upgrade_sharpshooter",
-      62
+      64
      ],
      [
       "upgrade_blitz_bullets",
-      62
-     ],
-     [
-      "upgrade_burst_fire",
-      56
+      63
      ],
      [
       "upgrade_cardio_calibrator",
-      54
+      55
      ],
      [
       "upgrade_sprint_booster",
-      50
+      51
      ],
      [
       "upgrade_rapid_rounds",
-      43
+      44
+     ],
+     [
+      "upgrade_healbane",
+      40
      ]
     ],
     "Late": [
      [
+      "upgrade_burst_fire",
+      58
+     ],
+     [
       "upgrade_titan_round",
-      38
+      39
      ],
      [
       "upgrade_imbued_duration_extender",
-      38
+      37
      ],
      [
       "upgrade_quick_silver",
@@ -5943,19 +5955,15 @@
      ],
      [
       "upgrade_warp_stone",
-      24
+      23
      ],
      [
       "upgrade_tech_overflow",
-      21
+      22
      ],
      [
       "upgrade_ethereal_bullets",
       21
-     ],
-     [
-      "upgrade_reduce_debuff_duration",
-      18
      ],
      [
       "upgrade_health_stealing_magic",
@@ -5966,41 +5974,43 @@
    "unknown": []
   },
   "build": {
-   "wr": 59,
-   "matches": 293,
+   "wr": 52,
+   "matches": 221,
    "core": [
-    "upgrade_high_velocity_mag",
-    "upgrade_pristine_emblem",
     "upgrade_quick_silver",
     "upgrade_extra_charge",
     "upgrade_rapid_recharge",
-    "upgrade_rapid_rounds",
     "upgrade_long_range",
+    "upgrade_rapid_rounds",
     "upgrade_cardio_calibrator",
     "upgrade_blitz_bullets",
     "upgrade_fleetfoot_boots",
+    "upgrade_clip_size",
     "upgrade_sharpshooter",
+    "upgrade_arcane_extension",
+    "upgrade_imbued_duration_extender",
     "upgrade_burst_fire",
+    "upgrade_titan_round",
     "upgrade_enchanted_holsters"
    ],
    "early": [
-    "upgrade_titan_round",
-    "upgrade_improved_spirit",
+    "upgrade_high_velocity_mag",
+    "upgrade_pristine_emblem",
     "upgrade_soaring_spirit",
-    "upgrade_trophy_collector",
     "upgrade_sprint_booster",
-    "upgrade_vampire",
-    "upgrade_health_stealing_magic",
+    "upgrade_improved_spirit",
+    "upgrade_trophy_collector",
+    "upgrade_magic_shield",
     "upgrade_bullet_resist_shredder"
    ],
    "late": [
     "upgrade_tech_overflow",
     "upgrade_ethereal_bullets",
     "upgrade_blood_tribute",
-    "upgrade_imbued_duration_extender",
+    "upgrade_banshee_slugs",
     "upgrade_surging_power",
     "upgrade_critshot",
-    "upgrade_banshee_slugs"
+    "upgrade_fury_trance"
    ],
    "defensive": [
     "upgrade_counterspell",
@@ -6008,20 +6018,24 @@
     "upgrade_spirit_bubble"
    ],
    "counters": [
+    "upgrade_counterspell",
+    "upgrade_proc_silence",
     "upgrade_reduce_debuff_duration",
     "upgrade_debuff_reducer",
-    "upgrade_counterspell",
     "upgrade_bullet_resist_shredder",
     "upgrade_healbane",
-    "upgrade_tech_purge",
     "upgrade_unstoppable"
    ],
    "actives": [
     "upgrade_reduce_debuff_duration",
     "upgrade_blood_tribute",
     "upgrade_surging_power",
+    "upgrade_fury_trance",
     "upgrade_unstoppable",
-    "upgrade_warp_stone"
+    "upgrade_thermal_detonator",
+    "upgrade_warp_stone",
+    "upgrade_health_stimpak",
+    "upgrade_grit"
    ],
    "unlock": [
     2,
@@ -6036,181 +6050,182 @@
   "hero": "hero_viscous",
   "name": "Viscous",
   "slug": "viscous",
-  "fetchedAt": 1790860704751,
+  "fetchedAt": 1790894616366,
   "pro": {
-   "wr": 66.7,
-   "g": 105,
+   "wr": 68.8,
+   "g": 93,
    "p": {
     "Early": [
      [
       "upgrade_high_velocity_mag",
-      95
+      96
      ],
      [
       "upgrade_magic_burst",
-      93
+      92
      ],
      [
       "upgrade_crackshot",
-      77
+      75
      ],
      [
       "upgrade_express_shot",
-      76
-     ],
-     [
-      "upgrade_sprint_booster",
-      54
-     ],
-     [
-      "upgrade_trophy_collector",
-      39
+      74
      ],
      [
       "upgrade_headshot_booster",
-      35
+      37
+     ],
+     [
+      "upgrade_trophy_collector",
+      34
      ],
      [
       "upgrade_health_stimpak",
-      31
+      28
+     ],
+     [
+      "upgrade_pristine_emblem",
+      20
      ]
     ],
     "Mid": [
      [
       "upgrade_magic_shock",
-      89
+      87
      ],
      [
       "upgrade_magic_reach",
-      75
+      73
      ],
      [
       "upgrade_veil_walker",
-      66
+      69
      ],
      [
       "upgrade_acolytes_glove",
+      57
+     ],
+     [
+      "upgrade_sprint_booster",
       55
      ],
      [
       "upgrade_improved_spirit",
-      49
+      46
      ],
      [
       "upgrade_healbane",
-      33
+      34
      ],
      [
       "upgrade_extra_charge",
-      24
-     ],
-     [
-      "upgrade_rescue_beam",
-      23
+      26
      ]
     ],
     "Late": [
      [
       "upgrade_spirit_snatch",
-      84
-     ],
-     [
-      "upgrade_soaring_spirit",
-      64
+      87
      ],
      [
       "upgrade_cooldown_reduction",
-      62
+      63
+     ],
+     [
+      "upgrade_soaring_spirit",
+      60
      ],
      [
       "upgrade_tech_range",
-      57
+      58
      ],
      [
       "upgrade_spirit_burn",
-      49
-     ],
-     [
-      "upgrade_magic_tempo",
-      36
+      46
      ],
      [
       "upgrade_transcendent_cooldown",
-      36
+      40
+     ],
+     [
+      "upgrade_magic_tempo",
+      33
      ],
      [
       "upgrade_boundless_spirit",
-      25
+      27
      ]
     ]
    },
    "unknown": []
   },
   "build": {
-   "wr": 51,
-   "matches": 168,
+   "wr": 61,
+   "matches": 114,
    "core": [
-    "upgrade_headshot_booster",
+    "upgrade_non_player_bonus",
     "upgrade_magic_burst",
     "upgrade_high_velocity_mag",
     "upgrade_crackshot",
     "upgrade_express_shot",
-    "upgrade_acolytes_glove",
-    "upgrade_improved_spirit",
-    "upgrade_magic_reach",
+    "upgrade_trophy_collector",
     "upgrade_veil_walker",
-    "upgrade_healbane",
-    "upgrade_extra_charge",
+    "upgrade_magic_reach",
     "upgrade_soaring_spirit",
-    "upgrade_spirit_snatch",
+    "upgrade_magic_tempo",
     "upgrade_magic_shock",
+    "upgrade_spirit_snatch",
     "upgrade_cooldown_reduction",
-    "upgrade_tech_range",
+    "upgrade_transcendent_cooldown",
+    "upgrade_boundless_spirit",
     "upgrade_spirit_burn"
    ],
    "early": [
-    "upgrade_magic_tempo",
-    "upgrade_trophy_collector",
+    "upgrade_acolytes_glove",
     "upgrade_magic_shield",
-    "upgrade_grit",
+    "upgrade_improved_spirit",
+    "upgrade_healbane",
+    "upgrade_sprint_booster",
+    "upgrade_health_stimpak",
     "upgrade_arcane_surge",
-    "upgrade_guardian_ward",
-    "upgrade_health_stimpak"
+    "upgrade_headshot_booster"
    ],
    "late": [
-    "upgrade_boundless_spirit",
-    "upgrade_mystic_reverb",
-    "upgrade_warp_stone",
+    "upgrade_tech_range",
     "upgrade_rescue_beam",
-    "upgrade_transcendent_cooldown",
+    "upgrade_warp_stone",
+    "upgrade_mystic_reverb",
     "upgrade_phantom_strike",
-    "upgrade_target_stun"
+    "upgrade_target_stun",
+    "upgrade_divine_barrier"
    ],
    "defensive": [
+    "upgrade_diviners_kevlar",
     "upgrade_spirit_bubble",
-    "upgrade_tech_purge",
-    "upgrade_diviners_kevlar"
+    "upgrade_counterspell"
    ],
    "counters": [
-    "upgrade_tech_purge",
+    "upgrade_healbane",
     "upgrade_divine_barrier",
+    "upgrade_counterspell",
     "upgrade_reduce_debuff_duration",
-    "upgrade_metal_skin",
-    "upgrade_glitch"
+    "upgrade_tech_purge",
+    "upgrade_withering_whip"
    ],
    "actives": [
-    "upgrade_grit",
-    "upgrade_guardian_ward",
     "upgrade_health_stimpak",
-    "upgrade_warp_stone",
     "upgrade_rescue_beam",
+    "upgrade_warp_stone",
     "upgrade_phantom_strike",
     "upgrade_target_stun",
     "upgrade_divine_barrier",
-    "upgrade_reduce_debuff_duration",
-    "upgrade_metal_skin",
+    "upgrade_guardian_ward",
     "upgrade_containment",
-    "upgrade_glitch"
+    "upgrade_grit",
+    "upgrade_reduce_debuff_duration",
+    "upgrade_rupture",
+    "upgrade_withering_whip"
    ],
    "unlock": [
     0,
@@ -6225,10 +6240,10 @@
   "hero": "hero_viper",
   "name": "Vyper",
   "slug": "vyper",
-  "fetchedAt": 1790860707678,
+  "fetchedAt": 1790894619372,
   "pro": {
-   "wr": 64.1,
-   "g": 142,
+   "wr": 63.1,
+   "g": 141,
    "p": {
     "Early": [
      [
@@ -6237,7 +6252,7 @@
      ],
      [
       "upgrade_improved_spirit",
-      95
+      96
      ],
      [
       "upgrade_rapid_rounds",
@@ -6253,15 +6268,15 @@
      ],
      [
       "upgrade_spirit_bubble",
-      80
+      81
      ],
      [
       "upgrade_headshot_booster2",
-      47
+      48
      ],
      [
       "upgrade_soaring_spirit",
-      31
+      30
      ]
     ],
     "Mid": [
@@ -6283,7 +6298,7 @@
      ],
      [
       "upgrade_sprint_booster",
-      47
+      46
      ],
      [
       "upgrade_improved_stamina",
@@ -6295,33 +6310,33 @@
      ],
      [
       "upgrade_blitz_bullets",
-      26
+      27
      ]
     ],
     "Late": [
      [
       "upgrade_debuff_reducer",
-      65
+      64
      ],
      [
       "upgrade_unstoppable",
-      58
+      57
      ],
      [
       "upgrade_tech_overflow",
-      56
+      57
      ],
      [
       "upgrade_health_stealing_magic",
-      54
+      53
      ],
      [
       "upgrade_tech_purge",
-      36
+      33
      ],
      [
       "upgrade_vampire",
-      20
+      18
      ],
      [
       "upgrade_high_velocity_mag",
@@ -6336,63 +6351,58 @@
    "unknown": []
   },
   "build": {
-   "wr": 59,
-   "matches": 326,
+   "wr": 64,
+   "matches": 317,
    "core": [
     "upgrade_close_range",
-    "upgrade_health_stimpak",
     "upgrade_improved_spirit",
+    "upgrade_grit",
     "upgrade_rapid_rounds",
     "upgrade_blitz_bullets",
     "upgrade_chain_lightning",
     "upgrade_split_shot",
     "upgrade_burst_fire",
-    "upgrade_quick_silver",
     "upgrade_bullet_resist_shredder",
     "upgrade_superior_stamina",
     "upgrade_ethereal_bullets",
+    "upgrade_capacitor",
+    "upgrade_unstoppable",
     "upgrade_tech_overflow"
    ],
    "early": [
-    "upgrade_grit",
+    "upgrade_quick_silver",
     "upgrade_vampire",
-    "upgrade_soaring_spirit",
     "upgrade_non_player_bonus",
+    "upgrade_soaring_spirit",
     "upgrade_improved_stamina",
     "upgrade_headshot_booster2",
-    "upgrade_pristine_emblem",
-    "upgrade_health_stealing_magic"
+    "upgrade_endurance"
    ],
    "late": [
     "upgrade_proc_silence",
     "upgrade_ricochet",
-    "upgrade_damage_recycler",
     "upgrade_close_quarter_combat",
-    "upgrade_capacitor"
+    "upgrade_damage_recycler",
+    "upgrade_surging_power"
    ],
    "defensive": [
     "upgrade_spirit_bubble",
     "upgrade_debuff_reducer",
-    "upgrade_unstoppable",
     "upgrade_tech_purge",
-    "upgrade_reduce_debuff_duration"
+    "upgrade_reduce_debuff_duration",
+    "upgrade_chonky"
    ],
    "counters": [
     "upgrade_debuff_reducer",
     "upgrade_reduce_debuff_duration",
     "upgrade_proc_silence",
     "upgrade_counterspell",
-    "upgrade_unstoppable",
     "upgrade_tech_purge"
    ],
    "actives": [
-    "upgrade_grit",
-    "upgrade_unstoppable",
     "upgrade_reduce_debuff_duration",
-    "upgrade_capacitor",
-    "upgrade_fleetfoot_boots",
     "upgrade_surging_power",
-    "upgrade_containment"
+    "upgrade_fleetfoot_boots"
    ],
    "unlock": [
     2,
@@ -6407,7 +6417,7 @@
   "hero": "hero_warden",
   "name": "Warden",
   "slug": "warden",
-  "fetchedAt": 1790860710676,
+  "fetchedAt": 1790894622386,
   "pro": {
    "wr": 62.8,
    "g": 137,
@@ -6594,7 +6604,7 @@
   "hero": "hero_wraith",
   "name": "Wraith",
   "slug": "wraith",
-  "fetchedAt": 1790860714184,
+  "fetchedAt": 1790894625407,
   "pro": {
    "wr": 59.3,
    "g": 81,
@@ -6618,11 +6628,11 @@
      ],
      [
       "upgrade_endurance",
-      54
+      56
      ],
      [
       "upgrade_pristine_emblem",
-      37
+      36
      ],
      [
       "upgrade_rechargingbullets",
@@ -6664,13 +6674,13 @@
      ],
      [
       "upgrade_soaring_spirit",
-      44
+      43
      ]
     ],
     "Late": [
      [
       "upgrade_ethereal_bullets",
-      65
+      67
      ],
      [
       "upgrade_tech_overflow",
@@ -6690,7 +6700,7 @@
      ],
      [
       "upgrade_counterspell",
-      21
+      20
      ],
      [
       "upgrade_boundless_spirit",
@@ -6779,10 +6789,10 @@
   "hero": "hero_yamato",
   "name": "Yamato",
   "slug": "yamato",
-  "fetchedAt": 1790860716703,
+  "fetchedAt": 1790894628358,
   "pro": {
-   "wr": 56.7,
-   "g": 323,
+   "wr": 57.4,
+   "g": 345,
    "p": {
     "Early": [
      [
@@ -6790,80 +6800,84 @@
       96
      ],
      [
-      "upgrade_acolytes_glove",
-      83
+      "upgrade_lifestrike_gauntlets",
+      79
      ],
      [
-      "upgrade_lifestrike_gauntlets",
-      76
+      "upgrade_acolytes_glove",
+      78
      ],
      [
       "upgrade_weapon_backstabber",
-      73
+      78
      ],
      [
       "upgrade_crackshot",
-      53
-     ],
-     [
-      "upgrade_resonant_healing",
-      47
-     ],
-     [
-      "upgrade_mystic_regeneration",
-      41
+      50
      ],
      [
       "upgrade_close_range",
-      40
+      46
+     ],
+     [
+      "upgrade_mystic_regeneration",
+      43
+     ],
+     [
+      "upgrade_health",
+      31
      ]
     ],
     "Mid": [
      [
-      "upgrade_spirit_snatch",
-      65
+      "upgrade_bullet_armor_reduction_aura",
+      66
      ],
      [
       "upgrade_healing_booster",
-      65
-     ],
-     [
-      "upgrade_bullet_armor_reduction_aura",
       64
      ],
      [
-      "upgrade_rechargingbullets",
+      "upgrade_spirit_snatch",
       63
      ],
      [
-      "upgrade_boxing_glove",
-      55
+      "upgrade_rechargingbullets",
+      62
      ],
      [
-      "upgrade_endurance",
-      55
+      "upgrade_boxing_glove",
+      62
      ],
      [
       "upgrade_bullet_resist_shredder",
+      60
+     ],
+     [
+      "upgrade_endurance",
       54
      ],
      [
-      "upgrade_healbane",
-      51
+      "upgrade_resonant_healing",
+      49
      ]
     ],
     "Late": [
      [
-      "upgrade_soaring_spirit",
-      33
-     ],
-     [
       "upgrade_melee_charge",
-      29
+      34
      ],
      [
       "upgrade_express_shot",
+      32
+     ],
+     [
+      "upgrade_soaring_spirit",
       28
+     ],
+     [
+      "upgrade_berserker",
+      25
      ],
      [
       "upgrade_cooldown_reduction",
@@ -6874,16 +6888,12 @@
       23
      ],
      [
-      "upgrade_berserker",
-      22
+      "upgrade_crushing_fists",
+      20
      ],
      [
-      "upgrade_tech_damage_pulse",
-      19
-     ],
-     [
-      "upgrade_magic_shock",
-      19
+      "upgrade_colossus",
+      20
      ]
     ]
    },
