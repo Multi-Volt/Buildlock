@@ -321,11 +321,16 @@ def extract():
     heroes=[]
     base=resolve(h,'hero_base')
     def statmap(d): return {k[1:]:v for k,v in d.items() if isinstance(v,(int,float))}
+    # The game files no longer mark which heroes are playable (m_bPlayerSelectable is gone, and newly released heroes
+    # can still be flagged m_bInDevelopment), so: not disabled, a full kit of its own, a portrait, and not a test hero.
+    TEST_HEROES={'hero_base','hero_genericperson','hero_targetdummy','hero_testhero'}
     for hid,v in h.items():
-        if not isinstance(v,dict) or not v.get('m_bPlayerSelectable') or v.get('m_bDisabled') or v.get('m_bInDevelopment') or v.get('m_bPrereleaseOnly'): continue
+        if not isinstance(v,dict) or hid in TEST_HEROES or v.get('_not_pickable') is not None or v.get('m_bDisabled') or v.get('m_bPrereleaseOnly'): continue
         r=resolve(h,hid)
-        ab=r['m_mapBoundAbilities']
-        w=resolve(a,ab['ESlot_Weapon_Primary']); wi=w.get('m_WeaponInfo',{})
+        ab=r.get('m_mapBoundAbilities',{})
+        if not r.get('m_strIconImageSmall') or ab.get('ESlot_Weapon_Primary') not in a: continue
+        if not all(ab.get(f'ESlot_Signature_{n}') in a for n in range(1,5)): continue
+        w=resolve(a,ab['ESlot_Weapon_Primary']); wi=(w.get('m_mapWeaponInfos') or {}).get('primary') or w.get('m_WeaponInfo',{})
         wprops=w.get('m_mapAbilityProperties',{})
         lv=r['m_mapLevelInfo']
         levels=[]
@@ -407,6 +412,12 @@ def main():
         heroes, items = old['heroes'], old['items']
     else:
         heroes, items = extract()
+        # A format change in the game files can make extraction come back (nearly) empty. Keep the last good data then.
+        if len(heroes) < 0.8 * len(old.get('heroes', [])) or len(items) < 0.8 * len(old.get('items', [])) or not heroes or not items \
+                or sum(1 for x in heroes if not x['w']['dmg']) > len(heroes) // 2:
+            sys.exit(f'Extraction looks broken: {len(heroes)} heroes ({sum(1 for x in heroes if not x["w"]["dmg"])} without weapon stats) '
+                     f'and {len(items)} items, down from {len(old.get("heroes", []))} and {len(old.get("items", []))}. '
+                     'The game files probably changed format; keeping the old data.')
         # keep previously known fallback image paths where ids still match
         oh = {x['id']: x for x in old.get('heroes', [])}; oi = {x['id']: x for x in old.get('items', [])}
         for x in heroes:
