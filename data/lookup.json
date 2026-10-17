@@ -70,6 +70,16 @@
     "Shining Wonder"
    ]
   },
+  "hero_deadpack": {
+   "name": "Deadman Danny",
+   "slug": "deadman-danny",
+   "abilities": [
+    "Strix Salvo",
+    "Chimera Mk1",
+    "Jettison Fuel",
+    "Close The Deal"
+   ]
+  },
   "hero_drifter": {
    "name": "Drifter",
    "slug": "drifter",
@@ -358,6 +368,16 @@
     "Flight",
     "Crow Familiar",
     "Assassinate"
+   ]
+  },
+  "hero_artist": {
+   "name": "Violet",
+   "slug": "violet",
+   "abilities": [
+    "Living Ink",
+    "Flow State",
+    "Still Life",
+    "Abstract Landscape"
    ]
   },
   "hero_viscous": {

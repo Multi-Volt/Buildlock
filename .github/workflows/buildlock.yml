@@ -1,16 +1,14 @@
 # Buildlock: refresh Tracklock data and publish the site to GitHub Pages.
 #
 # Runs:
-#   - every 6 hours (Tracklock data)
-#   - every Monday (also re-extracts game data, to pick up Deadlock patches)
+#   - every 6 hours (Tracklock data, plus game data so new heroes/items/patches appear automatically)
 #   - whenever you push to main
 #   - on demand: Actions tab > "Update and deploy Buildlock" > Run workflow
 name: Update and deploy Buildlock
 
 on:
   schedule:
-    - cron: "17 */6 * * *"   # Tracklock refresh (times are UTC)
-    - cron: "40 8 * * 1"     # weekly game data refresh
+    - cron: "17 */6 * * *"   # Tracklock + game data refresh (times are UTC)
   push:
     branches: [main]
   workflow_dispatch:
@@ -47,8 +45,8 @@ jobs:
       - name: Parser self-test
         run: node test/parser.test.js
 
-      - name: Update game data (weekly or when requested)
-        if: github.event.schedule == '40 8 * * 1' || inputs.update_game_data == true
+      - name: Update game data (scheduled runs, or when requested)
+        if: github.event_name == 'schedule' || inputs.update_game_data == true
         continue-on-error: true
         run: python3 tools/build.py
 

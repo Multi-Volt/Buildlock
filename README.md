@@ -65,8 +65,7 @@ It opens full screen like an app. Your builds stay on each device; move them bet
 
 | When | What the Action does |
 |---|---|
-| Every 6 hours | Fetches both Tracklock pages for every hero (about 2–3 minutes, with polite delays) and republishes the site |
-| Every Monday | Also downloads Deadlock's latest game files, so patches (new items, changed stats, new heroes) show up within a week |
+| Every 6 hours | Downloads Deadlock's latest game files (so patches, new items and new heroes show up automatically), fetches both Tracklock pages for every hero (about 2–3 minutes, with polite delays) and republishes the site |
 | Whenever you push to `main` | Rebuilds and republishes the site |
 | **Run workflow** button | The same thing on demand. Tick "Also re-download Deadlock game data" to pick up a patch immediately |
 
