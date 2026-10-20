@@ -230,6 +230,16 @@
     "Combo"
    ]
   },
+  "hero_nurse": {
+   "name": "Nurse Harrow",
+   "slug": "nurse-harrow",
+   "abilities": [
+    "Leech Therapy",
+    "Wretched Vapors",
+    "Healing Needles",
+    "Lurking Terrors"
+   ]
+  },
   "hero_bookworm": {
    "name": "Paige",
    "slug": "paige",
